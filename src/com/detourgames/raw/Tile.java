@@ -5,8 +5,8 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class Tile extends Sprite{
 	
-	private static final float HEIGHT = 32f;
-	private static final float WIDTH = 32f;
+	private static final float HEIGHT = 0.5f;
+	private static final float WIDTH = 0.5f;
 	
 	public Tile(){
 		super(new PhysicsStatic(), new AnimationComponent());

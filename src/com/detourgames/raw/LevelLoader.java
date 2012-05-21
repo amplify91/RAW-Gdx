@@ -114,7 +114,7 @@ public class LevelLoader {
 						//ph_tiles[sprites] = createTile(gridArr[i], x, y, level);
 						Animation animation = new Animation();
 						animation.createFrame(mSpriteSheet, Animation.convertTileFrame(gridArr[i])-1);
-						mSpriteFactory.createTile((float)x*32f, (float)y*32f, 0, animation);
+						mSpriteFactory.createTile((float)x/2f, (float)y/2f, 0, animation);
 						sprites++;
 					}
 					i++;

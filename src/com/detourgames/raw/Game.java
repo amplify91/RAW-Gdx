@@ -36,7 +36,7 @@ public class Game implements ApplicationListener {
 
 	@Override
 	public void resize(int width, int height) {
-		mGameManager.createCamera(width, height);
+		mGameManager.createCamera(12.5f, 7.5f);
 		
 		Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
 		Gdx.gl.glEnable(GL20.GL_BLEND);

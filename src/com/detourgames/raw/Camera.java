@@ -19,6 +19,7 @@ public class Camera {
 	public void update() {
 		mCamera.translate(1f, 0, 0);
 		mCamera.update();
+		//mCamera.apply(null);
 	}
 	
 	public OrthographicCamera getCamera(){
