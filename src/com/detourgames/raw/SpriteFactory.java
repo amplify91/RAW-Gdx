@@ -13,15 +13,16 @@ public class SpriteFactory {
 		
 	}
 
-	/*public Hero createHero(float x, float y){
+	public Hero createHero(float x, float y, Animation animation){
 		Hero hero = new Hero();
 		hero.create(mLevel.getWorld(), x, y);
 		mLevel.addDrawableSprite(hero);
 		mLevel.addUpdateableSprite(hero);
 		mLevel.assignHero(hero);
+		hero.mAnimation.setAnimation(animation);
 		
 		return hero;
-	}*/
+	}
 	
 	public Tile createTile(float x, float y, int shape, Animation animation){
 		

@@ -9,9 +9,9 @@ public class Game implements ApplicationListener {
 	GameLoop mGameLoop;
 	GameManager mGameManager = GameManager.getGameManager();
      
-     SpriteFactory mSpriteFactory;
-     SpriteSheet mSpriteSheet;
-	
+    SpriteFactory mSpriteFactory;
+    SpriteSheet mSpriteSheet;
+    
 	@Override
 	public void create() {
 		mGameLoop = new GameLoop();

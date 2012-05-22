@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Animation {
 
 	// public static final int HERO_TEXTURE = R.drawable.sprite_tiles;
-
+	
 	public static final int[] ANIMATION_RUNNING = {1,2,3,4,5,6,7,8};
 
 	public static final int FRAME_JUMP_BUTTON = 17;

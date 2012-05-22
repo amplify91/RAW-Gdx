@@ -27,8 +27,6 @@ public class LevelLoader {
 	int levelHeight = 0;
 	int sprites = 0;
 
-	Tile[] tiles;
-
 	public LevelLoader(Level level) {
 		mLevel = level;
 		mSpriteFactory = new SpriteFactory(mLevel);
@@ -107,7 +105,6 @@ public class LevelLoader {
 
 			sprites = 0;
 			int i = 0;
-			Tile[] ph_tiles = new Tile[gridArr.length];
 			for(int y=levelHeight-1;y>-1;y--){
 				for(int x=0;x<levelWidth;x++){
 					if(gridArr[i]!=0){
@@ -121,11 +118,9 @@ public class LevelLoader {
 				}
 			}
 			
-			tiles = new Tile[sprites];
-			for(int i2 = 0;i2<sprites;i2++){
-				tiles[i2] = ph_tiles[i2];
-			}
-			ph_tiles = null;
+			Animation heroAnimation =  new Animation();
+			heroAnimation.createAnimation(mSpriteSheet, Animation.ANIMATION_RUNNING);
+			mSpriteFactory.createHero(2, 2, heroAnimation);
 
 		}
 

@@ -11,6 +11,7 @@ public class Level {
 	// level.
 
 	World mWorld;
+	Hero mHero;
 	ArrayList<Sprite> mDrawableSprites;
 	ArrayList<Sprite> mUpdateableSprites;
 
@@ -42,7 +43,7 @@ public class Level {
 	public void update(float deltaTime, int velocityIterations,
 			int positionIterations) {
 		for (int i = 0; i < mUpdateableSprites.size(); i++) {
-			// mUpdateableSprites.get(i).update(deltaTime);
+			mUpdateableSprites.get(i).update(deltaTime);
 		}
 		mWorld.step(deltaTime, velocityIterations, positionIterations);
 	}
@@ -73,6 +74,14 @@ public class Level {
 
 	World getWorld() {
 		return mWorld;
+	}
+	
+	public void assignHero(Hero hero){
+		mHero = hero;
+	}
+	
+	public Hero getHero(){
+		return mHero;
 	}
 
 }
