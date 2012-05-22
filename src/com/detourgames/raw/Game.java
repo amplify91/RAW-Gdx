@@ -16,7 +16,7 @@ public class Game implements ApplicationListener {
 	public void create() {
 		mGameLoop = new GameLoop();
 		mGameManager.loadLevel(1);
-		
+		Gdx.input.setInputProcessor(new Input());//TODO make this suck less
 	}
 
 	@Override

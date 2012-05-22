@@ -7,7 +7,7 @@ public class PhysicsHero extends PhysicsComponent{
 	
 	private Vector2 mVel = new Vector2(); // Current velocity.
 	private Vector2 mRunVel = new Vector2(); // Impulse velocity that needs to be applied to run at correct speed
-	private Vector2 mJumpVel = new Vector2(0, 10);//TODO make movement velocities functions of mass
+	private Vector2 mJumpVel = new Vector2(0, 10);//TODO make movement velocities functions of mass and time
 	private Vector2 mDashVel = new Vector2(20, 0);
 	private Vector2 mTotalVel = new Vector2();
 	

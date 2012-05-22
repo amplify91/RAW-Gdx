@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameLoop {
 
-	public static final int TICKS_PER_SECOND = 25; // UPS
+	public static final int TICKS_PER_SECOND = 40; // UPS
 	public static final long TICK_DURATION = 1000000000 / TICKS_PER_SECOND;
 	public static final int MAX_FRAMESKIP = 5;
 	public static final float STEP_DURATION = 1.0f / (float) TICKS_PER_SECOND;
@@ -26,11 +26,16 @@ public class GameLoop {
 		game_is_running = false;
 
 	}
-
+	
+	boolean once = false;
+	
 	public void tick() {
 		// TODO make sure this works without being a thread and can handle being
 		// paused.
-		next_game_tick = TimeUtils.nanoTime();
+		if(!once){
+			next_game_tick = TimeUtils.nanoTime();
+			once = true;
+		}
 
 		loops = 0;
 		
@@ -40,8 +45,7 @@ public class GameLoop {
 			loops++;
 		}
 		interpolation = ((float) (TimeUtils.nanoTime() + TICK_DURATION - next_game_tick)) / ((float) TICK_DURATION); // TODO change floats to longs
-		updateGame(STEP_DURATION);
-		displayGame(interpolation);
+		displayGame(interpolation);//TODO use the interpolation for drawing. Otherwise, only draw once per update.
 
 	}
 
