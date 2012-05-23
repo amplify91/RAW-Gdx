@@ -30,7 +30,7 @@ public class GameManager {
 
 	public void update(float deltaTime) {
 		if (levelLoaded) {
-			mCamera.update();
+			mCamera.update(mLevel.getHero());
 			// (float)mLevel.getHero().getY());
 			// mHUD.update();
 			EventQueue.getEventQueue().processAndRemoveAllEvents();

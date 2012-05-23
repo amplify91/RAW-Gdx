@@ -7,10 +7,10 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameLoop {
 
-	public static final int TICKS_PER_SECOND = 40; // UPS
+	public static final int TICKS_PER_SECOND = 30; // UPS
 	public static final long TICK_DURATION = 1000000000 / TICKS_PER_SECOND;
 	public static final int MAX_FRAMESKIP = 5;
-	public static final float STEP_DURATION = 1.0f / (float) TICKS_PER_SECOND;
+	public static final float STEP_DURATION = 1.0f / (float) TICKS_PER_SECOND; // in seconds
 
 	long next_game_tick;
 	int loops;

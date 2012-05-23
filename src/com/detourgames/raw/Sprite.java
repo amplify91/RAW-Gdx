@@ -2,7 +2,7 @@ package com.detourgames.raw;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Sprite {
+public class Sprite implements IFocusable{
 
 	PhysicsComponent mPhysics;
 	AnimationComponent mAnimation;
@@ -11,6 +11,8 @@ public class Sprite {
 	float mDrawHeight = 0.5f;
 	float mDrawOffsetX = 0;
 	float mDrawOffsetY = 0;
+	float mCameraOffsetX = 0;
+	float mCameraOffsetY = 0;
 
 	// private Vector2 mProjectileSpawnPoint = new Vector2();
 
@@ -52,6 +54,18 @@ public class Sprite {
 	public float getY() {
 		return mPhysics.getY();
 	}
+	
+	@Override
+	public float getCameraOffsetX() {
+		// TODO Auto-generated method stub
+		return mCameraOffsetX;
+	}
+
+	@Override
+	public float getCameraOffsetY() {
+		// TODO Auto-generated method stub
+		return mCameraOffsetY;
+	}
 
 	/*
 	 * public float getOriginX(){ return mPhysics.getX() + mDrawWidth/2f; }
@@ -72,5 +86,5 @@ public class Sprite {
 	public void resumeAnimation() {
 		mAnimation.resume();
 	}
-
+	
 }

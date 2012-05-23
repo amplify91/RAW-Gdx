@@ -4,10 +4,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class Camera {
 	
-	/**
-	 * A wrapper for the libgdx camera. Might prove unnecessary.
-	 * */
-	
 	private OrthographicCamera mCamera;
 	
 	public Camera(float viewportWidth, float viewportHeight){
@@ -16,9 +12,9 @@ public class Camera {
 		mCamera.update();
 	}
 	
-	public void update() {
+	public void update(IFocusable focus) {
+		mCamera.position.set(focus.getX()-focus.getCameraOffsetX(), focus.getY()-focus.getCameraOffsetY(), 0);
 		mCamera.update();
-		//mCamera.apply(null);
 	}
 	
 	public OrthographicCamera getCamera(){
