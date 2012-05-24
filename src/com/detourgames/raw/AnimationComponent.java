@@ -17,7 +17,7 @@ public class AnimationComponent {
 		nextFrame = FRAME_DURATION;
 	}
 
-	public void update(float deltaTime) {
+	public void update(StateComponent state, float deltaTime) {
 
 		if (animating) {
 			if (tick > GameLoop.TICKS_PER_SECOND - 1) {

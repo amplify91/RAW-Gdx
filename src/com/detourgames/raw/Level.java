@@ -40,12 +40,14 @@ public class Level {
 	 * "success!!!!"); }
 	 */
 
-	public void update(float deltaTime, int velocityIterations,
-			int positionIterations) {
+	public void update(float deltaTime, int velocityIterations, int positionIterations) {
+		
+		mWorld.step(deltaTime, velocityIterations, positionIterations);
+		
 		for (int i = 0; i < mUpdateableSprites.size(); i++) {
 			mUpdateableSprites.get(i).update(deltaTime);
 		}
-		mWorld.step(deltaTime, velocityIterations, positionIterations);
+		
 	}
 
 	public void draw(SpriteBatch sb) {

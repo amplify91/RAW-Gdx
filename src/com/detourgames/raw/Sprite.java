@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Sprite implements IFocusable{
 
 	PhysicsComponent mPhysics;
+	StateComponent mState = new StateComponent();
 	AnimationComponent mAnimation;
+	InputComponent mInput = new InputComponent();
 
 	float mDrawWidth = 0.5f;
 	float mDrawHeight = 0.5f;
@@ -39,8 +41,12 @@ public class Sprite implements IFocusable{
 	}
 
 	public void update(float deltaTime) {
-		mAnimation.update(deltaTime);
+		
+		mState.update(mPhysics);
+		mAnimation.update(mState, deltaTime);
+		mInput.update(mState, mPhysics);
 		mPhysics.update();
+		
 	}
 
 	public void getInput() {
