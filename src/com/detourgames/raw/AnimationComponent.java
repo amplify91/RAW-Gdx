@@ -12,9 +12,6 @@ public class AnimationComponent {
 			/ (float) Animation.FPS;
 	private int tick = 0;
 
-	private int index = 0;
-	private int duration = 0;
-
 	public AnimationComponent() {
 		// mFrame = Animation.RUNNING_INDEX;
 		nextFrame = FRAME_DURATION;
@@ -30,10 +27,10 @@ public class AnimationComponent {
 
 			if (tick > nextFrame) {
 				nextFrame += FRAME_DURATION;
-				if (mCurrentFrameNumber < index + duration - 1) {
+				if (mCurrentFrameNumber < mAnimation.getFrames().length - 1) {
 					mCurrentFrameNumber++;
 				} else {
-					mCurrentFrameNumber = index;
+					mCurrentFrameNumber = 0;
 				}
 			}
 
