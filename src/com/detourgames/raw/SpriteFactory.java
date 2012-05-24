@@ -40,13 +40,13 @@ public class SpriteFactory {
 		return tile;
 	}
 	
-	/*public Projectile createProjectile(){
+	public Projectile createProjectile(){
 		Projectile projectile = new Projectile();
 		projectile.create(mLevel.getWorld(), 0, 0);
 		mLevel.addDrawableSprite(projectile);
 		mLevel.addUpdateableSprite(projectile);
 		
 		return projectile;
-	}*/
+	}
 
 }

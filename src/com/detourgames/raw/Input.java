@@ -30,8 +30,15 @@ public class Input implements InputProcessor{
 
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button) {
+		
+		if(!checkHUDButtons(x, y)){
+			shoot(x, y);
+		}
+		return false;
+	}
+
+	private boolean checkHUDButtons(int x, int y) {
 		// TODO Auto-generated method stub
-		shoot(x, y);
 		return false;
 	}
 
