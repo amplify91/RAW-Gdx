@@ -1,5 +1,6 @@
 package com.detourgames.raw;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
 public class Input implements InputProcessor{
@@ -7,6 +8,11 @@ public class Input implements InputProcessor{
 	@Override
 	public boolean keyDown(int keycode) {
 		// TODO Auto-generated method stub
+		if(keycode==Keys.UP){
+			jump();
+		}else if(keycode==Keys.RIGHT){
+			dash();
+		}
 		return false;
 	}
 
@@ -25,7 +31,7 @@ public class Input implements InputProcessor{
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button) {
 		// TODO Auto-generated method stub
-		EventQueue.getEventQueue().queue(new JumpEvent());
+		shoot(x, y);
 		return false;
 	}
 
@@ -52,5 +58,17 @@ public class Input implements InputProcessor{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	private void dash(){
+		EventQueue.getEventQueue().queue(new DashEvent());
+	}
+	
+	private void jump(){
+		EventQueue.getEventQueue().queue(new JumpEvent());
+	}
+	
+	private void shoot(int x, int y){
+		EventQueue.getEventQueue().queue(new FireProjectileEvent(x, y));
+	}
+	
 }

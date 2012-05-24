@@ -16,7 +16,7 @@ public class FireProjectileEvent extends Event {
 
 	@Override
 	public void executeEvent() {
-		// Log.i("Touch", "Shot at "+x+"' "+y);
+		System.out.println("Shot at "+x+"' "+y);
 		// Log.i("Event",
 		// "world is locked = "+GameManager.getGameManager().getLevel().getWorld().isLocked());
 		/*
