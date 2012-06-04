@@ -38,7 +38,7 @@ public class Game implements ApplicationListener {
 	public void resize(int width, int height) {
 		
 		float ratio = (float)width/(float)height;
-		mGameManager.createCamera(7.5f*ratio, 7.5f);
+		mGameManager.createCamera(7.5f*ratio, 7.5f, width, height);
 		
 	}
 

@@ -17,8 +17,7 @@ public abstract class PhysicsComponent {
 		
 	}
 
-	public void create(World world, float x, float y, float width,
-			float height, boolean dynamic) {
+	public void create(World world, float x, float y, float width, float height, boolean dynamic) {
 
 		BodyDef bodyDef = new BodyDef();
 		if (dynamic) {
@@ -40,8 +39,7 @@ public abstract class PhysicsComponent {
 
 	}
 
-	public void create(World world, float x, float y, Vector2 vertices[],
-			boolean dynamic) {
+	public void create(World world, float x, float y, Vector2 vertices[], boolean dynamic) {
 
 		BodyDef bodyDef = new BodyDef();
 		if (dynamic) {

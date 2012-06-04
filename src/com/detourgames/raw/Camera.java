@@ -7,11 +7,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 public class Camera {
 	
 	private OrthographicCamera mCamera;
+	private float mScreenWidth;
+	private float mScreenHeight;
+	private float mScreenWidthPixels;
+	private float mScreenHeightPixels;
 	
 	public Camera(float viewportWidth, float viewportHeight){
 		mCamera = new OrthographicCamera(viewportWidth, viewportHeight);
 		mCamera.position.set(viewportWidth/2f, viewportHeight/2f, 0);
 		mCamera.update();
+		
+		mScreenWidth = viewportWidth;
+		mScreenHeight = viewportHeight;
 		
 		//maybe unnecessary OpenGL stuff
 		Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
@@ -37,6 +44,27 @@ public class Camera {
 	
 	public OrthographicCamera getCamera(){
 		return mCamera;
+	}
+	
+	public float getHeight(){
+		return mScreenHeight;
+	}
+	
+	public float getWidth(){
+		return mScreenWidth;
+	}
+	
+	public float getHeightPixels(){
+		return mScreenHeightPixels;
+	}
+	
+	public float getWidthPixels(){
+		return mScreenWidthPixels;
+	}
+	
+	public void setScreenSizePixels(int width, int height){
+		mScreenWidthPixels = width;
+		mScreenHeightPixels = height;
 	}
 	
 }

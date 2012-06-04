@@ -4,7 +4,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
 public class Input implements InputProcessor{
-
+	
 	@Override
 	public boolean keyDown(int keycode) {
 		// TODO Auto-generated method stub
@@ -31,15 +31,19 @@ public class Input implements InputProcessor{
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button) {
 		
-		if(!checkHUDButtons(x, y)){
+		if(checkHUDButtons(x, y)){
+			jump();
+		}else{
 			shoot(x, y);
 		}
 		return false;
 	}
 
 	private boolean checkHUDButtons(int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		boolean button = GameManager.getGameManager().getHUD().checkButton(x, y);
+		
+		return button;
 	}
 
 	@Override
