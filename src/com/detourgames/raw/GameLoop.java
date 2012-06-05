@@ -14,7 +14,7 @@ public class GameLoop {
 
 	long next_game_tick;
 	int loops;
-	float interpolation;
+	//float interpolation;
 	boolean game_is_running;
 
 	GameManager mGameManager;
@@ -44,17 +44,17 @@ public class GameLoop {
 			next_game_tick += TICK_DURATION;
 			loops++;
 		}
-		interpolation = ((float) (TimeUtils.nanoTime() + TICK_DURATION - next_game_tick)) / ((float) TICK_DURATION); // TODO change floats to longs
-		displayGame(interpolation);//TODO use the interpolation for drawing. Otherwise, only draw once per update.
+		//interpolation = ((float) (TimeUtils.nanoTime() + TICK_DURATION - next_game_tick)) / ((float) TICK_DURATION); // TODO change floats to longs
+		displayGame();//TODO use the interpolation for drawing. Otherwise, only draw once per update.
 
 	}
 
-	private void displayGame(float interpolation){
+	private void displayGame(){
 		
 		Gdx.gl.glClearColor(0, 0, 0, 0.5f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		
-		mGameManager.draw();
+		mGameManager.draw(TimeUtils.nanoTime());
 
 	}
 

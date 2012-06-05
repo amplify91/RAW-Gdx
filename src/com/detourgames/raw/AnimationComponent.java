@@ -1,62 +1,67 @@
 package com.detourgames.raw;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.TimeUtils;
 
 public class AnimationComponent {
-
-	private boolean animating = true;
+	
+	private Animation[] mAnimations;
 	private Animation mAnimation;
-	private int mCurrentFrameNumber = 0;
-	private float nextFrame = 0;
-	private float FRAME_DURATION = (float) GameLoop.TICKS_PER_SECOND
-			/ (float) Animation.FPS;
-	private int tick = 0;
-
+	private int mCurrentAnimation = 0;
+	
+	private float mStateTime = 0f;
+	private long mStartTime = 0;
+	
+	public static final float FPS = 12;
+	public static final float FRAME_DURATION = 1f / (float) FPS;
+	
 	public AnimationComponent() {
-		// mFrame = Animation.RUNNING_INDEX;
-		nextFrame = FRAME_DURATION;
+		//If using this constructor, you must set animations before you try to draw.
+		//Otherwise, getFrame() will throw null pointer or some other bug will happen.
+	}
+	
+	public AnimationComponent(Animation[] animations) {
+		setAnimations(animations);
+		setAnimation(0);
 	}
 
-	public void update(StateComponent state, float deltaTime) {
-
-		if (animating) {
-			if (tick > GameLoop.TICKS_PER_SECOND - 1) {
-				tick = 0;
-				nextFrame = FRAME_DURATION;
-			}
-
-			if (tick > nextFrame) {
-				nextFrame += FRAME_DURATION;
-				if (mCurrentFrameNumber < mAnimation.getFrames().length - 1) {
-					mCurrentFrameNumber++;
-				} else {
-					mCurrentFrameNumber = 0;
-				}
-			}
-
-			tick++;
-		}
+	public void update(StateComponent state) {
+		//if state has changed, change animation
 		
 	}
-
-	public TextureRegion getCurrentFrame() {
-		return mAnimation.getFrames()[mCurrentFrameNumber];
-	}
-
-	public void setFrame(int frame) {
-		mCurrentFrameNumber = frame;
+	
+	public TextureRegion getFrame(long nanoTime){//TODO give current time as a parameter and calculate state time from there
+		mStateTime = (float)(nanoTime-mStartTime)/1000000000f;
+		return mAnimation.getKeyFrame(mStateTime, true);
 	}
 	
 	public void setAnimation(Animation animation){
 		mAnimation = animation;
+		mStartTime = TimeUtils.nanoTime();
 	}
-
-	public void pause() {
-		animating = false;
+	
+	public void setAnimation(int animation){
+		mCurrentAnimation = animation;
+		mAnimation = mAnimations[mCurrentAnimation];
+		mStartTime = TimeUtils.nanoTime();
 	}
-
-	public void resume() {
-		animating = true;
+	
+	public void setAnimations(Animation[] animations){
+		mAnimations = animations;
+		setAnimation(0);
 	}
-
+	
+	public void restartAnimation(){
+		mStartTime = TimeUtils.nanoTime();
+	}
+	
+	public static Animation createAnimation(SpriteSheet spriteSheet, int[] frameNumbers){
+		TextureRegion[] frames = new TextureRegion[frameNumbers.length];
+		for(int i=0;i<frames.length;i++){
+			frames[i] = new TextureRegion(spriteSheet.getTexture(), spriteSheet.getFrames()[frameNumbers[i]][0], spriteSheet.getFrames()[frameNumbers[i]][1], spriteSheet.getFrames()[frameNumbers[i]][2], spriteSheet.getFrames()[frameNumbers[i]][3]);
+		}
+		return new Animation(FRAME_DURATION, frames);
+	}
+	
 }

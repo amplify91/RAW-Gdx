@@ -40,13 +40,13 @@ public class GameManager {
 		}
 	}
 
-	public void draw() {
-
+	public void draw(long nanoTime) {
+		
 		if (levelLoaded) {
 			spriteBatch.setProjectionMatrix(mCamera.getCamera().combined);
 			spriteBatch.begin();
 			// mHUD.draw(spriteBatch);
-			mLevel.draw(spriteBatch);
+			mLevel.draw(spriteBatch, nanoTime);
 			spriteBatch.end();
 			// mLevel.drawDebug(camera);
 		}

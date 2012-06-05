@@ -29,9 +29,10 @@ public class LevelLoader {
 
 	public LevelLoader(Level level) {
 		mLevel = level;
-		mSpriteFactory = new SpriteFactory(mLevel);
 		Texture texture = new Texture(Gdx.files.internal("sprite_tiles.png"));
 		mSpriteSheet = new SpriteSheet(texture, 3, new int[]{3,1,5}, new int[]{8,8,4,0,7,16,16,16,16}, new int[]{128,1024,64}, new int[]{128,320,64});
+		mLevel.setSpriteSheet(mSpriteSheet);
+		mSpriteFactory = new SpriteFactory(mLevel);
 		// if(lvln==0){
 		// createRandomTileMap(); TODO
 		// }else{
@@ -109,18 +110,16 @@ public class LevelLoader {
 				for(int x=0;x<levelWidth;x++){
 					if(gridArr[i]!=0){
 						//ph_tiles[sprites] = createTile(gridArr[i], x, y, level);
-						Animation animation = new Animation();
-						animation.createFrame(mSpriteSheet, Animation.convertTileFrame(gridArr[i])-1);
-						mSpriteFactory.createTile((float)x/2f, (float)y/2f, 0, animation);
+						
+						mSpriteFactory.createTile((float)x/2f, (float)y/2f, 0, Tile.convertTileFrame(gridArr[i])-1);
 						sprites++;
 					}
 					i++;
 				}
 			}
 			
-			Animation heroAnimation =  new Animation();
-			heroAnimation.createAnimation(mSpriteSheet, Animation.ANIMATION_RUNNING);
-			mSpriteFactory.createHero(2, 2, heroAnimation);
+			
+			mSpriteFactory.createHero(2, 2);
 
 		}
 

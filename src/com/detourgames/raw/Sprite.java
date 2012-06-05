@@ -2,7 +2,7 @@ package com.detourgames.raw;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Sprite implements IFocusable{
+public abstract class Sprite implements IFocusable{
 
 	PhysicsComponent mPhysics;
 	StateComponent mState = new StateComponent();
@@ -24,11 +24,12 @@ public class Sprite implements IFocusable{
 	public static final float SCALE_FACTOR = 2f / 15f;
 	public static final float SCALE_FACTOR_INV = 15f / 2f;
 
-	public Sprite(PhysicsComponent p, AnimationComponent a) {
-
-		// renderable = new RenderVisible(context);
-		mPhysics = p;
-		mAnimation = a;
+	public Sprite(PhysicsComponent pc, AnimationComponent ac) {
+		
+		// all sprites will create their own animations in their own constructors.
+		// that means each sprite subclass must have a SpriteSheet param in their constructor.
+		mPhysics = pc;
+		mAnimation = ac;
 
 	}
 
@@ -36,14 +37,14 @@ public class Sprite implements IFocusable{
 		// TODO
 	}
 
-	public void draw(SpriteBatch sb) {
-		sb.draw(mAnimation.getCurrentFrame(), mPhysics.getX()+mDrawOffsetX, mPhysics.getY()+mDrawOffsetY, mDrawWidth, mDrawHeight);
+	public void draw(SpriteBatch sb, long nanoTime) {
+		sb.draw(mAnimation.getFrame(nanoTime), mPhysics.getX()+mDrawOffsetX, mPhysics.getY()+mDrawOffsetY, mDrawWidth, mDrawHeight);
 	}
 
 	public void update(float deltaTime) {
 		
 		mState.update(mPhysics);
-		mAnimation.update(mState, deltaTime);
+		mAnimation.update(mState);
 		mInput.update(mState, mPhysics);
 		mPhysics.update();
 		
@@ -84,13 +85,5 @@ public class Sprite implements IFocusable{
 	 * change arguments to mPhysics.getProjectileSpawn return
 	 * mProjectileSpawnPoint; }
 	 */
-
-	public void pauseAnimation() {
-		mAnimation.pause();
-	}
-
-	public void resumeAnimation() {
-		mAnimation.resume();
-	}
 	
 }

@@ -11,6 +11,7 @@ public class Level {
 	// level.
 
 	World mWorld;
+	SpriteSheet mSpriteSheet;
 	Hero mHero;
 	ArrayList<Sprite> mDrawableSprites;
 	ArrayList<Sprite> mUpdateableSprites;
@@ -50,9 +51,9 @@ public class Level {
 		
 	}
 
-	public void draw(SpriteBatch sb) {
+	public void draw(SpriteBatch sb, long nanoTime) {
 		for (int i = 0; i < mDrawableSprites.size(); i++) {
-			mDrawableSprites.get(i).draw(sb);
+			mDrawableSprites.get(i).draw(sb, nanoTime);
 		}
 	}
 
@@ -84,6 +85,14 @@ public class Level {
 	
 	public Hero getHero(){
 		return mHero;
+	}
+	
+	public void setSpriteSheet(SpriteSheet spriteSheet){
+		mSpriteSheet = spriteSheet;
+	}
+	
+	public SpriteSheet getSpriteSheet(){
+		return mSpriteSheet;
 	}
 
 }

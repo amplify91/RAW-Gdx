@@ -1,5 +1,6 @@
 package com.detourgames.raw;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -17,9 +18,15 @@ public class Projectile extends Sprite implements IReusable{
 	
 	public static final Vector2[] VERTS_RAW = new Vector2[]{new Vector2(0.0f,0.0f), new Vector2(0.2f,0.0f), new Vector2(0.2f,0.2f), new Vector2(0.2f,0.0f)};
 	
-	public Projectile(){
+	public Projectile(SpriteSheet spriteSheet){
 		
 		super(new PhysicsProjectile(), new AnimationComponent());
+		Animation[] animations = new Animation[]{
+				AnimationComponent.createAnimation(spriteSheet, new int[]{20})
+				//more animations,
+				//more animations
+				};
+		mAnimation.setAnimations(animations);
 		
 	}
 	
@@ -36,8 +43,6 @@ public class Projectile extends Sprite implements IReusable{
 	public void prepareForSpawn(int type, Sprite parent, Vector2 destination){
 		((PhysicsProjectile)mPhysics).setProjectileProperties(type, parent, destination);
 		//TODO finish
-		mAnimation.setFrame(Animation.FRAME_PROJECTILE_RAW_BULLET); //TODO change depending on type
-		mAnimation.pause();
 		
 		isReadyForSpawn = true;
 	}

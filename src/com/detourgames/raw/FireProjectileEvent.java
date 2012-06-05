@@ -18,7 +18,6 @@ public class FireProjectileEvent extends Event {
 	public void executeEvent() {
 		System.out.println("Shot at "+x+"' "+y);
 		//change from screen coords to world coords
-		// "world is locked = "+GameManager.getGameManager().getLevel().getWorld().isLocked());
 		
 		/*
 		 * Projectile p = ProjectilePool.getProjectilePool().getProjectile();
