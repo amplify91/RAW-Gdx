@@ -1,5 +1,6 @@
 package com.detourgames.raw;
 
+import com.badlogic.gdx.math.Vector2;
 import com.detourgames.raw.Event;
 
 public class FireProjectileEvent extends Event {
@@ -19,12 +20,11 @@ public class FireProjectileEvent extends Event {
 		System.out.println("Shot at "+x+"' "+y);
 		//change from screen coords to world coords
 		
-		/*
-		 * Projectile p = ProjectilePool.getProjectilePool().getProjectile();
-		 * p.prepareForSpawn(Projectile.TYPE_RAW,
-		 * GameManager.getGameManager().getLevel().getHero(), new Vec2(15,10));
-		 * p.spawn(GameManager.getGameManager().getLevel().getWorld());
-		 */// TODO make projectiles work!
+		
+		  Projectile p = ProjectilePool.getProjectilePool().getProjectile();
+		  p.prepareForSpawn(Projectile.TYPE_RAW,
+		  GameManager.getGameManager().getLevel().getHero(), new Vector2(15,10));
+		  p.spawn(GameManager.getGameManager().getLevel().getWorld());
 	}
 
 }

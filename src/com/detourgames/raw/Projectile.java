@@ -16,7 +16,8 @@ public class Projectile extends Sprite implements IReusable{
 	
 	public static final float VELOCITY_RAW = 1.0f;
 	
-	public static final Vector2[] VERTS_RAW = new Vector2[]{new Vector2(0.0f,0.0f), new Vector2(0.2f,0.0f), new Vector2(0.2f,0.2f), new Vector2(0.2f,0.0f)};
+	public static final Vector2[] VERTS_RAW = new Vector2[]{new Vector2(0.0f,0.0f), new Vector2(0.2f,0.0f), new Vector2(0.2f,0.2f), new Vector2(0.0f,0.2f)};
+	
 	
 	public Projectile(SpriteSheet spriteSheet){
 		
