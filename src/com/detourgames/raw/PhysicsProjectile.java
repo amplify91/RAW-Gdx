@@ -5,19 +5,23 @@ import com.badlogic.gdx.math.Vector2;
 public class PhysicsProjectile extends PhysicsComponent{
 
 	//int mType;
-		float mVelocity;
+		float mVelocity=10;
 		Vector2 mVelocityVec = new Vector2(0, 1);
 		//Vec2 mSpawnPoint;
 		Vector2 mDestinationPoint;
+		ProjectileEngine mProjectileEngine;
 		
 		public PhysicsProjectile(){
-			
+			mProjectileEngine=new ProjectileEngineBullet(this);
+			//TODO set to mProjectileEngine=new ProjectileEngineStatic(this);
+		}
+		public PhysicsProjectile(ProjectileEngine engine){
+			mProjectileEngine=engine;
 		}
 		
 		@Override
 		public void update() {
-			// TODO Auto-generated method stub
-			
+			mProjectileEngine.update();
 		}
 		
 		public void setProjectileProperties(int type, Sprite parent, Vector2 destinationPoint){
@@ -30,7 +34,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 			
 		}
 		
-		private void setType(int type){
+		private void setType(int type){//never called
 			
 			if(type==Projectile.TYPE_RAW){
 				mVelocity = Projectile.VELOCITY_RAW;

@@ -14,6 +14,12 @@ public class FireProjectileEvent extends Event {
 		this.y = y;
 
 	}
+	public FireProjectileEvent(Vector2 coordinates)
+	{
+		this.x=coordinates.x;
+		this.y=coordinates.y;
+	
+	}
 
 	@Override
 	public void executeEvent() {
@@ -23,7 +29,7 @@ public class FireProjectileEvent extends Event {
 		
 		  Projectile p = ProjectilePool.getProjectilePool().getProjectile();
 		  p.prepareForSpawn(Projectile.TYPE_RAW,
-		  GameManager.getGameManager().getLevel().getHero(), new Vector2(15,10));
+		  GameManager.getGameManager().getLevel().getHero(), new Vector2(x,y));
 		  p.spawn(GameManager.getGameManager().getLevel().getWorld());
 	}
 

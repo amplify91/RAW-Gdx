@@ -74,5 +74,9 @@ public abstract class PhysicsComponent {
 	public float getY() {
 		return mBody.getPosition().y;
 	}
+	public Vector2 getDistanceVectorToPoint(Vector2 point)
+	{
+		return new Vector2(point.x-this.getX(),point.y-this.getY());
+	}
 
 }

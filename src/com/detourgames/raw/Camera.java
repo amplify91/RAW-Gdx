@@ -3,6 +3,8 @@ package com.detourgames.raw;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 public class Camera {
 	
@@ -16,7 +18,6 @@ public class Camera {
 		mCamera = new OrthographicCamera(viewportWidth, viewportHeight);
 		mCamera.position.set(viewportWidth/2f, viewportHeight/2f, 0);
 		mCamera.update();
-		
 		mScreenWidth = viewportWidth;
 		mScreenHeight = viewportHeight;
 		
@@ -65,6 +66,13 @@ public class Camera {
 	public void setScreenSizePixels(int width, int height){
 		mScreenWidthPixels = width;
 		mScreenHeightPixels = height;
+	}
+	public Vector2 translatePixelToWorldCoordinates(int x, int y)
+	{
+		Vector3 vec=new Vector3(x,y,0);
+		mCamera.unproject(vec);
+		Vector2 returnVector=new Vector2(vec.x,vec.y);
+		return returnVector;
 	}
 	
 }

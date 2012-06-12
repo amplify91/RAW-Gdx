@@ -2,6 +2,7 @@ package com.detourgames.raw;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector2;
 
 public class Input implements InputProcessor{
 	
@@ -79,7 +80,8 @@ public class Input implements InputProcessor{
 	}
 	
 	private void shoot(int x, int y){
-		EventQueue.getEventQueue().queue(new FireProjectileEvent(x, y));
+		Vector2 worldCoords=GameManager.getGameManager().getCamera().translatePixelToWorldCoordinates(x, y);
+		EventQueue.getEventQueue().queue(new FireProjectileEvent(worldCoords));
 	}
 	
 }
