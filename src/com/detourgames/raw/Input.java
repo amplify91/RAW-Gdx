@@ -80,7 +80,7 @@ public class Input implements InputProcessor{
 	}
 	
 	private void shoot(int x, int y){
-		Vector2 worldCoords=GameManager.getGameManager().getCamera().translatePixelToWorldCoordinates(x, y);
+		Vector2 worldCoords = GameManager.getGameManager().getCamera().translatePixelToWorldCoordinates(x, y);
 		EventQueue.getEventQueue().queue(new FireProjectileEvent(worldCoords));
 	}
 	

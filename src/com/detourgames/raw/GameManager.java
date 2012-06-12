@@ -1,6 +1,7 @@
 package com.detourgames.raw;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 
 public class GameManager {
 
@@ -15,14 +16,15 @@ public class GameManager {
 
 	LevelLoader levelLoader;
 	SpriteBatch spriteBatch;
-
+	Box2DDebugRenderer debug;
+	
 	boolean levelLoaded = false;
 
 	private GameManager() {
 		// input = new Input(this);
 		// camera = new Camera();
 		// mHUD = new HUD(camera);
-
+		
 	}
 
 	public static GameManager getGameManager() { // TODO synchronized?
@@ -39,7 +41,7 @@ public class GameManager {
 			// TODO update camera AFTER level?
 		}
 	}
-
+	
 	public void draw(long nanoTime) {
 		
 		if (levelLoaded) {
@@ -48,6 +50,7 @@ public class GameManager {
 			// mHUD.draw(spriteBatch);
 			mLevel.draw(spriteBatch, nanoTime);
 			spriteBatch.end();
+			debug.render(mLevel.getWorld(), mCamera.getCamera().combined);
 			// mLevel.drawDebug(camera);
 		}
 
@@ -76,6 +79,8 @@ public class GameManager {
 
 			levelLoaded = true;
 		}
+		
+		debug = new Box2DDebugRenderer(true, false, false, false);
 
 		// System.gc();
 	}

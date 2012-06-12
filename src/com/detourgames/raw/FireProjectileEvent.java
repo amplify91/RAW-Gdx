@@ -16,21 +16,18 @@ public class FireProjectileEvent extends Event {
 	}
 	public FireProjectileEvent(Vector2 coordinates)
 	{
-		this.x=coordinates.x;
-		this.y=coordinates.y;
+		this.x = coordinates.x;
+		this.y = coordinates.y;
 	
 	}
 
 	@Override
 	public void executeEvent() {
 		System.out.println("Shot at "+x+"' "+y);
-		//change from screen coords to world coords
 		
-		
-		  Projectile p = ProjectilePool.getProjectilePool().getProjectile();
-		  p.prepareForSpawn(Projectile.TYPE_RAW,
-		  GameManager.getGameManager().getLevel().getHero(), new Vector2(x,y));
-		  p.spawn(GameManager.getGameManager().getLevel().getWorld());
+		Projectile p = ProjectilePool.getProjectilePool().getProjectile();
+		p.prepareForSpawn(Projectile.TYPE_RAW, GameManager.getGameManager().getLevel().getHero(), new Vector2(x,y));
+		p.spawn(GameManager.getGameManager().getLevel().getWorld());
 	}
 
 }
