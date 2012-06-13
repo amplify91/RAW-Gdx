@@ -12,6 +12,13 @@ public abstract class PhysicsComponent {
 
 	Body mBody;
 	Vector2[] mVertices;
+	
+	//collision filters
+	static final short TYPE_UNBODIED=0;
+	static final short TYPE_TERRAIN = 1;
+	static final short TYPE_RAW = 2;
+	static final short TYPE_ENEMY = 3;
+	
 
 	public PhysicsComponent() {
 		
@@ -74,6 +81,8 @@ public abstract class PhysicsComponent {
 	public float getY() {
 		return mBody.getPosition().y;
 	}
+	
+	public Body getBody(){return mBody;};
 	public Vector2 getDistanceVectorToPoint(Vector2 point)
 	{
 		return new Vector2(point.x-this.getX(),point.y-this.getY());

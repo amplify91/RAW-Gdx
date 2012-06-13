@@ -23,7 +23,6 @@ public class Level {
 		Vector2 gravity = new Vector2(0.0f, -10.0f);
 		mWorld = new World(gravity, true);
 		mWorld.setContinuousPhysics(true);
-
 		mDrawableSprites = new ArrayList<Sprite>();
 		mUpdateableSprites = new ArrayList<Sprite>();
 

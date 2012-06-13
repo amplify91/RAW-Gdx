@@ -1,6 +1,11 @@
 package com.detourgames.raw;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 
 public class PhysicsHero extends PhysicsComponent{
@@ -47,5 +52,26 @@ public class PhysicsHero extends PhysicsComponent{
 	public void dash(){
 		mTotalVel = mTotalVel.add(mDashVel);
 	}
-	
+	@Override
+	public void create(World world, float x, float y, float width, float height, boolean dynamic) {
+
+		BodyDef bodyDef = new BodyDef();
+		if (dynamic) {
+			bodyDef.type = BodyType.DynamicBody;
+		} else {
+			bodyDef.type = BodyType.StaticBody;
+		}
+		bodyDef.position.set(x, y);// (x+(width/2f), y+(height/2f))
+		mBody = world.createBody(bodyDef);
+
+		PolygonShape dynamicBox = new PolygonShape();
+		dynamicBox.setAsBox(width / 2, height / 2);
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = dynamicBox;
+		fixtureDef.density = 1.0f;
+		fixtureDef.friction = 0.0f;
+		fixtureDef.filter.groupIndex=-TYPE_RAW;
+		mBody.createFixture(fixtureDef);
+		mBody.setFixedRotation(true);
+	}
 }

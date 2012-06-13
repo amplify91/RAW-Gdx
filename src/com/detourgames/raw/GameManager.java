@@ -80,7 +80,7 @@ public class GameManager {
 			levelLoaded = true;
 		}
 		
-		debug = new Box2DDebugRenderer(true, false, false, false);
+		debug = new Box2DDebugRenderer(true, true,true,true);
 
 		// System.gc();
 	}

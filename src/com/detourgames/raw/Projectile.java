@@ -10,6 +10,7 @@ public class Projectile extends Sprite implements IReusable{
 	public boolean isReadyForSpawn = false;
 	
 	public static final int TYPE_RAW = 1;
+	public static final int TYPE_ENEMY=2;
 	
 	public static final float WIDTH_RAW = 0.5f;
 	public static final float HEIGHT_RAW = 0.5f;
@@ -52,7 +53,6 @@ public class Projectile extends Sprite implements IReusable{
 		if(isReadyForSpawn){
 			isActive = true;
 			isReadyForSpawn = false;
-			create(world, getX(), getY());
 		}else{
 			//Log.e("Projectile", "prepareForSpawn() before spawn()");
 		}
