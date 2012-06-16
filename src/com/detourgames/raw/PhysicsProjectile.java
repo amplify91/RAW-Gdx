@@ -1,20 +1,16 @@
 package com.detourgames.raw;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class PhysicsProjectile extends PhysicsComponent{
 
-		float mVelocity=10;
+		float mVelocity = 10f;
 		Vector2 mDestinationPoint;
 		
 		public PhysicsProjectile(){
@@ -23,16 +19,18 @@ public class PhysicsProjectile extends PhysicsComponent{
 		
 		@Override
 		public void update() {
+			
 		}
 		
 		public void setProjectileProperties(int type, Sprite parent, Vector2 destinationPoint){
 			//TODO finish. also swap parent for just vec2 spawnpoint if no other info is needed from parent.
 			mBody.setTransform(parent.getX(), parent.getY(), 0);
 			//mType = type;
-			//mSpawnPoint = spawnPoint;
 			mDestinationPoint = destinationPoint;
 			setType(type);
-			this.mBody.applyLinearImpulse( this.getDistanceVectorToPoint(destinationPoint).nor().mul(mVelocity), this.getBody().getPosition());
+			// TODO .mul(mBody.getMass()).mul(mVelocity); <- impulse vector should be multiplied like this, but, for
+			//some reason, it is always normalized even after being multiplied. I suspect a problem with Vector2.nor()
+			mBody.applyLinearImpulse( getDistanceVectorToPoint(destinationPoint).nor(), mBody.getWorldCenter());
 			
 		}
 		
@@ -43,7 +41,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 				mVertices = Projectile.VERTS_RAW;
 				for(Fixture f : mBody.getFixtureList())
 				{
-					f.getFilterData().groupIndex = -TYPE_RAW;//TODO ideal place to do this, but gets reset by something, so this has no effect.
+					f.getFilterData().groupIndex = -TYPE_ALLY;//TODO ideal place to do this, but gets reset by something, so this has no effect.
 				}
 			}
 			if(type==Projectile.TYPE_ENEMY){
@@ -56,6 +54,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 			}
 			
 		}
+		
 		@Override
 		public void create(World world, float x, float y, Vector2 vertices[], boolean dynamic) {
 
@@ -74,7 +73,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 			fixtureDef.shape = dynamicBox;
 			fixtureDef.density = 1.0f;
 			fixtureDef.friction = 0.0f;
-			fixtureDef.filter.groupIndex=-TYPE_RAW;
+			fixtureDef.filter.groupIndex = -TYPE_ALLY;
 			mBody.createFixture(fixtureDef);
 			mBody.setFixedRotation(true);
 

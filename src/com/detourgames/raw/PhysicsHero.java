@@ -70,7 +70,7 @@ public class PhysicsHero extends PhysicsComponent{
 		fixtureDef.shape = dynamicBox;
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.0f;
-		fixtureDef.filter.groupIndex=-TYPE_RAW;
+		fixtureDef.filter.groupIndex = -TYPE_ALLY;
 		mBody.createFixture(fixtureDef);
 		mBody.setFixedRotation(true);
 	}
