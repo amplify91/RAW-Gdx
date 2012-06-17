@@ -22,7 +22,7 @@ public class Projectile extends Sprite implements IReusable{
 	
 	public Projectile(SpriteSheet spriteSheet){
 		
-		super(new PhysicsProjectile(), new AnimationComponent());
+		super(new PhysicsProjectile(), new AnimationComponent(), new StateStatic());
 		Animation[] animations = new Animation[]{
 				AnimationComponent.createAnimation(spriteSheet, new int[]{20})
 				//more animations,

@@ -17,7 +17,7 @@ public class Hero extends Sprite{
 	public static final int[] ANIMATION_JUMPING = {8,9,10,11,12,13,14,15};
 	
 	public Hero(SpriteSheet spriteSheet){
-		super(new PhysicsHero(), new AnimationComponent());
+		super(new PhysicsHero(), new AnimationComponent(), new StateHero());
 		Animation[] animations = new Animation[]{
 				AnimationComponent.createAnimation(spriteSheet, ANIMATION_RUNNING),
 				AnimationComponent.createAnimation(spriteSheet, ANIMATION_JUMPING)

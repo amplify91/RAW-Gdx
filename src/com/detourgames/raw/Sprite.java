@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public abstract class Sprite implements IFocusable{
 
 	PhysicsComponent mPhysics;
-	StateComponent mState = new StateComponent();
+	StateComponent mState;
 	AnimationComponent mAnimation;
 	InputComponent mInput = new InputComponent();
 
@@ -24,12 +24,13 @@ public abstract class Sprite implements IFocusable{
 	public static final float SCALE_FACTOR = 2f / 15f;
 	public static final float SCALE_FACTOR_INV = 15f / 2f;
 
-	public Sprite(PhysicsComponent pc, AnimationComponent ac) {
+	public Sprite(PhysicsComponent pc, AnimationComponent ac, StateComponent sc) {
 		
 		// all sprites will create their own animations in their own constructors.
 		// that means each sprite subclass must have a SpriteSheet param in their constructor.
 		mPhysics = pc;
 		mAnimation = ac;
+		mState = sc;
 
 	}
 
