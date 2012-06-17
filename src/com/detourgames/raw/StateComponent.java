@@ -5,9 +5,9 @@ public abstract class StateComponent {
 	int mMaxHealth;
 	int mHealth;
 	
-	int mState = 0;
+	protected int mState = 0;
 	
-	int[] mAvailableStates;
+	private int[] mAvailableStates;
 	
 	public static final int STATE_IDLE = 1;
 	public static final int STATE_RUNNING = 2;
@@ -20,8 +20,6 @@ public abstract class StateComponent {
 	public static final int STATE_HURTING = 9;
 	public static final int STATE_RECOVERING = 10;
 	public static final int STATE_RAWESOME = 11;
-	
-	//public boolean[] flags = new boolean[]{isIdle, isRunning, ...etc};
 	
 	public StateComponent(int[] availableStates){
 		setAvailableStates(availableStates);
@@ -36,6 +34,10 @@ public abstract class StateComponent {
 		setInitialState();
 	}
 	
+	public int getState(){
+		return mState;
+	}
+	
 	public void setState(int state){
 		
 		if(isStateAvailable(state)){
@@ -47,7 +49,7 @@ public abstract class StateComponent {
 	}
 	
 	private boolean isStateAvailable(int state){
-		for(int i: mAvailableStates){
+		for(int i=0;i<mAvailableStates.length-1;i++){
 			if(mAvailableStates[i]==state){
 				return true;
 			}

@@ -16,7 +16,7 @@ public class Tile extends Sprite{
 		86, 87, 88, 89, 90, 91 };
 	
 	public Tile(){
-		super(new PhysicsStatic(), new AnimationComponent(), new StateStatic());
+		super(new PhysicsStatic(), new AnimationStatic(), new StateStatic());
 		
 	}
 	

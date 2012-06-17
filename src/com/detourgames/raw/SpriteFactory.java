@@ -35,6 +35,7 @@ public class SpriteFactory {
 		if(shape==1){
 			tileVerts = verts;
 		}
+		
 		Animation animation = AnimationComponent.createAnimation(mSpriteSheet, new int[]{frame});
 		tile.create(mLevel.getWorld(), x, y, animation, tileVerts);
 		mLevel.addDrawableSprite(tile);

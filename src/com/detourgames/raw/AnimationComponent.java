@@ -4,11 +4,11 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class AnimationComponent {
+public abstract class AnimationComponent {
 	
 	private Animation[] mAnimations;
 	private Animation mAnimation;
-	private int mCurrentAnimation = 0;
+	protected int mCurrentAnimation = 0;
 	
 	private float mStateTime = 0f;
 	private long mStartTime = 0;
@@ -26,12 +26,10 @@ public class AnimationComponent {
 		setAnimation(0);
 	}
 
-	public void update(StateComponent state) {
-		//if state has changed, change animation
-		
-	}
+	public abstract void update(StateComponent state);
 	
 	public TextureRegion getFrame(long nanoTime){//TODO give current time as a parameter and calculate state time from there
+		
 		mStateTime = (float)(nanoTime-mStartTime)/1000000000f;
 		return mAnimation.getKeyFrame(mStateTime, true);
 	}

@@ -10,22 +10,9 @@ public class Hero extends Sprite{
 	private static final float MAX_SPEED = 10;
 	private static final float HEIGHT = 1;
 	private static final float WIDTH = 1;
-	//hero animations/flags
-	public static final int RUNNING = 0;
-	public static final int JUMPING = 1;
-	public static final int[] ANIMATION_RUNNING = {0,1,2,3,4,5,6,7};
-	public static final int[] ANIMATION_JUMPING = {8,9,10,11,12,13,14,15};
 	
 	public Hero(SpriteSheet spriteSheet){
-		super(new PhysicsHero(), new AnimationComponent(), new StateHero());
-		Animation[] animations = new Animation[]{
-				AnimationComponent.createAnimation(spriteSheet, ANIMATION_RUNNING),
-				AnimationComponent.createAnimation(spriteSheet, ANIMATION_JUMPING)
-				//more animations,
-				//more animations,
-				//more animations
-				};
-		mAnimation.setAnimations(animations);
+		super(new PhysicsHero(), new AnimationHero(spriteSheet), new StateHero());
 		running = new Vector2(25, 0);
 		//mAnimation.setAnimation(Animation.ANIMATION_RUNNING);
 		
@@ -37,16 +24,16 @@ public class Hero extends Sprite{
 		mDrawOffsetX = -WIDTH / 2f;
 		mDrawOffsetY = -HEIGHT / 2f;
 		mPhysics.create(world, x, y, WIDTH, HEIGHT, true);
-		//mAnimation.setAnimation(Animation.RUNNING);
 	}
 	
 	public void jump(){
 		((PhysicsHero) mPhysics).jump();
-		//mAnimation.setAnimation(JUMPING);
+		mState.setState(StateHero.STATE_JUMPING);
 	}
 	
 	public void dash(){
 		((PhysicsHero) mPhysics).dash();
+		//mState.setState(StateHero.STATE_DASHING);
 	}
 	
 }
