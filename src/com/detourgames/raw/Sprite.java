@@ -7,7 +7,7 @@ public abstract class Sprite implements IFocusable{
 	PhysicsComponent mPhysics;
 	StateComponent mState;
 	AnimationComponent mAnimation;
-	InputComponent mInput = new InputComponent();
+	ControllerComponent mController = new ControllerComponent();
 
 	float mDrawWidth = 0.5f;
 	float mDrawHeight = 0.5f;
@@ -46,7 +46,7 @@ public abstract class Sprite implements IFocusable{
 		
 		mState.update(mPhysics);
 		mAnimation.update(mState);
-		mInput.update(mState, mPhysics);
+		mController.update(mState, mPhysics);
 		mPhysics.update();
 		
 	}

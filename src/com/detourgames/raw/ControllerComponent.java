@@ -1,8 +1,8 @@
 package com.detourgames.raw;
 
-public class InputComponent {
+public class ControllerComponent {
 	
-	public InputComponent(){
+	public ControllerComponent(){
 		
 	}
 	
