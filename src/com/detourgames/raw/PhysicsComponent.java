@@ -9,23 +9,33 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class PhysicsComponent {
-
+	
+	Sprite mParent;
 	Body mBody;
 	Vector2[] mVertices;
 	
-	//collision filters
-	static final short TYPE_UNBODIED = 0;
-	static final short TYPE_TERRAIN = 1;
-	static final short TYPE_ALLY = 2;
-	static final short TYPE_ENEMY = 3;
+	//collision group indices
+	//negative means they never collide with each other, positive means always collide
+	//if groups don't match or either one is 0, determine collision by category/mask
+	public static final short GROUP_ALLY = -1;
+	public static final short GROUP_ENEMY = -2;
+	public static final short GROUP_NEUTRAL = -3;
+	public static final short GROUP_TERRAIN = -4;
+	public static final short GROUP_GFX = -5; //graphic effects
+	public static final short GROUP_SPECIAL = -6; //power-ups and items, etc.
 	
+	//collision categories
+	//category bit means "I am a...", mask bit means "I collide with..."
+	public static final short ALLY = 0;
+	public static final short ENEMY = 1;
 
 	public PhysicsComponent() {
 		
 	}
 
 	public void create(World world, float x, float y, float width, float height, boolean dynamic) {
-
+		
+		//create main fixture (bodies may have more than one)
 		BodyDef bodyDef = new BodyDef();
 		if (dynamic) {
 			bodyDef.type = BodyType.DynamicBody;
@@ -42,12 +52,14 @@ public abstract class PhysicsComponent {
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.0f;
 		mBody.createFixture(fixtureDef);
-		mBody.setFixedRotation(true);
+		//mBody.setFixedRotation(true);
+		mBody.setUserData(this);
 
 	}
 
 	public void create(World world, float x, float y, Vector2 vertices[], boolean dynamic) {
-
+		
+		//create main fixture (bodies may have more than one)
 		BodyDef bodyDef = new BodyDef();
 		if (dynamic) {
 			bodyDef.type = BodyType.DynamicBody;
@@ -64,12 +76,21 @@ public abstract class PhysicsComponent {
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.0f;
 		mBody.createFixture(fixtureDef);
-		mBody.setFixedRotation(true);
+		//mBody.setFixedRotation(true);
+		mBody.setUserData(this);
 
 	}
 
 	public abstract void update();
-
+	
+	public Sprite getParentSprite(){
+		return mParent;
+	}
+	
+	public void setParentSprite(Sprite parent){
+		mParent = parent;
+	}
+	
 	public void destroy() {
 		// TODO
 	}

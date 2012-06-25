@@ -12,7 +12,7 @@ public class StateHero extends StateComponent{
 	protected void setInitialState() {
 		mMaxHealth = 100;
 		mHealth = mMaxHealth;
-		mState = STATE_IDLE;
+		setState(STATE_IDLE);
 	}
 	
 }

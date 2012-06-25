@@ -14,6 +14,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 		Vector2 mDestinationPoint;
 		
 		public PhysicsProjectile(){
+			super();
 		}
 		
 		
@@ -41,7 +42,8 @@ public class PhysicsProjectile extends PhysicsComponent{
 				mVertices = Projectile.VERTS_RAW;
 				for(Fixture f : mBody.getFixtureList())
 				{
-					f.getFilterData().groupIndex = -TYPE_ALLY;//TODO ideal place to do this, but gets reset by something, so this has no effect.
+					f.getFilterData().groupIndex = PhysicsComponent.GROUP_ALLY;//TODO ideal place to do this, but gets reset by something, so this has no effect.
+					//TODO maybe it is being reset by 16th line of create()?
 				}
 			}
 			if(type==Projectile.TYPE_ENEMY){
@@ -49,7 +51,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 				mVertices = Projectile.VERTS_RAW;
 				for(Fixture f : mBody.getFixtureList())
 				{
-					f.getFilterData().groupIndex = -TYPE_ENEMY;
+					f.getFilterData().groupIndex = PhysicsComponent.GROUP_ENEMY;
 				}
 			}
 			
@@ -73,7 +75,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 			fixtureDef.shape = dynamicBox;
 			fixtureDef.density = 1.0f;
 			fixtureDef.friction = 0.0f;
-			fixtureDef.filter.groupIndex = -TYPE_ALLY;
+			fixtureDef.filter.groupIndex = PhysicsComponent.GROUP_ALLY;
 			mBody.createFixture(fixtureDef);
 			mBody.setFixedRotation(true);
 

@@ -49,7 +49,7 @@ public abstract class StateComponent {
 	}
 	
 	private boolean isStateAvailable(int state){
-		for(int i=0;i<mAvailableStates.length-1;i++){
+		for(int i=0;i<mAvailableStates.length;i++){
 			if(mAvailableStates[i]==state){
 				return true;
 			}

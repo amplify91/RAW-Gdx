@@ -22,7 +22,7 @@ public class PhysicsHero extends PhysicsComponent{
 	private static final float MAX_SPEED = 2f;
 	
 	public PhysicsHero(){
-		
+		super();
 	}
 	
 	@Override
@@ -52,6 +52,7 @@ public class PhysicsHero extends PhysicsComponent{
 	public void dash(){
 		mTotalVel = mTotalVel.add(mDashVel);
 	}
+	
 	@Override
 	public void create(World world, float x, float y, float width, float height, boolean dynamic) {
 
@@ -70,7 +71,7 @@ public class PhysicsHero extends PhysicsComponent{
 		fixtureDef.shape = dynamicBox;
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.0f;
-		fixtureDef.filter.groupIndex = -TYPE_ALLY;
+		fixtureDef.filter.groupIndex = PhysicsComponent.GROUP_ALLY;
 		mBody.createFixture(fixtureDef);
 		mBody.setFixedRotation(true);
 	}
