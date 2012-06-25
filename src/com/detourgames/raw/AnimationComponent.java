@@ -8,7 +8,7 @@ public abstract class AnimationComponent {
 	
 	private Animation[] mAnimations;
 	private Animation mAnimation;
-	protected int mCurrentAnimation = 0;
+	protected int mCurrentAnimation = -1;
 	
 	private float mStateTime = 0f;
 	private long mStartTime = 0;

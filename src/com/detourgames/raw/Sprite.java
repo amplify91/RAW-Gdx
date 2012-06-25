@@ -31,6 +31,7 @@ public abstract class Sprite implements IFocusable{
 		mPhysics = pc;
 		mAnimation = ac;
 		mState = sc;
+		mPhysics.setParentSprite(this);//TODO see if this works or else I need to do this in each subclass
 
 	}
 
@@ -40,6 +41,7 @@ public abstract class Sprite implements IFocusable{
 
 	public void draw(SpriteBatch sb, long nanoTime) {
 		sb.draw(mAnimation.getFrame(nanoTime), mPhysics.getX()+mDrawOffsetX, mPhysics.getY()+mDrawOffsetY, mDrawWidth, mDrawHeight);
+		//sb.draw(mAnimation.getFrame(nanoTime), mPhysics.getX()+mDrawOffsetX, mPhysics.getY()+mDrawOffsetY, 0, 0, mDrawWidth, mDrawHeight, 1, 1, mPhysics.mBody.getAngle()+((float)Math.PI/2f), false);
 	}
 
 	public void update(float deltaTime) {
@@ -65,13 +67,11 @@ public abstract class Sprite implements IFocusable{
 	
 	@Override
 	public float getCameraOffsetX() {
-		// TODO Auto-generated method stub
 		return mCameraOffsetX;
 	}
 
 	@Override
 	public float getCameraOffsetY() {
-		// TODO Auto-generated method stub
 		return mCameraOffsetY;
 	}
 

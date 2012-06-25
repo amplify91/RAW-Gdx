@@ -1,7 +1,9 @@
 package com.detourgames.raw;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Hero extends Sprite{
@@ -24,6 +26,18 @@ public class Hero extends Sprite{
 		mDrawOffsetX = -WIDTH / 2f;
 		mDrawOffsetY = -HEIGHT / 2f;
 		mPhysics.create(world, x, y, WIDTH, HEIGHT, true);
+		
+		//create ground sensor
+		float sensorHeight = 0.1f;
+		PolygonShape sensorBox = new PolygonShape();
+		sensorBox.setAsBox((WIDTH-0.1f) / 2f, sensorHeight / 2f, new Vector2(0,(-HEIGHT/2f)-(sensorHeight/2f)), 0);
+		FixtureDef sensorFixtureDef = new FixtureDef();
+		sensorFixtureDef.shape = sensorBox;
+		sensorFixtureDef.density = 1.0f;
+		sensorFixtureDef.friction = 0.0f;
+		sensorFixtureDef.isSensor = true;
+		Fixture groundSensor = mPhysics.mBody.createFixture(sensorFixtureDef);
+		groundSensor.setUserData(2); //TODO make a better way of doing this. See: ContactListener.
 	}
 	
 	public void jump(){
