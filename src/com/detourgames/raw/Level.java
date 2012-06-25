@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Level {
@@ -22,6 +23,7 @@ public class Level {
 
 		Vector2 gravity = new Vector2(0.0f, -10.0f);
 		mWorld = new World(gravity, true);
+		mWorld.setContactListener(new ContactListenerRAW());
 		mWorld.setContinuousPhysics(true);
 		mDrawableSprites = new ArrayList<Sprite>();
 		mUpdateableSprites = new ArrayList<Sprite>();
