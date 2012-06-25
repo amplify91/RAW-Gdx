@@ -15,7 +15,6 @@ public class TestContactListener implements ContactListener{
 		Fixture fixtureB = contact.getFixtureB();
 		if(fixtureA.getUserData() != null){
 			if((Integer)fixtureA.getUserData() == 2){
-				System.out.println("A");
 				((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_RUNNING);
 				
 				
@@ -23,9 +22,7 @@ public class TestContactListener implements ContactListener{
 		}
 		if(fixtureB.getUserData() != null){
 			if((Integer)fixtureB.getUserData() == 2){
-				//gets to here
-				System.out.println("B");
-				((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_RUNNING);
+				((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_RUNNING);
 				
 			}
 		}

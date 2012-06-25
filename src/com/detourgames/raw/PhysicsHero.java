@@ -74,5 +74,6 @@ public class PhysicsHero extends PhysicsComponent{
 		fixtureDef.filter.groupIndex = PhysicsComponent.GROUP_ALLY;
 		mBody.createFixture(fixtureDef);
 		mBody.setFixedRotation(true);
+		mBody.setUserData(this);
 	}
 }

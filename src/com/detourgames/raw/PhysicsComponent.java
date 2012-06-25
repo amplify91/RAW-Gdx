@@ -53,7 +53,7 @@ public abstract class PhysicsComponent {
 		fixtureDef.friction = 0.0f;
 		mBody.createFixture(fixtureDef);
 		//mBody.setFixedRotation(true);
-		mBody.setUserData(this);
+		mBody.setUserData(this); //TODO If subclass overrides, make sure to call this.
 
 	}
 
