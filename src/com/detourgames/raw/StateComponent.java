@@ -26,9 +26,7 @@ public abstract class StateComponent {
 		setInitialState();
 	}
 	
-	public void update(PhysicsComponent physics){
-		//physics.getBody().getFixtureList().
-	}
+	public abstract void update(PhysicsComponent physics);
 	
 	public void reset(){
 		setInitialState();

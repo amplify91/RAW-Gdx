@@ -12,6 +12,7 @@ public abstract class AnimationComponent {
 	
 	private float mStateTime = 0f;
 	private long mStartTime = 0;
+	private boolean isAnimationFinished = false;
 	
 	public static final float FPS = 12;
 	public static final float FRAME_DURATION = 1f / (float) FPS;
@@ -31,17 +32,24 @@ public abstract class AnimationComponent {
 	public TextureRegion getFrame(long nanoTime){//TODO give current time as a parameter and calculate state time from there
 		
 		mStateTime = (float)(nanoTime-mStartTime)/1000000000f;
+		if(!isAnimationFinished){
+			isAnimationFinished = mAnimation.isAnimationFinished(mStateTime);
+			//TODO at this point, if an animation is finished, it will loop back and display first frame before being able to be changed.
+			// Suggest moving this small block to an update() method or some other solution.
+		}
 		return mAnimation.getKeyFrame(mStateTime, true);
 	}
 	
 	public void setAnimation(Animation animation){
 		mAnimation = animation;
+		isAnimationFinished = false;
 		mStartTime = TimeUtils.nanoTime();
 	}
 	
 	public void setAnimation(int animation){
 		mCurrentAnimation = animation;
 		mAnimation = mAnimations[mCurrentAnimation];
+		isAnimationFinished = false;
 		mStartTime = TimeUtils.nanoTime();
 	}
 	
@@ -51,7 +59,12 @@ public abstract class AnimationComponent {
 	}
 	
 	public void restartAnimation(){
+		isAnimationFinished = false;
 		mStartTime = TimeUtils.nanoTime();
+	}
+	
+	public boolean isAnimationFinished(){
+		return isAnimationFinished;
 	}
 	
 	public static Animation createAnimation(SpriteSheet spriteSheet, int[] frameNumbers){
