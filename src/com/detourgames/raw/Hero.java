@@ -25,7 +25,7 @@ public class Hero extends Sprite{
 		mDrawHeight = HEIGHT;
 		mDrawOffsetX = -WIDTH / 2f;
 		mDrawOffsetY = -HEIGHT / 2f;
-		mPhysics.create(world, x, y, WIDTH, HEIGHT, true);
+		mPhysics.create(world, x, y, WIDTH, HEIGHT, true, FixtureType.HERO_BODY);
 		
 		//create ground sensor
 		float sensorHeight = 0.1f;
@@ -36,8 +36,7 @@ public class Hero extends Sprite{
 		sensorFixtureDef.density = 1.0f;
 		sensorFixtureDef.friction = 0.0f;
 		sensorFixtureDef.isSensor = true;
-		Fixture groundSensor = mPhysics.mBody.createFixture(sensorFixtureDef);
-		groundSensor.setUserData(2); //TODO make a better way of doing this. See: ContactListener.
+		mPhysics.mBody.createFixture(sensorFixtureDef).setUserData(FixtureType.HERO_GROUND_SENSOR);
 	}
 	
 	public void jump(){

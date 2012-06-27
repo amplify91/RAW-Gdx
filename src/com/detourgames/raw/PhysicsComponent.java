@@ -33,7 +33,7 @@ public abstract class PhysicsComponent {
 		
 	}
 
-	public void create(World world, float x, float y, float width, float height, boolean dynamic) {
+	public void create(World world, float x, float y, float width, float height, boolean dynamic, int mainFixtureType) {
 		
 		//create main fixture (bodies may have more than one)
 		BodyDef bodyDef = new BodyDef();
@@ -57,7 +57,7 @@ public abstract class PhysicsComponent {
 
 	}
 
-	public void create(World world, float x, float y, Vector2 vertices[], boolean dynamic) {
+	public void create(World world, float x, float y, Vector2 vertices[], boolean dynamic, int mainFixtureType) {
 		
 		//create main fixture (bodies may have more than one)
 		BodyDef bodyDef = new BodyDef();
@@ -75,7 +75,7 @@ public abstract class PhysicsComponent {
 		fixtureDef.shape = dynamicBox;
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.0f;
-		mBody.createFixture(fixtureDef);
+		mBody.createFixture(fixtureDef).setUserData(mainFixtureType);
 		//mBody.setFixedRotation(true);
 		mBody.setUserData(this);
 

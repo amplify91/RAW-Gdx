@@ -27,7 +27,7 @@ public class Tile extends Sprite{
 		mDrawOffsetX = 0;
 		mDrawOffsetY = 0;
 		//mPhysics.create(world, x, y, 0.5f, 0.5f, false);
-		mPhysics.create(world, x, y, vertices, false);
+		mPhysics.create(world, x, y, vertices, false, FixtureType.TERRAIN);
 		
 		
 		mAnimation.setAnimation(animation);

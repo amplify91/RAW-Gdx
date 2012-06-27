@@ -38,7 +38,7 @@ public class Projectile extends Sprite implements IReusable{
 		mDrawHeight = HEIGHT_RAW;
 		mDrawOffsetX = -WIDTH_RAW / 2f;
 		mDrawOffsetY = -HEIGHT_RAW / 2f;
-		mPhysics.create(world, x, y, VERTS_RAW, true);//TODO change to true for dynamic projectiles.
+		mPhysics.create(world, x, y, VERTS_RAW, true, FixtureType.HERO_PROJECTILE);//TODO change to true for dynamic projectiles.
 		mPhysics.mBody.setBullet(true);
 	}
 	

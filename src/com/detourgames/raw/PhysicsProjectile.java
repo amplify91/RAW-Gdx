@@ -58,7 +58,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 		}
 		
 		@Override
-		public void create(World world, float x, float y, Vector2 vertices[], boolean dynamic) {
+		public void create(World world, float x, float y, Vector2 vertices[], boolean dynamic, int mainFixtureType) {
 
 			BodyDef bodyDef = new BodyDef();
 			if (dynamic) {
@@ -76,7 +76,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 			fixtureDef.density = 1.0f;
 			fixtureDef.friction = 0.0f;
 			fixtureDef.filter.groupIndex = PhysicsComponent.GROUP_ALLY;
-			mBody.createFixture(fixtureDef);
+			mBody.createFixture(fixtureDef).setUserData(mainFixtureType);
 			mBody.setFixedRotation(true);
 
 		}

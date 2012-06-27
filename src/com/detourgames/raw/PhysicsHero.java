@@ -54,7 +54,7 @@ public class PhysicsHero extends PhysicsComponent{
 	}
 	
 	@Override
-	public void create(World world, float x, float y, float width, float height, boolean dynamic) {
+	public void create(World world, float x, float y, float width, float height, boolean dynamic, int mainFixtureType) {
 
 		BodyDef bodyDef = new BodyDef();
 		if (dynamic) {
@@ -72,7 +72,7 @@ public class PhysicsHero extends PhysicsComponent{
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.0f;
 		fixtureDef.filter.groupIndex = PhysicsComponent.GROUP_ALLY;
-		mBody.createFixture(fixtureDef);
+		mBody.createFixture(fixtureDef).setUserData(mainFixtureType);
 		mBody.setFixedRotation(true);
 		mBody.setUserData(this);
 	}

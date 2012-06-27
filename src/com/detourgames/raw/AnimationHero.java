@@ -1,7 +1,5 @@
 package com.detourgames.raw;
 
-import javax.security.auth.callback.LanguageCallback;
-
 import com.badlogic.gdx.graphics.g2d.Animation;
 
 public class AnimationHero extends AnimationComponent{
