@@ -24,11 +24,16 @@ public class ProjectilePool {
 	public Projectile getProjectile(){
 		for(int i=0;i<mProjectiles.size();i++){
 			if(!mProjectiles.get(i).isActive){
+				System.out.println("Number of total Projectiles in pool: " + mProjectiles.size() + ". Used an old one!");
 				return mProjectiles.get(i);
 			}
 		}
+		System.out.println("Number of total Projectiles in pool: " + mProjectiles.size() + ". Made a new one!");
+		Projectile p = mSpriteFactory.createProjectile();
+		mProjectiles.add(p);
 		
-		return mSpriteFactory.createProjectile();
+		getProjectile();
+		return p;
 		
 	}
 	

@@ -98,7 +98,9 @@ public class Level {
 	
 	private void setContactListeners(){
 		ContactListenerHero clHero = new ContactListenerHero();
+		ContactListenerProjectile clProj = new ContactListenerProjectile();
 		mWorld.setContactListener(clHero);
+		mWorld.setContactListener(clProj);
 	}
 	
 }

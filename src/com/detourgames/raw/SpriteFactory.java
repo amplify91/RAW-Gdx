@@ -45,7 +45,7 @@ public class SpriteFactory {
 	
 	public Projectile createProjectile(){
 		Projectile projectile = new Projectile(mSpriteSheet);
-		projectile.create(mLevel.getWorld(), 0, 0);
+		projectile.create(mLevel.getWorld(), -1, -1);
 		mLevel.addDrawableSprite(projectile);
 		mLevel.addUpdateableSprite(projectile);
 		

@@ -19,7 +19,8 @@ public abstract class StateComponent {
 	public static final int STATE_SWINGING = 8;
 	public static final int STATE_HURTING = 9;
 	public static final int STATE_RECOVERING = 10;
-	public static final int STATE_RAWESOME = 11;
+	public static final int STATE_DEAD = 11;
+	public static final int STATE_RAWESOME = 12;
 	
 	public StateComponent(int[] availableStates){
 		setAvailableStates(availableStates);
