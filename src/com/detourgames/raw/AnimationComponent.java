@@ -9,10 +9,12 @@ public abstract class AnimationComponent {
 	private Animation[] mAnimations;
 	private Animation mAnimation;
 	protected int mCurrentAnimation = -1;
+	private int mNextAnimation = -1;
 	
 	private float mStateTime = 0f;
 	private long mStartTime = 0;
 	private boolean isAnimationFinished = false;
+	private boolean isAnimationQueued = false;
 	
 	public static final float FPS = 12;
 	public static final float FRAME_DURATION = 1f / (float) FPS;
@@ -37,6 +39,11 @@ public abstract class AnimationComponent {
 			//TODO at this point, if an animation is finished, it will loop back and display first frame before being able to be changed.
 			// Suggest moving this small block to an update() method or some other solution.
 		}
+		if(isAnimationFinished){
+			if(isAnimationQueued){
+				setQueuedAnimation();
+			}
+		}
 		return mAnimation.getKeyFrame(mStateTime, true);
 	}
 	
@@ -51,6 +58,23 @@ public abstract class AnimationComponent {
 		mAnimation = mAnimations[mCurrentAnimation];
 		isAnimationFinished = false;
 		mStartTime = TimeUtils.nanoTime();
+	}
+	
+	public void setTransitionAnimation(int animation, int nextAnimation){
+		setAnimation(animation);
+		queueAnimation(nextAnimation);
+	}
+	
+	private void setQueuedAnimation(){
+		setAnimation(mNextAnimation);
+		isAnimationQueued = false;
+		mStateTime = (float)1f/1000000000f;
+	}
+	
+	private void queueAnimation(int nextAnimation){
+		//TODO
+		mNextAnimation = nextAnimation;
+		isAnimationQueued = true;
 	}
 	
 	public void setAnimations(Animation[] animations){

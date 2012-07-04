@@ -6,13 +6,14 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
-public class ContactListenerHero implements ContactListener{
+public class ContactListenerRAW implements ContactListener{
 	
 	private int numGroundContacts = 0;
 	
 	@Override
 	public void beginContact(Contact contact) {
 		beginGroundContact(contact);
+		beginProjectileContact(contact);
 	}
 
 	@Override
@@ -70,6 +71,21 @@ public class ContactListenerHero implements ContactListener{
 					//((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_FALLING);
 					((StateHero)((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState).isOnGround=false;
 				}
+			}
+		}
+	}
+	
+	private void beginProjectileContact(Contact contact){
+		Fixture fixtureA = contact.getFixtureA();
+		Fixture fixtureB = contact.getFixtureB();
+		if(fixtureA.getUserData() != null){
+			if((Integer)fixtureA.getUserData() == FixtureType.HERO_PROJECTILE){
+				((StateProjectile)((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState).setState(StateComponent.STATE_HURTING);
+			}
+		}
+		if(fixtureB.getUserData() != null){
+			if((Integer)fixtureB.getUserData() == FixtureType.HERO_PROJECTILE){
+				((StateProjectile)((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState).setState(StateComponent.STATE_HURTING);
 			}
 		}
 	}

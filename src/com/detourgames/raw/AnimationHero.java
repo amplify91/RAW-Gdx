@@ -35,26 +35,11 @@ public class AnimationHero extends AnimationComponent{
 	public void update(StateComponent state) {
 		
 		if(state.getState()==StateHero.STATE_RUNNING && mCurrentAnimation!=INDEX_LANDING && mCurrentAnimation!=INDEX_RUNNING){
-			setAnimation(INDEX_LANDING);
+			setTransitionAnimation(INDEX_LANDING, INDEX_RUNNING);
 		}else if(state.getState()==StateHero.STATE_JUMPING && mCurrentAnimation!=INDEX_JUMPING && mCurrentAnimation!=INDEX_PRE_JUMPING){
-			setAnimation(INDEX_PRE_JUMPING);
+			setTransitionAnimation(INDEX_PRE_JUMPING, INDEX_JUMPING);
 		}else if(state.getState()==StateHero.STATE_FALLING && mCurrentAnimation!=INDEX_FALLING && mCurrentAnimation!=INDEX_PRE_FALLING){
-			setAnimation(INDEX_PRE_FALLING);
-		}
-		if(mCurrentAnimation==INDEX_LANDING && state.getState()==StateHero.STATE_RUNNING){
-			if(isAnimationFinished()){
-				setAnimation(INDEX_RUNNING);
-			}
-		}
-		if(mCurrentAnimation==INDEX_PRE_JUMPING && state.getState()==StateHero.STATE_JUMPING){
-			if(isAnimationFinished()){
-				setAnimation(INDEX_JUMPING);
-			}
-		}
-		if(mCurrentAnimation==INDEX_PRE_FALLING && state.getState()==StateHero.STATE_FALLING){
-			if(isAnimationFinished()){
-				setAnimation(INDEX_FALLING);
-			}
+			setTransitionAnimation(INDEX_PRE_FALLING, INDEX_FALLING);
 		}
 		
 	}
