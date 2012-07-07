@@ -3,10 +3,14 @@ package com.detourgames.raw;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
+import java.util.Vector;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonWriter.OutputType;
+import com.badlogic.gdx.utils.OrderedMap;
 
 public class LevelLoader {
 
@@ -42,8 +46,13 @@ public class LevelLoader {
 
 		// sprites += HUD.HUD_SPRITES;
 	}
-	
+
 	public void createLevelFromFile(int ln) {
+		FileHandle jsonId = Gdx.files.internal("levels/tonkatrucks.json");
+		JsonReader reader=new JsonReader();
+		Object o=reader.parse(jsonId);
+		CreateLevelFromJsonObject((OrderedMap)o);
+		if(true)return;
 		FileHandle fileId = getFileHandle(ln);
 		// int[][] pieceInfo = null;
 		// int[][] grid = new int[1][1];
@@ -58,7 +67,7 @@ public class LevelLoader {
 		try {
 			InputStream inputStream = fileId.read();
 			BufferedReader in = new BufferedReader(new InputStreamReader(inputStream), inputStream.toString().length());
-			
+
 			String line = in.readLine();
 			int x = 1;
 			while (line != null) {
@@ -110,15 +119,15 @@ public class LevelLoader {
 				for(int x=0;x<levelWidth;x++){
 					if(gridArr[i]!=0){
 						//ph_tiles[sprites] = createTile(gridArr[i], x, y, level);
-						
+
 						mSpriteFactory.createTile((float)x/2f, (float)y/2f, 0, Tile.convertTileFrame(gridArr[i])-1);
 						sprites++;
 					}
 					i++;
 				}
 			}
-			
-			
+
+
 			mSpriteFactory.createHero(2, 2);
 
 		}
@@ -129,10 +138,41 @@ public class LevelLoader {
 		FileHandle levelID = null;
 
 		if (ln == 1) {
-			levelID = Gdx.files.internal("levels/rawtestlevel1");
+			levelID = Gdx.files.internal("levels/tonkatrucks.json");
 		}
 
 		return levelID;
 	}
 
+	private void CreateLevelFromJsonObject(OrderedMap<String,Object> map)
+	{
+		Float objectWidth=(Float)map.get("width");
+		Float objectHeight=(Float)map.get("height");
+		int levelWidth=objectWidth.intValue();
+		int levelHeight=objectHeight.intValue();
+		@SuppressWarnings("unchecked")
+		Array layers= (Array) map.get("layers");
+		OrderedMap tileLayer=(OrderedMap)layers.items[0];
+		Array gridBleh=(Array)tileLayer.get("data");
+		int[]gridArr=new int[gridBleh.size];
+		for(int i=0;i<gridBleh.size;i++)
+		{			
+			Float tile=(Float)gridBleh.get(i);
+			gridArr[i]=tile.intValue();		
+		}
+		sprites = 0;
+		int i = 0;
+		for(int y=levelHeight-1;y>-1;y--){
+			for(int x=0;x<levelWidth;x++){
+				if(gridArr[i]!=0){
+					//ph_tiles[sprites] = createTile(gridArr[i], x, y, level);
+					int tileType=gridArr[i]-1;
+					mSpriteFactory.createTile((float)x/2f, (float)y/2f, 0, Tile.convertTileFrame(tileType));
+					sprites++;
+				}
+				i++;
+			}
+		}
+		mSpriteFactory.createHero(2, 2);
+	}
 }
