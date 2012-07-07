@@ -39,7 +39,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 			
 			if(type==Projectile.TYPE_RAW){
 				mVelocity = Projectile.VELOCITY_RAW;
-				mVertices = Projectile.VERTS_RAW;
+				//mVertices = Projectile.VERTS_RAW;
 				for(Fixture f : mBody.getFixtureList())
 				{
 					f.getFilterData().groupIndex = PhysicsComponent.GROUP_ALLY;//TODO ideal place to do this, but gets reset by something, so this has no effect.
@@ -48,7 +48,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 			}
 			if(type==Projectile.TYPE_ENEMY){
 				mVelocity = Projectile.VELOCITY_RAW;
-				mVertices = Projectile.VERTS_RAW;
+				//mVertices = Projectile.VERTS_RAW;
 				for(Fixture f : mBody.getFixtureList())
 				{
 					f.getFilterData().groupIndex = PhysicsComponent.GROUP_ENEMY;
@@ -58,7 +58,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 		}
 		
 		@Override
-		public void create(World world, float x, float y, Vector2 vertices[], boolean dynamic) {
+		public void create(World world, float x, float y, Vector2 vertices[], boolean dynamic, int mainFixtureType) {
 
 			BodyDef bodyDef = new BodyDef();
 			if (dynamic) {
@@ -76,8 +76,9 @@ public class PhysicsProjectile extends PhysicsComponent{
 			fixtureDef.density = 1.0f;
 			fixtureDef.friction = 0.0f;
 			fixtureDef.filter.groupIndex = PhysicsComponent.GROUP_ALLY;
-			mBody.createFixture(fixtureDef);
+			mBody.createFixture(fixtureDef).setUserData(mainFixtureType);
 			mBody.setFixedRotation(true);
+			mBody.setUserData(this);
 
 		}
 

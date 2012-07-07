@@ -8,10 +8,15 @@ public class StateStatic extends StateComponent{
 	}
 	
 	@Override
+	public void update(PhysicsComponent physics) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	protected void setInitialState() {
-		mMaxHealth = 0;
-		mHealth = mMaxHealth;
-		mState = STATE_IDLE;
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -22,13 +22,7 @@ public class Projectile extends Sprite implements IReusable{
 	
 	public Projectile(SpriteSheet spriteSheet){
 		
-		super(new PhysicsProjectile(), new AnimationStatic(), new StateStatic());
-		Animation[] animations = new Animation[]{
-				AnimationComponent.createAnimation(spriteSheet, new int[]{20})
-				//more animations,
-				//more animations
-				};
-		mAnimation.setAnimations(animations);
+		super(new PhysicsProjectile(), new AnimationProjectile(spriteSheet), new StateProjectile());
 		
 	}
 	
@@ -38,11 +32,12 @@ public class Projectile extends Sprite implements IReusable{
 		mDrawHeight = HEIGHT_RAW;
 		mDrawOffsetX = -WIDTH_RAW / 2f;
 		mDrawOffsetY = -HEIGHT_RAW / 2f;
-		mPhysics.create(world, x, y, VERTS_RAW, true);//TODO change to true for dynamic projectiles.
+		mPhysics.create(world, x, y, VERTS_RAW, true, FixtureType.HERO_PROJECTILE);
 		mPhysics.mBody.setBullet(true);
 	}
 	
 	public void prepareForSpawn(int type, Sprite parent, Vector2 destination){
+		mState.setInitialState();
 		((PhysicsProjectile)mPhysics).setProjectileProperties(type, parent, destination);
 		//TODO finish
 		
@@ -53,14 +48,18 @@ public class Projectile extends Sprite implements IReusable{
 		if(isReadyForSpawn){
 			isActive = true;
 			isReadyForSpawn = false;
+			mPhysics.mBody.setActive(true);//this is the call that sets them going.
 		}else{
-			//Log.e("Projectile", "prepareForSpawn() before spawn()");
+			System.out.println("call prepareForSpawn() before spawn()");
 		}
 	}
 
 	public void recycle() {
 		isActive = false;
 		isReadyForSpawn = false;
+		mPhysics.mBody.setTransform(-1, -1, 0);
+		mPhysics.mBody.setLinearVelocity(0, 0);
+		mPhysics.mBody.setActive(false);
 		//TODO set to a neutral state that won't interfere with the rest of the game.
 	}
 	

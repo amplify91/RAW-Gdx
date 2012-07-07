@@ -1,36 +1,93 @@
 package com.detourgames.raw;
-import com.badlogic.gdx.physics.box2d.Body;
+
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
-public class ContactListenerRAW implements ContactListener {
-
+public class ContactListenerRAW implements ContactListener{
+	
+	private int numGroundContacts = 0;
+	
 	@Override
-	public void beginContact(Contact arg0) {
-		Body bodyA=arg0.getFixtureA().getBody();
-		Body bodyB=arg0.getFixtureB().getBody();
-		Object userDataA=bodyA.getUserData();
-		Object userDataB=bodyB.getUserData();
+	public void beginContact(Contact contact) {
+		beginGroundContact(contact);
+		beginProjectileContact(contact);
 	}
 
 	@Override
-	public void endContact(Contact arg0) {
-		// TODO Auto-generated method stub
-		String s = arg0.getClass().toString();
+	public void endContact(Contact contact) {
+		endGroundContact(contact);
 	}
 
 	@Override
-	public void postSolve(Contact arg0, ContactImpulse arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void preSolve(Contact arg0, Manifold arg1) {
+	public void preSolve(Contact contact, Manifold oldManifold) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Override
+	public void postSolve(Contact contact, ContactImpulse impulse) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void beginGroundContact(Contact contact){
+		Fixture fixtureA = contact.getFixtureA();
+		Fixture fixtureB = contact.getFixtureB();
+		if(fixtureA.getUserData() != null){
+			if((Integer)fixtureA.getUserData() == FixtureType.HERO_GROUND_SENSOR){
+				((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_RUNNING);
+				numGroundContacts++;
+				((StateHero)((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState).isOnGround=true;
+			}
+		}
+		if(fixtureB.getUserData() != null){
+			if((Integer)fixtureB.getUserData() == FixtureType.HERO_GROUND_SENSOR){
+				((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_RUNNING);
+				numGroundContacts++;
+				((StateHero)((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState).isOnGround=true;
+			}
+		}
+	}
+	
+	private void endGroundContact(Contact contact){
+		Fixture fixtureA = contact.getFixtureA();
+		Fixture fixtureB = contact.getFixtureB();
+		if(fixtureA.getUserData() != null){
+			if((Integer)fixtureA.getUserData() == FixtureType.HERO_GROUND_SENSOR){
+				numGroundContacts--;
+				if(numGroundContacts==0){
+					//((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_FALLING);
+					((StateHero)((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState).isOnGround=false;
+				}
+			}
+		}
+		if(fixtureB.getUserData() != null){
+			if((Integer)fixtureB.getUserData() == FixtureType.HERO_GROUND_SENSOR){
+				numGroundContacts--;
+				if(numGroundContacts==0){
+					//((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_FALLING);
+					((StateHero)((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState).isOnGround=false;
+				}
+			}
+		}
+	}
+	
+	private void beginProjectileContact(Contact contact){
+		Fixture fixtureA = contact.getFixtureA();
+		Fixture fixtureB = contact.getFixtureB();
+		if(fixtureA.getUserData() != null){
+			if((Integer)fixtureA.getUserData() == FixtureType.HERO_PROJECTILE){
+				((StateProjectile)((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState).setState(StateComponent.STATE_HURTING);
+			}
+		}
+		if(fixtureB.getUserData() != null){
+			if((Integer)fixtureB.getUserData() == FixtureType.HERO_PROJECTILE){
+				((StateProjectile)((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState).setState(StateComponent.STATE_HURTING);
+			}
+		}
+	}
+	
 }

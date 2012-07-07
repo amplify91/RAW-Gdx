@@ -2,11 +2,8 @@ package com.detourgames.raw;
 
 import java.util.ArrayList;
 
-import javax.management.loading.MLet;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Level {
@@ -25,13 +22,11 @@ public class Level {
 
 		Vector2 gravity = new Vector2(0.0f, -10.0f);
 		mWorld = new World(gravity, true);
-		mWorld.setContactListener(new ContactListenerRAW());
 		mWorld.setContinuousPhysics(true);
 		mDrawableSprites = new ArrayList<Sprite>();
 		mUpdateableSprites = new ArrayList<Sprite>();
 		
-		TestContactListener test = new TestContactListener();
-		mWorld.setContactListener(test);
+		setContactListeners();
 
 		// debug = new B2DDebugDraw(null, context);//TODO if debug drawing
 		// doesn't work, this null is probably why.
@@ -100,5 +95,10 @@ public class Level {
 	public SpriteSheet getSpriteSheet(){
 		return mSpriteSheet;
 	}
-
+	
+	private void setContactListeners(){
+		ContactListenerRAW cl = new ContactListenerRAW();
+		mWorld.setContactListener(cl);
+	}
+	
 }
