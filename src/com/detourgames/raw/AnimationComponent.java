@@ -19,6 +19,11 @@ public abstract class AnimationComponent {
 	public static final float FPS = 12;
 	public static final float FRAME_DURATION = 1f / (float) FPS;
 	
+	private float mWidth = 0.5f;
+	private float mHeight = 0.5f;
+	private float mOffsetX = 0;
+	private float mOffsetY = 0;
+	
 	public AnimationComponent() {
 		//If using this constructor, you must set animations before you try to draw.
 		//Otherwise, getFrame() will throw null pointer or some other bug will happen.
@@ -27,6 +32,14 @@ public abstract class AnimationComponent {
 	public AnimationComponent(Animation[] animations) {
 		setAnimations(animations);
 		setAnimation(0);
+	}
+	
+	public AnimationComponent(Animation[] animations, float width, float height) {
+		setAnimations(animations);
+		setAnimation(0);
+		setWidth(width);
+		setHeight(height);
+		calculateOffset();
 	}
 
 	public abstract void update(StateComponent state);
@@ -97,6 +110,42 @@ public abstract class AnimationComponent {
 			frames[i] = new TextureRegion(spriteSheet.getTexture(), spriteSheet.getFrames()[frameNumbers[i]][0], spriteSheet.getFrames()[frameNumbers[i]][1], spriteSheet.getFrames()[frameNumbers[i]][2], spriteSheet.getFrames()[frameNumbers[i]][3]);
 		}
 		return new Animation(FRAME_DURATION, frames);
+	}
+	
+	public float getWidth(){
+		return mWidth;
+	}
+	
+	public void setWidth(float width){
+		mWidth = width;
+	}
+	
+	public float getHeight(){
+		return mHeight;
+	}
+	
+	public void setHeight(float height){
+		mHeight = height;
+	}
+	
+	public void setSize(float width, float height){
+		setWidth(width);
+		setHeight(height);
+		calculateOffset();
+	}
+	
+	public float getOffsetX(){
+		return mOffsetX;
+	}
+	
+	public float getOffsetY(){
+		return mOffsetY;
+	}
+	
+	private void calculateOffset(){
+		//update mOffsetX and Y according to height and width
+		mOffsetX = -(mWidth/2f);
+		mOffsetY = -(mHeight/2f);
 	}
 	
 }

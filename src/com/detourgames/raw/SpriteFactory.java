@@ -8,7 +8,7 @@ public class SpriteFactory {
 	Level mLevel;
 	SpriteSheet mSpriteSheet;
 	
-	private static final Vector2[] verts = new Vector2[]{new Vector2(0f,0f),new Vector2(0.5f,0f),new Vector2(0.5f,0.5f),new Vector2(0f,0.5f)};
+	private static final Vector2[] verts = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(-0.25f,0.25f)};
 
 	public SpriteFactory(Level level) {
 		mLevel = level;

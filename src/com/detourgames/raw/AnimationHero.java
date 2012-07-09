@@ -17,7 +17,7 @@ public class AnimationHero extends AnimationComponent{
 	public static final int[] ANIMATION_FALLING = {14};
 	public static final int[] ANIMATION_LANDING = {15};
 	
-	public AnimationHero(SpriteSheet spriteSheet){
+	public AnimationHero(SpriteSheet spriteSheet, float width, float height){
 		super(new Animation[]{
 				AnimationComponent.createAnimation(spriteSheet, ANIMATION_RUNNING),
 				AnimationComponent.createAnimation(spriteSheet, ANIMATION_PRE_JUMPING),
@@ -28,7 +28,7 @@ public class AnimationHero extends AnimationComponent{
 				//more animations,
 				//more animations,
 				//more animations
-				});
+				}, width, height);
 	}
 	
 	@Override

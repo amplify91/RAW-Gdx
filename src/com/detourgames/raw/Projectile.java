@@ -12,26 +12,22 @@ public class Projectile extends Sprite implements IReusable{
 	public static final int TYPE_RAW = 1;
 	public static final int TYPE_ENEMY=2;
 	
-	public static final float WIDTH_RAW = 0.5f;
-	public static final float HEIGHT_RAW = 0.5f;
+	public static final float WIDTH_RAW = 0.4f;
+	public static final float HEIGHT_RAW = 0.4f;
 	
 	public static final float VELOCITY_RAW = 1.0f;
 	
-	public static final Vector2[] VERTS_RAW = new Vector2[]{new Vector2(0.0f,0.0f), new Vector2(0.2f,0.0f), new Vector2(0.2f,0.2f), new Vector2(0.0f,0.2f)};
+	public static final Vector2[] VERTS_RAW = new Vector2[]{new Vector2(-0.2f,-0.2f), new Vector2(0.2f,-0.2f), new Vector2(0.2f,0.2f), new Vector2(-0.2f,0.2f)};
 	
 	
 	public Projectile(SpriteSheet spriteSheet){
 		
-		super(new PhysicsProjectile(), new AnimationProjectile(spriteSheet), new StateProjectile());
+		super(new PhysicsProjectile(), new AnimationProjectile(spriteSheet,WIDTH_RAW,HEIGHT_RAW), new StateProjectile());
 		
 	}
 	
 	public void create(World world, float x, float y){
 		//TODO
-		mDrawWidth = WIDTH_RAW;
-		mDrawHeight = HEIGHT_RAW;
-		mDrawOffsetX = -WIDTH_RAW / 2f;
-		mDrawOffsetY = -HEIGHT_RAW / 2f;
 		mPhysics.create(world, x, y, VERTS_RAW, true, FixtureType.HERO_PROJECTILE);
 		mPhysics.mBody.setBullet(true);
 	}

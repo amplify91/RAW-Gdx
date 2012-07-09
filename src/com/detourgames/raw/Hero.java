@@ -14,17 +14,13 @@ public class Hero extends Sprite{
 	private static final float WIDTH = 1;
 	
 	public Hero(SpriteSheet spriteSheet){
-		super(new PhysicsHero(), new AnimationHero(spriteSheet), new StateHero());
+		super(new PhysicsHero(), new AnimationHero(spriteSheet,WIDTH,HEIGHT), new StateHero());
 		running = new Vector2(25, 0);
 		//mAnimation.setAnimation(Animation.ANIMATION_RUNNING);
 		
 	}
 	
 	public void create(World world, float x, float y){
-		mDrawWidth = WIDTH;
-		mDrawHeight = HEIGHT;
-		mDrawOffsetX = -WIDTH / 2f;
-		mDrawOffsetY = -HEIGHT / 2f;
 		mPhysics.create(world, x, y, WIDTH, HEIGHT, true, FixtureType.HERO_BODY);
 		
 		//create ground sensor
