@@ -50,87 +50,10 @@ public class LevelLoader {
 	public void createLevelFromFile(int ln) {
 		FileHandle jsonId = Gdx.files.internal("levels/tonkatrucks.json");
 		JsonReader reader=new JsonReader();
-		Object o=reader.parse(jsonId);
+		String jsonString=jsonId.readString();
+		Object o=reader.parse(jsonString);
 		CreateLevelFromJsonObject((OrderedMap)o);
-		if(true)return;
-		FileHandle fileId = getFileHandle(ln);
-		// int[][] pieceInfo = null;
-		// int[][] grid = new int[1][1];
-		levelWidth = 0;
-		levelHeight = 0;
-		// int[][][] levelInfo = null;
-		String line1 = null;
-		String line4 = null;
-		String line5 = null;
-		// String line6 = null;
 
-		try {
-			InputStream inputStream = fileId.read();
-			BufferedReader in = new BufferedReader(new InputStreamReader(inputStream), inputStream.toString().length());
-
-			String line = in.readLine();
-			int x = 1;
-			while (line != null) {
-				if(x==1){
-					line1 = line;
-				}else if(x==4){
-					line4 = line;
-				}else if(x==5){
-					line5 = line;
-				}/*else if(x==6){
-					line6 = read;
-				}*/
-				line = in.readLine();
-				x++;
-			}
-		} catch (Exception e) {
-			// Log.d("ERROR-readingLevelFile", "Could not read file: " +
-			// e.getLocalizedMessage());
-		}
-
-		if (line1 != null) {
-			String[] str = line1.split("[ ]");
-			levelWidth = Integer.parseInt(str[0]);
-			levelHeight = Integer.parseInt(str[1]);
-			// grid = new int[levelHeight][levelWidth];
-			/*
-			 * for(int y=0;y<levelHeight;y++){ for(int x=0;x<levelWidth;x++){
-			 * grid[y][x] = 0; } }
-			 */// Not necessary
-		}
-
-		// tiles = new Tile[levelHeight][levelWidth];
-
-		if (line4 != null) {
-			String[] str = line4.split("[ ]");
-			int[] gridArr = new int[(levelWidth * levelHeight)];
-			if (str.length != gridArr.length) {
-				// Log.d("Levels",
-				// "Not correctly parsing level file. Check split() method");
-			}
-			// int tile;
-			for (int x = 0; x < gridArr.length; x++) {
-				gridArr[x] = Integer.parseInt(str[x]);
-			}
-
-			sprites = 0;
-			int i = 0;
-			for(int y=levelHeight-1;y>-1;y--){
-				for(int x=0;x<levelWidth;x++){
-					if(gridArr[i]!=0){
-						//ph_tiles[sprites] = createTile(gridArr[i], x, y, level);
-
-						mSpriteFactory.createTile((float)x/2f, (float)y/2f, 0, Tile.convertTileFrame(gridArr[i])-1);
-						sprites++;
-					}
-					i++;
-				}
-			}
-
-
-			mSpriteFactory.createHero(2, 2);
-
-		}
 
 	}
 
@@ -148,6 +71,9 @@ public class LevelLoader {
 	{
 		Float objectWidth=(Float)map.get("width");
 		Float objectHeight=(Float)map.get("height");
+		Array tileSetO=(Array)map.get("tilesets");
+		OrderedMap tileSetProperties=(OrderedMap)tileSetO.items[0];
+		OrderedMap tileProperties=(OrderedMap)tileSetProperties.get("tileproperties");
 		int levelWidth=objectWidth.intValue();
 		int levelHeight=objectHeight.intValue();
 		@SuppressWarnings("unchecked")
@@ -166,13 +92,21 @@ public class LevelLoader {
 			for(int x=0;x<levelWidth;x++){
 				if(gridArr[i]!=0){
 					//ph_tiles[sprites] = createTile(gridArr[i], x, y, level);
-					int tileType=gridArr[i]-1;
-					mSpriteFactory.createTile((float)x/2f, (float)y/2f, 0, Tile.convertTileFrame(tileType));
+					int tileNum=gridArr[i];
+					if(!tileProperties.containsKey(""+tileNum))
+					{
+						i++;
+						continue;
+					}
+					OrderedMap tileTypeOM = (OrderedMap)tileProperties.get(""+tileNum);
+					String tileTypeS = (String)tileTypeOM.get("TileType");
+					int tileType=Integer.parseInt(tileTypeS);
+					mSpriteFactory.createTile((float)x/2f, (float)y/2f, 0,52);
 					sprites++;
 				}
 				i++;
 			}
 		}
-		mSpriteFactory.createHero(2, 2);
+		mSpriteFactory.createHero(0, 0);
 	}
 }
