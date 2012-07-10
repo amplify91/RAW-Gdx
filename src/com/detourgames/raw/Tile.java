@@ -33,6 +33,7 @@ public class Tile extends Sprite{
 	public static int convertTileFrame(int frame){
 		//TODO this is kind of an ugly way to do this.
 		int f = 0;
+		frame = frame %FRAME_TEST_TILES.length;
 		if(frame>0&&frame<65){
 			f = FRAME_TEST_TILES[frame-1];
 		}else{
