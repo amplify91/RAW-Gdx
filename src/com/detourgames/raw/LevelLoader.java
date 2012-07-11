@@ -86,8 +86,8 @@ public class LevelLoader {
 		OrderedMap<String, ?> background3Layer = null;
 		Array<?> foregroundData = null;
 		Array<?> terrainData = null;
-		Array<?> actorsObjectsObjects = null;
-		Array<?> eventsData = null;
+		Array<?> actorsObjectsData = null;
+		Array<?> eventsObjects = null;
 		Array<?> background1Data = null;
 		Array<?> background2Data = null;
 		Array<?> background3Data = null;
@@ -105,10 +105,10 @@ public class LevelLoader {
 				terrainData = (Array<?>)terrainLayer.get("data");
 			}else if(name.equalsIgnoreCase("Actors and Objects")){
 				actorsObjectsLayer = (OrderedMap<String, ?>)layers.items[i];
-				actorsObjectsObjects = (Array<?>)actorsObjectsLayer.get("objects");
+				actorsObjectsData = (Array<?>)actorsObjectsLayer.get("data");
 			}else if(name.equalsIgnoreCase("Events")){
 				eventsLayer = (OrderedMap<String, ?>)layers.items[i];
-				eventsData = (Array<?>)eventsLayer.get("data");
+				eventsObjects = (Array<?>)eventsLayer.get("objects");
 			}else if(name.equalsIgnoreCase("Background")){
 				background1Layer = (OrderedMap<String, ?>)layers.items[i];
 				background1Data = (Array<?>)background1Layer.get("data");
