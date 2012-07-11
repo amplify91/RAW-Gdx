@@ -48,7 +48,7 @@ public class LevelLoader {
 	}
 
 	public void createLevelFromFile(int ln) {
-		FileHandle jsonId = Gdx.files.internal("levels/tonkatrucks.json");
+		FileHandle jsonId = getFileHandle(ln);
 		JsonReader reader=new JsonReader();
 		String jsonString=jsonId.readString();
 		Object o=reader.parse(jsonString);
@@ -61,7 +61,7 @@ public class LevelLoader {
 		FileHandle levelID = null;
 
 		if (ln == 1) {
-			levelID = Gdx.files.internal("levels/tonkatrucks.json");
+			levelID = Gdx.files.internal("levels/RAWtest2.json");
 		}
 
 		return levelID;
@@ -78,8 +78,17 @@ public class LevelLoader {
 		int levelHeight=objectHeight.intValue();
 		@SuppressWarnings("unchecked")
 		Array layers= (Array) map.get("layers");
-		OrderedMap tileLayer=(OrderedMap)layers.items[0];
-		Array gridBleh=(Array)tileLayer.get("data");
+		Array gridBleh = null;
+		for(int i=0;i<layers.size;i++){
+			OrderedMap tileLayer=(OrderedMap)layers.items[i];
+			String name = (String)tileLayer.get("name");
+			if(name.equalsIgnoreCase("Terrain")){
+				gridBleh=(Array)tileLayer.get("data");
+				break;
+			}
+		}
+		//OrderedMap tileLayer=(OrderedMap)layers.items[0];
+		//Array gridBleh=(Array)tileLayer.get("data");
 		int[]gridArr=new int[gridBleh.size];
 		for(int i=0;i<gridBleh.size;i++)
 		{			
