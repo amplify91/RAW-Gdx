@@ -29,7 +29,6 @@ public class LevelLoader {
 
 	int levelWidth = 0;
 	int levelHeight = 0;
-	int sprites = 0;
 
 	public LevelLoader(Level level) {
 		mLevel = level;
@@ -52,7 +51,7 @@ public class LevelLoader {
 		JsonReader reader=new JsonReader();
 		String jsonString=jsonId.readString();
 		Object o=reader.parse(jsonString);
-		CreateLevelFromJsonObject((OrderedMap)o);
+		CreateLevelFromJsonObject((OrderedMap<String, Object>)o);
 
 
 	}
@@ -67,55 +66,86 @@ public class LevelLoader {
 		return levelID;
 	}
 
-	private void CreateLevelFromJsonObject(OrderedMap<String,Object> map)
-	{
-		Float objectWidth=(Float)map.get("width");
-		Float objectHeight=(Float)map.get("height");
-		Array tileSetO=(Array)map.get("tilesets");
-		OrderedMap tileSetProperties=(OrderedMap)tileSetO.items[0];
-		OrderedMap tileProperties=(OrderedMap)tileSetProperties.get("tileproperties");
-		int levelWidth=objectWidth.intValue();
-		int levelHeight=objectHeight.intValue();
-		@SuppressWarnings("unchecked")
-		Array layers= (Array) map.get("layers");
-		Array gridBleh = null;
+	@SuppressWarnings("unchecked")
+	private void CreateLevelFromJsonObject(OrderedMap<String,Object> map){
+		
+		levelWidth = ((Float)map.get("width")).intValue();
+		levelHeight = ((Float)map.get("height")).intValue();
+		
+		Array<?> tileSetO=(Array<?>)map.get("tilesets");
+		OrderedMap<String, ?> tileSetProperties=(OrderedMap<String, ?>)tileSetO.items[0];
+		OrderedMap<String, ?> tileProperties=(OrderedMap<String, ?>)tileSetProperties.get("tileproperties");
+		
+		Array<?> layers = (Array<?>) map.get("layers");
+		OrderedMap<String, ?> foregroundLayer = null;
+		OrderedMap<String, ?> terrainLayer = null;
+		OrderedMap<String, ?> actorsObjectsLayer = null;
+		OrderedMap<String, ?> eventsLayer = null;
+		OrderedMap<String, ?> background1Layer = null;
+		OrderedMap<String, ?> background2Layer = null;
+		OrderedMap<String, ?> background3Layer = null;
+		Array<?> foregroundData = null;
+		Array<?> terrainData = null;
+		Array<?> actorsObjectsObjects = null;
+		Array<?> eventsData = null;
+		Array<?> background1Data = null;
+		Array<?> background2Data = null;
+		Array<?> background3Data = null;
+		
+		OrderedMap<String, ?> tileLayer;
+		String name;
 		for(int i=0;i<layers.size;i++){
-			OrderedMap tileLayer=(OrderedMap)layers.items[i];
-			String name = (String)tileLayer.get("name");
-			if(name.equalsIgnoreCase("Terrain")){
-				gridBleh=(Array)tileLayer.get("data");
-				break;
+			tileLayer = (OrderedMap<String, ?>)layers.items[i];
+			name = (String)tileLayer.get("name");
+			if(name.equalsIgnoreCase("Foreground")){
+				foregroundLayer = (OrderedMap<String, ?>)layers.items[i];
+				foregroundData = (Array<?>)foregroundLayer.get("data");
+			}else if(name.equalsIgnoreCase("Terrain")){
+				terrainLayer = (OrderedMap<String, ?>)layers.items[i];
+				terrainData = (Array<?>)terrainLayer.get("data");
+			}else if(name.equalsIgnoreCase("Actors and Objects")){
+				actorsObjectsLayer = (OrderedMap<String, ?>)layers.items[i];
+				actorsObjectsObjects = (Array<?>)actorsObjectsLayer.get("objects");
+			}else if(name.equalsIgnoreCase("Events")){
+				eventsLayer = (OrderedMap<String, ?>)layers.items[i];
+				eventsData = (Array<?>)eventsLayer.get("data");
+			}else if(name.equalsIgnoreCase("Background")){
+				background1Layer = (OrderedMap<String, ?>)layers.items[i];
+				background1Data = (Array<?>)background1Layer.get("data");
+			}else if(name.equalsIgnoreCase("Background2")){
+				background2Layer = (OrderedMap<String, ?>)layers.items[i];
+				background2Data = (Array<?>)background2Layer.get("data");
+			}else if(name.equalsIgnoreCase("Background3")){
+				background3Layer = (OrderedMap<String, ?>)layers.items[i];
+				background3Data = (Array<?>)background3Layer.get("data");
 			}
 		}
-		//OrderedMap tileLayer=(OrderedMap)layers.items[0];
-		//Array gridBleh=(Array)tileLayer.get("data");
-		int[]gridArr=new int[gridBleh.size];
-		for(int i=0;i<gridBleh.size;i++)
-		{			
-			Float tile=(Float)gridBleh.get(i);
-			gridArr[i]=tile.intValue();		
+		
+		int[] tiles = new int[terrainData.size];
+		for(int i=0;i<tiles.length;i++){
+			tiles[i] = ((Float)terrainData.get(i)).intValue();		
 		}
-		sprites = 0;
+		
 		int i = 0;
 		for(int y=levelHeight-1;y>-1;y--){
 			for(int x=0;x<levelWidth;x++){
-				if(gridArr[i]!=0){
-					//ph_tiles[sprites] = createTile(gridArr[i], x, y, level);
-					int tileNum=gridArr[i]-1;
+				if(tiles[i]!=0){
+					int tileNum = tiles[i]-1;//-1 because of apparent flaw in Tiled?
 					if(!tileProperties.containsKey(""+tileNum))
 					{
 						i++;
 						continue;
 					}
-					OrderedMap tileTypeOM = (OrderedMap)tileProperties.get(""+tileNum);
-					String tileTypeS = (String)tileTypeOM.get("TileType");
-					int tileType=Integer.parseInt(tileTypeS);
+					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
+					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
 					mSpriteFactory.createTile((float)x/2f, (float)y/2f, 0, tileType);
-					sprites++;
 				}
 				i++;
 			}
 		}
+		
+		//TODO parse other layers
+		
 		mSpriteFactory.createHero(2, 2);
 	}
 }
