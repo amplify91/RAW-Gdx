@@ -92,7 +92,7 @@ public class LevelLoader {
 			for(int x=0;x<levelWidth;x++){
 				if(gridArr[i]!=0){
 					//ph_tiles[sprites] = createTile(gridArr[i], x, y, level);
-					int tileNum=gridArr[i];
+					int tileNum=gridArr[i]-1;
 					if(!tileProperties.containsKey(""+tileNum))
 					{
 						i++;
@@ -101,12 +101,12 @@ public class LevelLoader {
 					OrderedMap tileTypeOM = (OrderedMap)tileProperties.get(""+tileNum);
 					String tileTypeS = (String)tileTypeOM.get("TileType");
 					int tileType=Integer.parseInt(tileTypeS);
-					mSpriteFactory.createTile((float)x/2f, (float)y/2f, 0,52);
+					mSpriteFactory.createTile((float)x/2f, (float)y/2f, 0, tileType);
 					sprites++;
 				}
 				i++;
 			}
 		}
-		mSpriteFactory.createHero(0, 0);
+		mSpriteFactory.createHero(2, 2);
 	}
 }
