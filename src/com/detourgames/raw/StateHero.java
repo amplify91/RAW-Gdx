@@ -2,6 +2,8 @@ package com.detourgames.raw;
 
 public class StateHero extends StateComponent{
 	
+	//TODO Could move these to super class to avoid having to cast to (StateHero),
+	//but it would pollute other classes that didnt need it.
 	boolean isOnGround = false;
 	boolean canJump = false;
 	boolean canDoubleJump = false;
