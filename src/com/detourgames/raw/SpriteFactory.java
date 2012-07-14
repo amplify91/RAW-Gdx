@@ -19,12 +19,22 @@ public class SpriteFactory {
 	public Hero createHero(float x, float y){
 		Hero hero = new Hero(mSpriteSheet);
 		hero.create(mLevel.getWorld(), x, y);
-		mLevel.addDrawableSprite(hero);
+		mLevel.addDrawableSprite(hero, Level.LAYER_ACTORS_OBJECTS);
 		mLevel.addUpdateableSprite(hero);
 		mLevel.assignHero(hero);
 		//hero.mAnimation.setAnimation(int!!!);
 		
 		return hero;
+	}
+	
+	public BackgroundTile createBackgroundTile(float x, float y, int frame, float scrollSpeed){
+		
+		BackgroundTile bgt = new BackgroundTile();
+		bgt.create(mLevel.getWorld(), x, y, mSpriteSheet, frame, scrollSpeed);
+		mLevel.addDrawableSprite(bgt, Level.LAYER_BACKGROUND1);
+		mLevel.addUpdateableSprite(bgt);
+		
+		return bgt;
 	}
 	
 	public Tile createTile(float x, float y, int shape, int frame){
@@ -38,7 +48,7 @@ public class SpriteFactory {
 		
 		Animation animation = AnimationComponent.createAnimation(mSpriteSheet, new int[]{frame});
 		tile.create(mLevel.getWorld(), x, y, animation, tileVerts);
-		mLevel.addDrawableSprite(tile);
+		mLevel.addDrawableSprite(tile, Level.LAYER_TERRAIN);
 		
 		return tile;
 	}
@@ -46,7 +56,7 @@ public class SpriteFactory {
 	public Projectile createProjectile(){
 		Projectile projectile = new Projectile(mSpriteSheet);
 		projectile.create(mLevel.getWorld(), -1, -1);
-		mLevel.addDrawableSprite(projectile);
+		mLevel.addDrawableSprite(projectile, Level.LAYER_ACTORS_OBJECTS);
 		mLevel.addUpdateableSprite(projectile);
 		
 		return projectile;

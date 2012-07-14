@@ -112,6 +112,14 @@ public abstract class AnimationComponent {
 		return new Animation(FRAME_DURATION, frames);
 	}
 	
+	public static Animation createAnimation(SpriteSheet spriteSheet, int[] frameNumbers, float frameDuration){
+		TextureRegion[] frames = new TextureRegion[frameNumbers.length];
+		for(int i=0;i<frames.length;i++){
+			frames[i] = new TextureRegion(spriteSheet.getTexture(), spriteSheet.getFrames()[frameNumbers[i]][0], spriteSheet.getFrames()[frameNumbers[i]][1], spriteSheet.getFrames()[frameNumbers[i]][2], spriteSheet.getFrames()[frameNumbers[i]][3]);
+		}
+		return new Animation(frameDuration, frames);
+	}
+	
 	public float getWidth(){
 		return mWidth;
 	}

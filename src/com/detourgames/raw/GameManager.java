@@ -51,7 +51,7 @@ public class GameManager {
 			mLevel.draw(spriteBatch, nanoTime);
 			spriteBatch.end();
 			debug.render(mLevel.getWorld(), mCamera.getCamera().combined);
-			// mLevel.drawDebug(camera);
+			//mLevel.drawDebug(mCamera);
 		}
 
 	}

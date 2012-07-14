@@ -130,7 +130,7 @@ public class LevelLoader {
 		for(int y=levelHeight-1;y>-1;y--){
 			for(int x=0;x<levelWidth;x++){
 				if(tiles[i]!=0){
-					int tileNum = tiles[i]-1;//-1 because of apparent flaw in Tiled?
+					int tileNum = tiles[i]-1;//TODO -1 because of apparent flaw in Tiled?
 					if(!tileProperties.containsKey(""+tileNum))
 					{
 						i++;
@@ -147,5 +147,7 @@ public class LevelLoader {
 		//TODO parse other layers
 		
 		mSpriteFactory.createHero(2, 2);
+		
+		mSpriteFactory.createBackgroundTile(6.25f, 3.75f, 28, 0.2f);
 	}
 }

@@ -13,8 +13,21 @@ public class Level {
 	World mWorld;
 	SpriteSheet mSpriteSheet;
 	Hero mHero;
-	ArrayList<Sprite> mDrawableSprites;
+	ArrayList<Sprite> mForeGround = new ArrayList<Sprite>();
+	ArrayList<Sprite> mTerrain = new ArrayList<Sprite>();
+	ArrayList<Sprite> mActorsObjects = new ArrayList<Sprite>();
+	ArrayList<Sprite> mBackground1 = new ArrayList<Sprite>();
+	ArrayList<Sprite> mBackground2 = new ArrayList<Sprite>();
+	ArrayList<Sprite> mBackground3 = new ArrayList<Sprite>();
+	//ArrayList<ArrayList<Sprite>> mDrawableSprites;
 	ArrayList<Sprite> mUpdateableSprites;
+	
+	public static final int LAYER_FOREGROUND = 1;
+	public static final int LAYER_TERRAIN = 2;
+	public static final int LAYER_ACTORS_OBJECTS = 3;
+	public static final int LAYER_BACKGROUND1 = 4;
+	public static final int LAYER_BACKGROUND2 = 5;
+	public static final int LAYER_BACKGROUND3 = 6;
 
 	// B2DDebugDraw debug;
 
@@ -23,7 +36,7 @@ public class Level {
 		Vector2 gravity = new Vector2(0.0f, -10.0f);
 		mWorld = new World(gravity, true);
 		mWorld.setContinuousPhysics(true);
-		mDrawableSprites = new ArrayList<Sprite>();
+		//mDrawableSprites = new ArrayList<ArrayList<Sprite>>();
 		mUpdateableSprites = new ArrayList<Sprite>();
 		
 		setContactListeners();
@@ -53,19 +66,42 @@ public class Level {
 	}
 
 	public void draw(SpriteBatch sb, long nanoTime) {
-		for (int i = 0; i < mDrawableSprites.size(); i++) {
-			mDrawableSprites.get(i).draw(sb, nanoTime);
+		//draw each layer in order back to front
+		for (int i = 0; i < mBackground3.size(); i++) {
+			mBackground3.get(i).draw(sb, nanoTime);
+		}
+		for (int i = 0; i < mBackground2.size(); i++) {
+			mBackground2.get(i).draw(sb, nanoTime);
+		}
+		for (int i = 0; i < mBackground1.size(); i++) {
+			mBackground1.get(i).draw(sb, nanoTime);
+		}
+		for (int i = 0; i < mActorsObjects.size(); i++) {
+			mActorsObjects.get(i).draw(sb, nanoTime);
+		}
+		for (int i = 0; i < mTerrain.size(); i++) {
+			mTerrain.get(i).draw(sb, nanoTime);
+		}
+		for (int i = 0; i < mForeGround.size(); i++) {
+			mForeGround.get(i).draw(sb, nanoTime);
 		}
 	}
 
-	/*
-	 * Hero mHero; public void assignHero(Hero hero){ //TODO change this to
-	 * assign a different Hero to each client (for multiplayer). mHero = hero; }
-	 * public Hero getHero(){ return mHero; }
-	 */
-
-	public void addDrawableSprite(Sprite sprite) {
-		mDrawableSprites.add(sprite);
+	public void addDrawableSprite(Sprite sprite, int layer) {
+		if(layer==LAYER_FOREGROUND){
+			mForeGround.add(sprite);
+		}else if(layer==LAYER_TERRAIN){
+			mTerrain.add(sprite);
+		}else if(layer==LAYER_ACTORS_OBJECTS){
+			mActorsObjects.add(sprite);
+		}else if(layer==LAYER_BACKGROUND1){
+			mBackground1.add(sprite);
+		}else if(layer==LAYER_BACKGROUND2){
+			mBackground2.add(sprite);
+		}else if(layer==LAYER_BACKGROUND3){
+			mBackground3.add(sprite);
+		}
+		//mDrawableSprites.add(sprite);
 	}
 
 	public void addUpdateableSprite(Sprite sprite) {
@@ -80,6 +116,7 @@ public class Level {
 		return mWorld;
 	}
 	
+	//TODO change this to assign a different Hero to each client (for multiplayer).
 	public void assignHero(Hero hero){
 		mHero = hero;
 	}

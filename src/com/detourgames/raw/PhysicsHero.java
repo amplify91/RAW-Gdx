@@ -66,7 +66,7 @@ public class PhysicsHero extends PhysicsComponent{
 		mBody = world.createBody(bodyDef);
 
 		PolygonShape dynamicBox = new PolygonShape();
-		dynamicBox.setAsBox(width / 2, height / 2);
+		dynamicBox.setAsBox(width / 2f, height / 2f);
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = dynamicBox;
 		fixtureDef.density = 1.0f;

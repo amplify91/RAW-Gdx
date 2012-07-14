@@ -17,6 +17,7 @@ public abstract class PhysicsComponent {
 	//collision group indices
 	//negative means they never collide with each other, positive means always collide
 	//if groups don't match or either one is 0, determine collision by category/mask
+	public static final short GROUP_NO_COLLISIONS = 0;
 	public static final short GROUP_ALLY = -1;
 	public static final short GROUP_ENEMY = -2;
 	public static final short GROUP_NEUTRAL = -3;
@@ -26,8 +27,9 @@ public abstract class PhysicsComponent {
 	
 	//collision categories
 	//category bit means "I am a...", mask bit means "I collide with..."
-	public static final short ALLY = 0;
-	public static final short ENEMY = 1;
+	public static final short CATEGORY_NO_COLLISIONS = 0;
+	public static final short CATEGORY_ALLY = 1;
+	public static final short CATEGORY_ENEMY = 2;
 
 	public PhysicsComponent() {
 		
@@ -46,12 +48,12 @@ public abstract class PhysicsComponent {
 		mBody = world.createBody(bodyDef);
 
 		PolygonShape dynamicBox = new PolygonShape();
-		dynamicBox.setAsBox(width / 2, height / 2);
+		dynamicBox.setAsBox(width / 2f, height / 2f);
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = dynamicBox;
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.0f;
-		mBody.createFixture(fixtureDef);
+		mBody.createFixture(fixtureDef).setUserData(mainFixtureType);
 		//mBody.setFixedRotation(true);
 		mBody.setUserData(this); //TODO If subclass overrides, make sure to call this.
 
