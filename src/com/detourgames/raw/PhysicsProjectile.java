@@ -29,9 +29,8 @@ public class PhysicsProjectile extends PhysicsComponent{
 			//mType = type;
 			mDestinationPoint = destinationPoint;
 			setType(type);
-			// TODO .mul(mBody.getMass()).mul(mVelocity); <- impulse vector should be multiplied like this, but, for
-			//some reason, it is always normalized even after being multiplied. I suspect a problem with Vector2.nor()
-			mBody.applyLinearImpulse( getDistanceVectorToPoint(destinationPoint).nor().mul(mVelocity), mBody.getWorldCenter());
+			mBody.setTransform(mBody.getPosition(), (float)Math.toRadians(getDistanceVectorToPoint(destinationPoint).angle()));
+			mBody.applyLinearImpulse( getDistanceVectorToPoint(destinationPoint).nor().mul(mVelocity).mul(mBody.getMass()), mBody.getWorldCenter());
 			
 		}
 		
