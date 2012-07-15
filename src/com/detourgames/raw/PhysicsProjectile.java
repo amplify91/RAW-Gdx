@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class PhysicsProjectile extends PhysicsComponent{
 
-		float mVelocity = 10f;
+		float mVelocity = 1f;//changed by this.SetType()
 		Vector2 mDestinationPoint;
 		
 		public PhysicsProjectile(){
@@ -31,7 +31,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 			setType(type);
 			// TODO .mul(mBody.getMass()).mul(mVelocity); <- impulse vector should be multiplied like this, but, for
 			//some reason, it is always normalized even after being multiplied. I suspect a problem with Vector2.nor()
-			mBody.applyLinearImpulse( getDistanceVectorToPoint(destinationPoint).nor(), mBody.getWorldCenter());
+			mBody.applyLinearImpulse( getDistanceVectorToPoint(destinationPoint).nor().mul(mVelocity), mBody.getWorldCenter());
 			
 		}
 		

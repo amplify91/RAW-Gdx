@@ -130,7 +130,7 @@ public class LevelLoader {
 		for(int y=levelHeight-1;y>-1;y--){
 			for(int x=0;x<levelWidth;x++){
 				if(tiles[i]!=0){
-					int tileNum = tiles[i]-1;//TODO -1 because of apparent flaw in Tiled?
+					int tileNum = tiles[i]-1;//XXX -1 because of apparent flaw in Tiled? Aaron: "Yup. First index is 1."
 					if(!tileProperties.containsKey(""+tileNum))
 					{
 						i++;
