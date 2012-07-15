@@ -13,7 +13,7 @@ public class PhysicsScrolling extends PhysicsComponent{
 	
 	private IFocusable mFocus;
 	private Vector2 mScrollDirection = new Vector2(1,0);
-	private float mScrollSpeed = 1.0f;// likely between 0 and 1
+	private float mScrollFactor = 1.0f;// likely between 0 and 1
 	
 	private float mFocusLastX;
 	private float mFocusLastY;
@@ -31,12 +31,12 @@ public class PhysicsScrolling extends PhysicsComponent{
 		mFocusLastY = mFocus.getY();
 	}
 	
-	public PhysicsScrolling(IFocusable focus, float scrollSpeed){
+	public PhysicsScrolling(IFocusable focus, float scrollFactor){
 		if(focus==null){
 			System.out.println("Null focus for PhysicsScrolling!");
 		}
 		mFocus = focus;
-		mScrollSpeed = scrollSpeed;
+		mScrollFactor = scrollFactor;
 		mFocusLastX = mFocus.getX();
 		mFocusLastY = mFocus.getY();
 	}
@@ -48,8 +48,8 @@ public class PhysicsScrolling extends PhysicsComponent{
 		mFocusMoveX = mFocusX - mFocusLastX;
 		mFocusMoveY = mFocusY - mFocusLastY;
 		
-		mBody.setTransform(mBody.getPosition().x + (mFocusMoveX * mScrollDirection.x * mScrollSpeed),
-				mBody.getPosition().y + (mFocusMoveY * mScrollDirection.y * mScrollSpeed), mBody.getAngle());
+		mBody.setTransform(mBody.getPosition().x + (mFocusMoveX * mScrollDirection.x * mScrollFactor),
+				mBody.getPosition().y + (mFocusMoveY * mScrollDirection.y * mScrollFactor), mBody.getAngle());
 		
 		mFocusLastX = mFocusX;
 		mFocusLastY = mFocusY;
@@ -87,8 +87,8 @@ public class PhysicsScrolling extends PhysicsComponent{
 		mScrollDirection = normalizedDirection;
 	}
 	
-	public void setScrollSpeed(float scrollSpeed){
-		mScrollSpeed = scrollSpeed;
+	public void setScrollFactor(float scrollFactor){
+		mScrollFactor = scrollFactor;
 	}
 	
 }

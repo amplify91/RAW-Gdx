@@ -27,10 +27,10 @@ public class SpriteFactory {
 		return hero;
 	}
 	
-	public BackgroundTile createBackgroundTile(float x, float y, int frame, float scrollSpeed){
+	public BackgroundTile createBackgroundTile(float x, float y, int frame, float scrollFactor){
 		
 		BackgroundTile bgt = new BackgroundTile();
-		bgt.create(mLevel.getWorld(), x, y, mSpriteSheet, frame, scrollSpeed);
+		bgt.create(mLevel.getWorld(), x, y, mSpriteSheet, frame, scrollFactor);
 		mLevel.addDrawableSprite(bgt, Level.LAYER_BACKGROUND1);
 		mLevel.addUpdateableSprite(bgt);
 		

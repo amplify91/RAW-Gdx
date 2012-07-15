@@ -29,6 +29,8 @@ public class LevelLoader {
 
 	int levelWidth = 0;
 	int levelHeight = 0;
+	
+	public final static float MAP_SCALE = 2.0f;// Tiles/meter
 
 	public LevelLoader(Level level) {
 		mLevel = level;
@@ -72,9 +74,9 @@ public class LevelLoader {
 		levelWidth = ((Float)map.get("width")).intValue();
 		levelHeight = ((Float)map.get("height")).intValue();
 		
-		Array<?> tileSetO=(Array<?>)map.get("tilesets");
-		OrderedMap<String, ?> tileSetProperties=(OrderedMap<String, ?>)tileSetO.items[0];
-		OrderedMap<String, ?> tileProperties=(OrderedMap<String, ?>)tileSetProperties.get("tileproperties");
+		Array<?> tileSetO = (Array<?>)map.get("tilesets");
+		OrderedMap<String, ?> tileSetProperties = (OrderedMap<String, ?>)tileSetO.items[0];
+		OrderedMap<String, ?> tileProperties = (OrderedMap<String, ?>)tileSetProperties.get("tileproperties");
 		
 		Array<?> layers = (Array<?>) map.get("layers");
 		OrderedMap<String, ?> foregroundLayer = null;
@@ -121,30 +123,133 @@ public class LevelLoader {
 			}
 		}
 		
-		int[] tiles = new int[terrainData.size];
-		for(int i=0;i<tiles.length;i++){
-			tiles[i] = ((Float)terrainData.get(i)).intValue();		
+		int[] foreground = new int[foregroundData.size];
+		for(int i=0;i<foreground.length;i++){
+			foreground[i] = ((Float)foregroundData.get(i)).intValue();		
+		}
+		int[] terrain = new int[terrainData.size];
+		for(int i=0;i<terrain.length;i++){
+			terrain[i] = ((Float)terrainData.get(i)).intValue();		
+		}
+		int[] actorsObjects = new int[actorsObjectsData.size];
+		for(int i=0;i<actorsObjects.length;i++){
+			actorsObjects[i] = ((Float)actorsObjectsData.get(i)).intValue();		
+		}
+		// TODO events
+		int[] background1 = new int[background1Data.size];
+		for(int i=0;i<background1.length;i++){
+			background1[i] = ((Float)background1Data.get(i)).intValue();		
+		}
+		int[] background2 = new int[background2Data.size];
+		for(int i=0;i<background2.length;i++){
+			background2[i] = ((Float)background2Data.get(i)).intValue();		
+		}
+		int[] background3 = new int[background3Data.size];
+		for(int i=0;i<background3.length;i++){
+			background3[i] = ((Float)background3Data.get(i)).intValue();		
 		}
 		
 		int i = 0;
 		for(int y=levelHeight-1;y>-1;y--){
 			for(int x=0;x<levelWidth;x++){
-				if(tiles[i]!=0){
-					int tileNum = tiles[i]-1;//XXX -1 because of apparent flaw in Tiled? Aaron: "Yup. First index is 1."
-					if(!tileProperties.containsKey(""+tileNum))
-					{
+				if(foreground[i]!=0){
+					int tileNum = foreground[i]-1;
+					if(!tileProperties.containsKey(""+tileNum)){
 						i++;
 						continue;
 					}
 					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
 					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
-					mSpriteFactory.createTile((float)x/2f, (float)y/2f, 0, tileType);
+					//mSpriteFactory.createTile((float)x/MAP_SCALE, (float)y/MAP_SCALE, 0, tileType);
 				}
 				i++;
 			}
 		}
-		
-		//TODO parse other layers
+		i = 0;
+		for(int y=levelHeight-1;y>-1;y--){
+			for(int x=0;x<levelWidth;x++){
+				if(terrain[i]!=0){
+					int tileNum = terrain[i]-1;//XXX -1 because of apparent flaw (OBO error) in Tiled? Aaron: "Yup. First index is 1."
+					if(!tileProperties.containsKey(""+tileNum)){
+						i++;
+						continue;
+					}
+					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
+					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
+					mSpriteFactory.createTile((float)x/MAP_SCALE, (float)y/MAP_SCALE, 0, tileType);
+				}
+				i++;
+			}
+		}
+		i = 0;
+		for(int y=levelHeight-1;y>-1;y--){
+			for(int x=0;x<levelWidth;x++){
+				if(actorsObjects[i]!=0){
+					int tileNum = actorsObjects[i]-1;
+					if(!tileProperties.containsKey(""+tileNum)){
+						i++;
+						continue;
+					}
+					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
+					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
+					/*if(tileType==HERO){
+						mSpriteFactory.createHero((float)x/MAP_SCALE, (float)y/MAP_SCALE);
+					}else if(tileType==blahblah){
+						
+					}*/
+				}
+				i++;
+			}
+		}
+		// TODO events
+		i = 0;
+		for(int y=levelHeight-1;y>-1;y--){
+			for(int x=0;x<levelWidth;x++){
+				if(background1[i]!=0){
+					int tileNum = background1[i]-1;
+					if(!tileProperties.containsKey(""+tileNum)){
+						i++;
+						continue;
+					}
+					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
+					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
+					mSpriteFactory.createBackgroundTile((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType, BackgroundTile.BACKGROUND1_SCROLL_FACTOR);
+				}
+				i++;
+			}
+		}
+		i = 0;
+		for(int y=levelHeight-1;y>-1;y--){
+			for(int x=0;x<levelWidth;x++){
+				if(background2[i]!=0){
+					int tileNum = background2[i]-1;
+					if(!tileProperties.containsKey(""+tileNum)){
+						i++;
+						continue;
+					}
+					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
+					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
+					mSpriteFactory.createBackgroundTile((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType, BackgroundTile.BACKGROUND2_SCROLL_FACTOR);
+				}
+				i++;
+			}
+		}
+		i = 0;
+		for(int y=levelHeight-1;y>-1;y--){
+			for(int x=0;x<levelWidth;x++){
+				if(background3[i]!=0){
+					int tileNum = background3[i]-1;
+					if(!tileProperties.containsKey(""+tileNum)){
+						i++;
+						continue;
+					}
+					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
+					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
+					mSpriteFactory.createBackgroundTile((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType, BackgroundTile.BACKGROUND3_SCROLL_FACTOR);
+				}
+				i++;
+			}
+		}
 		
 		mSpriteFactory.createHero(2, 2);
 		
