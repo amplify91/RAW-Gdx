@@ -176,7 +176,7 @@ public class LevelLoader {
 					}
 					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
 					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
-					mSpriteFactory.createTile((float)x/MAP_SCALE, (float)y/MAP_SCALE, 0, tileType);
+					mSpriteFactory.createTile((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType);
 				}
 				i++;
 			}

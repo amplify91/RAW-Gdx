@@ -10,8 +10,8 @@ public class Hero extends Sprite{
 	
 	Vector2 running;
 	private static final float MAX_SPEED = 10;
-	private static final float HEIGHT = 1;
-	private static final float WIDTH = 1;
+	private static final float HEIGHT = 0.9f;
+	private static final float WIDTH = 0.9f;
 	
 	public Hero(SpriteSheet spriteSheet){
 		super(new PhysicsHero(), new AnimationHero(spriteSheet,WIDTH,HEIGHT), new StateHero());

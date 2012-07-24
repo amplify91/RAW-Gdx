@@ -7,8 +7,6 @@ public class SpriteFactory {
 
 	Level mLevel;
 	SpriteSheet mSpriteSheet;
-	
-	private static final Vector2[] verts = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(-0.25f,0.25f)};
 
 	public SpriteFactory(Level level) {
 		mLevel = level;
@@ -37,17 +35,12 @@ public class SpriteFactory {
 		return bgt;
 	}
 	
-	public Tile createTile(float x, float y, int shape, int frame){
+	public Tile createTile(float x, float y, int frame){
 		
 		Tile tile = new Tile();
-		Vector2[] tileVerts = verts;
 		
-		if(shape==1){
-			tileVerts = verts;
-		}
 		
-		Animation animation = AnimationComponent.createAnimation(mSpriteSheet, new int[]{frame});
-		tile.create(mLevel.getWorld(), x, y, animation, tileVerts);
+		tile.create(mLevel.getWorld(), x, y, frame, mSpriteSheet);
 		mLevel.addDrawableSprite(tile, Level.LAYER_TERRAIN);
 		
 		return tile;

@@ -15,16 +15,47 @@ public class Tile extends Sprite{
 		69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85,
 		86, 87, 88, 89, 90, 91 };
 	
+	public static final int SHAPE_SQUARE = 0;
+	public static final int SHAPE_30_UP_SMALL = 1;
+	public static final int SHAPE_30_UP_BIG = 2;
+	public static final int SHAPE_30_DOWN_SMALL = 3;
+	public static final int SHAPE_30_DOWN_BIG = 4;
+	public static final int SHAPE_45_UP = 5;
+	public static final int SHAPE_45_DOWN = 6;
+	public static final int SHAPE_60_UP_BIG = 7;
+	public static final int SHAPE_60_UP_SMALL = 8;
+	public static final int SHAPE_60_DOWN_BIG = 9;
+	public static final int SHAPE_60_DOWN_SMALL = 10;
+	public static final int SHAPE_HALF_TOP = 11;
+	public static final int SHAPE_HALF_BOTTOM = 12;
+	public static final int SHAPE_HALF_LEFT = 13;
+	public static final int SHAPE_HALF_RIGHT = 14;
+	public static final Vector2[] VERTS_SQUARE = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(-0.25f,0.25f)};
+	public static final Vector2[] VERTS_30_UP_SMALL = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0f)};
+	public static final Vector2[] VERTS_30_UP_BIG = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(-0.25f,0f)};
+	public static final Vector2[] VERTS_30_DOWN_SMALL = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(-0.25f,0f)};
+	public static final Vector2[] VERTS_30_DOWN_BIG = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0f),new Vector2(-0.25f,0.25f)};
+	public static final Vector2[] VERTS_45_UP = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f)};
+	public static final Vector2[] VERTS_45_DOWN = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(-0.25f,0.25f)};
+	public static final Vector2[] VERTS_60_UP_BIG = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(0f,0.25f)};
+	public static final Vector2[] VERTS_60_UP_SMALL = new Vector2[]{new Vector2(0f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f)};
+	public static final Vector2[] VERTS_60_DOWN_BIG = new Vector2[]{new Vector2(0f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(-0.25f,0.25f)};
+	public static final Vector2[] VERTS_60_DOWN_SMALL = new Vector2[]{new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(0f,0.25f)};
+	public static final Vector2[] VERTS_HALF_TOP = new Vector2[]{new Vector2(-0.25f,0f),new Vector2(0.25f,0f),new Vector2(0.25f,0.25f),new Vector2(-0.25f,0.25f)};
+	public static final Vector2[] VERTS_HALF_BOTTOM = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0f),new Vector2(-0.25f,0f)};
+	public static final Vector2[] VERTS_HALF_LEFT = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0f,-0.25f),new Vector2(0f,0.25f),new Vector2(-0.25f,0.25f)};
+	public static final Vector2[] VERTS_HALF_RIGHT = new Vector2[]{new Vector2(0f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(0f,0.25f)};
+	
 	public Tile(){
 		super(new PhysicsStatic(), new AnimationStatic(), new StateStatic());
 		
 	}
 	
-	public void create(World world, float x, float y, Animation animation, Vector2[] vertices){
+	public void create(World world, float x, float y, int frame, SpriteSheet spriteSheet){
 		mAnimation.setSize(WIDTH, HEIGHT);
 		//mPhysics.create(world, x, y, 0.5f, 0.5f, false);
-		mPhysics.create(world, x, y, vertices, false, FixtureType.TERRAIN);
-		
+		mPhysics.create(world, x, y, getTileVertices(getShapeFromFrame(frame)), false, FixtureType.TERRAIN);
+		Animation animation = AnimationComponent.createAnimation(spriteSheet, new int[]{frame});
 		mAnimation.setAnimation(animation);
 		
 	}
@@ -41,11 +72,54 @@ public class Tile extends Sprite{
 		return f;
 	}
 	
-	/*private Vector2[] getTileVertices(int frame){
-		//TODO finish this. Plug in vertices for all different types of frames.
+	private Vector2[] getTileVertices(int shape){
+		
 		Vector2[] verts;
-		verts = new Vector2[]{new Vector2(0f,0f),new Vector2(0.5f,0f),new Vector2(0.5f,0.5f),new Vector2(0f,0.5f)};
+		if(shape==SHAPE_SQUARE){
+			verts = VERTS_SQUARE;
+		}else if(shape==SHAPE_30_UP_SMALL){
+			verts = VERTS_30_UP_SMALL;
+		}else if(shape==SHAPE_30_UP_BIG){
+			verts = VERTS_30_UP_BIG;
+		}else if(shape==SHAPE_30_DOWN_SMALL){
+			verts = VERTS_30_DOWN_SMALL;
+		}else if(shape==SHAPE_30_DOWN_BIG){
+			verts = VERTS_30_DOWN_BIG;
+		}else if(shape==SHAPE_45_UP){
+			verts = VERTS_45_UP;
+		}else if(shape==SHAPE_45_DOWN){
+			verts = VERTS_45_DOWN;
+		}else if(shape==SHAPE_60_UP_BIG){
+			verts = VERTS_60_UP_BIG;
+		}else if(shape==SHAPE_60_UP_SMALL){
+			verts = VERTS_60_UP_SMALL;
+		}else if(shape==SHAPE_60_DOWN_BIG){
+			verts = VERTS_60_DOWN_BIG;
+		}else if(shape==SHAPE_60_DOWN_SMALL){
+			verts = VERTS_60_DOWN_SMALL;
+		}else if(shape==SHAPE_HALF_TOP){
+			verts = VERTS_HALF_TOP;
+		}else if(shape==SHAPE_HALF_BOTTOM){
+			verts = VERTS_HALF_BOTTOM;
+		}else if(shape==SHAPE_HALF_LEFT){
+			verts = VERTS_HALF_LEFT;
+		}else if(shape==SHAPE_HALF_RIGHT){
+			verts = VERTS_HALF_RIGHT;
+		}else{
+			verts = VERTS_SQUARE;
+		}
 		return verts;
-	}*/
+	}
+	
+	private int getShapeFromFrame(int frame){
+		int shape = SHAPE_SQUARE;
+		
+		if(frame==27){
+			shape = SHAPE_SQUARE;
+		}
+		//TODO plug in values from final spritesheet
+		
+		return shape;
+	}
 	
 }
