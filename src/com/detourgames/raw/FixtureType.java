@@ -9,6 +9,7 @@ public class FixtureType {
 	public static final int HERO_GROUND_SENSOR = 2;
 	public static final int TERRAIN = 3;
 	public static final int HERO_PROJECTILE = 4;
+	public static final int TURRET_BODY = 5;
 	
 	
 }

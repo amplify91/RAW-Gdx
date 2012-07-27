@@ -2,8 +2,8 @@ package com.detourgames.raw;
 
 public abstract class StateComponent {
 	
-	int mMaxHealth;
-	int mHealth;
+	public int mMaxHealth;
+	public int mHealth;
 	
 	protected int mState = 0;
 	

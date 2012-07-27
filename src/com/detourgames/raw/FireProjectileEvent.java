@@ -7,17 +7,20 @@ public class FireProjectileEvent extends Event {
 
 	float x;
 	float y;
+	Sprite shootingSprite;
 
-	public FireProjectileEvent(float x, float y) {
+	public FireProjectileEvent(float x, float y, Sprite shootingSprite) {
 
 		this.x = x;
 		this.y = y;
+		this.shootingSprite=shootingSprite;
 
 	}
-	public FireProjectileEvent(Vector2 coordinates)
+	public FireProjectileEvent(Vector2 coordinates, Sprite shootingSprite)
 	{
 		this.x = coordinates.x;
 		this.y = coordinates.y;
+		this.shootingSprite=shootingSprite;
 	
 	}
 
@@ -26,7 +29,7 @@ public class FireProjectileEvent extends Event {
 		System.out.println("Shot at "+x+"' "+y);
 		
 		Projectile p = ProjectilePool.getProjectilePool().getProjectile();
-		p.prepareForSpawn(Projectile.TYPE_RAW, GameManager.getGameManager().getLevel().getHero(), new Vector2(x,y));
+		p.prepareForSpawn(Projectile.TYPE_RAW, shootingSprite, new Vector2(x,y));
 		p.spawn(GameManager.getGameManager().getLevel().getWorld());
 	}
 

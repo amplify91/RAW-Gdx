@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class PhysicsComponent {
 	
-	Sprite mParent;
+	protected Sprite mParent;
 	Body mBody;
 	Vector2[] mVertices;
 	
