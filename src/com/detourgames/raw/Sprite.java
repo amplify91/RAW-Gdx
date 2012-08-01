@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class Sprite implements IFocusable{
 
-	PhysicsComponent mPhysics;
-	StateComponent mState;
+	protected PhysicsComponent mPhysics;
+	protected StateComponent mState;
 	AnimationComponent mAnimation;
 	ControllerComponent mController = new ControllerComponent();
 	

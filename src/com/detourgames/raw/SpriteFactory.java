@@ -2,6 +2,7 @@ package com.detourgames.raw;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
+import com.detourgames.raw.turretElement.TurretSprite;
 
 public class SpriteFactory {
 
@@ -21,6 +22,14 @@ public class SpriteFactory {
 		mLevel.addUpdateableSprite(hero);
 		mLevel.assignHero(hero);
 		//hero.mAnimation.setAnimation(int!!!);
+		
+		return hero;
+	}
+	public TurretSprite createTurret(float x, float y){
+		TurretSprite hero = new TurretSprite(mSpriteSheet);
+		hero.create(mLevel.getWorld(), x, y);
+		mLevel.addDrawableSprite(hero, Level.LAYER_ACTORS_OBJECTS);
+		mLevel.addUpdateableSprite(hero);
 		
 		return hero;
 	}

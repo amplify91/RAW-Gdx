@@ -10,5 +10,6 @@ public class ControllerComponent {
 		//If a player-type subclass, get next input event.
 		//If an AI-type, run AI routine and calculate next action.
 	}
+
 	
 }
