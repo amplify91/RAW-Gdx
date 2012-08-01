@@ -1,5 +1,7 @@
 package com.detourgames.raw;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public class HUD {
 	
 	private float mScreenWidth;
@@ -14,24 +16,36 @@ public class HUD {
 	private static final float JUMP_WIDTH = 0.1f;
 	private static final float JUMP_HEIGHT = 1f/6f;
 	
+	public static final int BUTTON_NONE = 0;
+	public static final int BUTTON_JUMP = 1;
+	public static final int BUTTON_DASH = 2;
+	
 	public HUD(Camera camera){
-		mScreenWidth = camera.getWidthPixels();
-		mScreenHeight = camera.getHeightPixels();
-		sizeButtons();
+		setup(camera);
 	}
 	
-	public void draw(){
+	public void draw(SpriteBatch spriteBatch){
 		
 	}
 	
-	public boolean checkButton(int x, int y){
+	public boolean checkButton(int x, int y, int button){
 		
 		int y2 = (int) (y - (mScreenHeight-1));
 		y2 *= -1;
 		if(x>=mJumpXMin&&x<=mJumpXMax&&y2>=mJumpYMin&&y2<=mJumpYMax){
+			button = BUTTON_JUMP;
 			return true;
+		}else{
+			button = BUTTON_NONE;
+			return false;
 		}
-		return false;
+		
+	}
+	
+	public void setup(Camera camera){
+		mScreenWidth = camera.getWidthPixels();
+		mScreenHeight = camera.getHeightPixels();
+		sizeButtons();
 	}
 	
 	private void sizeButtons(){

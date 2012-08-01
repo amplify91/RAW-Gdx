@@ -39,6 +39,7 @@ public class Game implements ApplicationListener {
 		
 		float ratio = (float)width/(float)height;
 		mGameManager.createCamera(7.5f*ratio, 7.5f, width, height);
+		mGameManager.getHUD().setup(mGameManager.getCamera());
 		
 	}
 

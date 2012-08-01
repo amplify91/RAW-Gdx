@@ -6,13 +6,21 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Input implements InputProcessor{
 	
+	private int mButton = 0;
+	
+	public static final int BUTTON_NONE = 0;
+	public static final int BUTTON_JUMP = 1;
+	public static final int BUTTON_DASH = 2;
+	
 	@Override
 	public boolean keyDown(int keycode) {
 		// TODO Auto-generated method stub
-		if(keycode==Keys.UP){
+		if(keycode==Keys.UP || keycode==Keys.W){
 			jump();
-		}else if(keycode==Keys.RIGHT){
+			return true;
+		}else if(keycode==Keys.RIGHT || keycode==Keys.D){
 			dash();
+			return true;
 		}
 		return false;
 	}
@@ -34,17 +42,18 @@ public class Input implements InputProcessor{
 		
 		if(checkHUDButtons(x, y)){
 			jump();
+			return true;
 		}else{
 			shoot(x, y);
+			return true;
 		}
-		return false;
 	}
 
 	private boolean checkHUDButtons(int x, int y) {
 		
-		boolean button = GameManager.getGameManager().getHUD().checkButton(x, y);
+		boolean handled = GameManager.getGameManager().getHUD().checkButton(x, y, mButton);
 		
-		return button;
+		return handled;
 	}
 
 	@Override

@@ -1,26 +1,18 @@
 package com.detourgames.raw;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Vector;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import com.badlogic.gdx.utils.OrderedMap;
 
 public class LevelLoader {
 
 	/*
 	 * A class for accessing level files, parsing them, loading them, and
-	 * returning the contents of a level to the GameManager.
+	 * spawning the contents of the level with SpriteFactory.
 	 * 
-	 * It should only need a few methods: createLevel(levelnumber), //should
-	 * possibly be called in the constructor getLevel(), and getLevelItem()
-	 * (like getTiles() or getEnemies()).
 	 */
 
 	Level mLevel;
