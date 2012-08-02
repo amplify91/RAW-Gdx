@@ -3,28 +3,31 @@ import com.badlogic.gdx.math.Vector2;
 import com.detourgames.raw.ControllerComponent;
 import com.detourgames.raw.GameManager;
 import com.detourgames.raw.PhysicsComponent;
+import com.detourgames.raw.Sprite;
 import com.detourgames.raw.StateComponent;
 
 public class TurretController extends ControllerComponent {
-
+	
+	Sprite mTarget;
+	
 	@Override
 	public void update(StateComponent state, PhysicsComponent physics){
-		GetNextAction((TurretComponent)physics);
+		getNextAction(state);
+		if(state.getState()==StateComponent.STATE_SHOOTING){
+			((TurretComponent)physics).fireMissileAtTarget(new Vector2(mTarget.getX(),mTarget.getY()));
+			state.setState(StateComponent.STATE_IDLE);
+		}
 	}
-	public void GetNextAction(TurretComponent turret)
-	{
+	
+	public void getNextAction(StateComponent state){
 		
 		//find target (RAW)
-		float targetX=GameManager.getGameManager().getLevel().getHero().getX();
-		float targetY=GameManager.getGameManager().getLevel().getHero().getY();
-		//shoot target
-		if(turret!=null)
-			turret.StartAttackingLocation(new Vector2(targetX,targetY));
+		startAttackingTarget(state, GameManager.getGameManager().getLevel().getHero());
 	}
-	//singleton pattern
-	private static TurretController instance=new TurretController();
-	public static TurretController GetInstance(){return instance;}
 	
-	public TurretComponent turret;
+	public void startAttackingTarget(StateComponent state, Sprite target){
+		state.setState(StateComponent.STATE_SHOOTING);
+		mTarget = target;
+	}
 	
 }

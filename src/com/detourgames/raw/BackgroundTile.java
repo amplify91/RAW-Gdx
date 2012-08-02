@@ -11,7 +11,7 @@ public class BackgroundTile extends Sprite{
 	public static final float BACKGROUND3_SCROLL_FACTOR = 0.1f;
 	
 	public BackgroundTile() {
-		super(new PhysicsScrolling(GameManager.getGameManager().getLevel().getHero()), new AnimationStatic(), new StateNone());
+		super(new PhysicsScrolling(GameManager.getGameManager().getLevel().getHero()), new AnimationStatic(), new StateNone(), new ControllerComponent());
 		// might need to be created AFTER Hero.
 	}
 	

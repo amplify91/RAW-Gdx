@@ -14,7 +14,7 @@ public class Hero extends Sprite{
 	private static final float WIDTH = 0.9f;
 	
 	public Hero(SpriteSheet spriteSheet){
-		super(new PhysicsHero(), new AnimationHero(spriteSheet,WIDTH,HEIGHT), new StateHero());
+		super(new PhysicsHero(), new AnimationHero(spriteSheet,WIDTH,HEIGHT), new StateHero(), new ControllerComponent());
 		running = new Vector2(25, 0);
 		//mAnimation.setAnimation(Animation.ANIMATION_RUNNING);
 		

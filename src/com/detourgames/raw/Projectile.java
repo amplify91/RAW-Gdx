@@ -22,7 +22,7 @@ public class Projectile extends Sprite implements IReusable{
 	
 	public Projectile(SpriteSheet spriteSheet){
 		
-		super(new PhysicsProjectile(), new AnimationProjectile(spriteSheet,WIDTH_RAW,HEIGHT_RAW), new StateProjectile());
+		super(new PhysicsProjectile(), new AnimationProjectile(spriteSheet,WIDTH_RAW,HEIGHT_RAW), new StateProjectile(), new ControllerComponent());
 		
 	}
 	

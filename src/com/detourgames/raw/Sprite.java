@@ -7,18 +7,19 @@ public abstract class Sprite implements IFocusable{
 	protected PhysicsComponent mPhysics;
 	protected StateComponent mState;
 	AnimationComponent mAnimation;
-	ControllerComponent mController = new ControllerComponent();
+	ControllerComponent mController;
 	
 	float mCameraOffsetX = 0;
 	float mCameraOffsetY = 0;
 
-	public Sprite(PhysicsComponent pc, AnimationComponent ac, StateComponent sc) {
+	public Sprite(PhysicsComponent pc, AnimationComponent ac, StateComponent sc, ControllerComponent cc) {
 		
 		// all sprites will create their own animations in their own constructors.
 		// that means each sprite subclass must have a SpriteSheet param in their constructor.
 		mPhysics = pc;
 		mAnimation = ac;
 		mState = sc;
+		mController = cc;
 		mPhysics.setParentSprite(this);//TODO see if this works or else I need to do this in each subclass
 
 	}

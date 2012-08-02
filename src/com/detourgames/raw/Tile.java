@@ -47,7 +47,7 @@ public class Tile extends Sprite{
 	public static final Vector2[] VERTS_HALF_RIGHT = new Vector2[]{new Vector2(0f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(0f,0.25f)};
 	
 	public Tile(){
-		super(new PhysicsStatic(), new AnimationStatic(), new StateStatic());
+		super(new PhysicsStatic(), new AnimationStatic(), new StateStatic(), new ControllerComponent());
 		
 	}
 	
