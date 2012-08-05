@@ -1,11 +1,13 @@
 package com.detourgames.raw;
 
-public class HUDElement{
-	
-	//This will be extended from Sprite or from a GraphicsSprite type class. Not being used yet.
-	
-	public HUDElement() {
-		// TODO Auto-generated constructor stub
+public abstract class HUDElement extends Sprite{
+
+	public HUDElement(PhysicsComponent pc, AnimationComponent ac, StateComponent sc, ControllerComponent cc) {
+		super(pc, ac, sc, cc);
 	}
 	
+	public abstract boolean isTouchInside(float x, float y);
+	
+	public abstract void resize();
+
 }

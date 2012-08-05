@@ -1,58 +1,56 @@
 package com.detourgames.raw;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 public class HUD {
 	
+	private Camera mCamera;
+	
 	private float mScreenWidth;
 	private float mScreenHeight;
-	
-	private float mJumpXMin;
-	private float mJumpXMax;
-	private float mJumpYMin;
-	private float mJumpYMax;
-	private static final float JUMP_ORIGIN_X = 0; // 0-1
-	private static final float JUMP_ORIGIN_Y = 0;
-	private static final float JUMP_WIDTH = 0.1f;
-	private static final float JUMP_HEIGHT = 1f/6f;
 	
 	public static final int BUTTON_NONE = 0;
 	public static final int BUTTON_JUMP = 1;
 	public static final int BUTTON_DASH = 2;
 	
+	HUDElement[] mHUDElements;
+	
 	public HUD(Camera camera){
-		setup(camera);
+		mCamera = camera;
 	}
 	
-	public void draw(SpriteBatch spriteBatch){
-		
-	}
-	
-	public boolean checkButton(int x, int y, int button){
-		
-		int y2 = (int) (y - (mScreenHeight-1));
-		y2 *= -1;
-		if(x>=mJumpXMin&&x<=mJumpXMax&&y2>=mJumpYMin&&y2<=mJumpYMax){
-			button = BUTTON_JUMP;
-			return true;
-		}else{
-			button = BUTTON_NONE;
-			return false;
+	public void draw(SpriteBatch sb, long nanoTime){
+		for(int i=0;i<mHUDElements.length;i++){
+			mHUDElements[i].draw(sb, nanoTime);
 		}
+	}
+	
+	public int checkButton(int x, int y){
 		
+		//int y2 = (int) (y - (mCamera.getHeightPixels()-1));
+		//y2 *= -1;
+		int button = 0;
+		Vector2 vec = mCamera.translatePixelToWorldCoordinates(x, y);
+		for(int i=0;i<mHUDElements.length;i++){
+			if(mHUDElements[i].isTouchInside(vec.x, vec.y)){
+				button = i+1;//TODO make sure mHUDElements is constructed in the same order as the button constants.
+				return button;
+			}
+		}
+		button = BUTTON_NONE;
+		return button;
 	}
 	
-	public void setup(Camera camera){
-		mScreenWidth = camera.getWidthPixels();
-		mScreenHeight = camera.getHeightPixels();
-		sizeButtons();
-	}
-	
-	private void sizeButtons(){
-		mJumpXMin = JUMP_ORIGIN_X * mScreenWidth;
-		mJumpXMax = mJumpXMin + (JUMP_WIDTH * mScreenWidth);
-		mJumpYMin = JUMP_ORIGIN_Y * mScreenHeight;
-		mJumpYMax = mJumpYMin + (JUMP_HEIGHT * mScreenHeight);
+	public void createElements(Level level, SpriteSheet spriteSheet){
+		mHUDElements = new HUDElement[]{
+				new HUDButtonJump(mCamera, level.getWorld(), spriteSheet),
+				new HUDButtonDash(mCamera, level.getWorld(), spriteSheet)
+		};
+		for(int i=0;i<mHUDElements.length;i++){
+			//level.addDrawableSprite(mHUDElements[i], Level.LAYER_HUD); TODO
+			level.addUpdateableSprite(mHUDElements[i]);
+		}
 	}
 	
 }

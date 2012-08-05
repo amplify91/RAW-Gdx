@@ -26,7 +26,7 @@ public class FireProjectileEvent extends Event {
 
 	@Override
 	public void executeEvent() {
-		System.out.println("Shot at "+x+"' "+y);
+		//System.out.println("Shot at "+x+"' "+y);
 		
 		Projectile p = ProjectilePool.getProjectilePool().getProjectile();
 		p.prepareForSpawn(Projectile.TYPE_RAW, shootingSprite, new Vector2(x,y));

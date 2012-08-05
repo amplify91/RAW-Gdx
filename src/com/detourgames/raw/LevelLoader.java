@@ -246,5 +246,6 @@ public class LevelLoader {
 		mSpriteFactory.createHero(2, 2);
 		mSpriteFactory.createTurret(4,4);
 		mSpriteFactory.createBackgroundTile(6.25f, 3.75f, 28, 0.2f);
+		mSpriteFactory.createHUDElements();
 	}
 }

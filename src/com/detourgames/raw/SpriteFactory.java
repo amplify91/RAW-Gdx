@@ -63,5 +63,9 @@ public class SpriteFactory {
 		
 		return projectile;
 	}
-
+	
+	public void createHUDElements(){
+		GameManager.getGameManager().getHUD().createElements(mLevel, mSpriteSheet);
+	}
+	
 }

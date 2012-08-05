@@ -15,7 +15,6 @@ public class Game implements ApplicationListener {
 	@Override
 	public void create() {
 		mGameLoop = new GameLoop();
-		mGameManager.loadLevel(1);
 		Gdx.input.setInputProcessor(new Input());//TODO make this suck less
 	}
 
@@ -39,7 +38,7 @@ public class Game implements ApplicationListener {
 		
 		float ratio = (float)width/(float)height;
 		mGameManager.createCamera(7.5f*ratio, 7.5f, width, height);
-		mGameManager.getHUD().setup(mGameManager.getCamera());
+		mGameManager.loadLevel(1);
 		
 	}
 

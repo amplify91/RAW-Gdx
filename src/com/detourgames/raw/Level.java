@@ -13,21 +13,23 @@ public class Level {
 	World mWorld;
 	SpriteSheet mSpriteSheet;
 	Hero mHero;
+	ArrayList<Sprite> mHUD = new ArrayList<Sprite>();
 	ArrayList<Sprite> mForeGround = new ArrayList<Sprite>();
-	ArrayList<Sprite> mTerrain = new ArrayList<Sprite>();
 	ArrayList<Sprite> mActorsObjects = new ArrayList<Sprite>();
+	ArrayList<Sprite> mTerrain = new ArrayList<Sprite>();
 	ArrayList<Sprite> mBackground1 = new ArrayList<Sprite>();
 	ArrayList<Sprite> mBackground2 = new ArrayList<Sprite>();
 	ArrayList<Sprite> mBackground3 = new ArrayList<Sprite>();
 	//ArrayList<ArrayList<Sprite>> mDrawableSprites;
 	ArrayList<Sprite> mUpdateableSprites;
 	
-	public static final int LAYER_FOREGROUND = 1;
-	public static final int LAYER_TERRAIN = 2;
+	public static final int LAYER_HUD = 1;
+	public static final int LAYER_FOREGROUND = 2;
 	public static final int LAYER_ACTORS_OBJECTS = 3;
-	public static final int LAYER_BACKGROUND1 = 4;
-	public static final int LAYER_BACKGROUND2 = 5;
-	public static final int LAYER_BACKGROUND3 = 6;
+	public static final int LAYER_TERRAIN = 4;
+	public static final int LAYER_BACKGROUND1 = 5;
+	public static final int LAYER_BACKGROUND2 = 6;
+	public static final int LAYER_BACKGROUND3 = 7;
 
 	// B2DDebugDraw debug;
 
@@ -76,24 +78,29 @@ public class Level {
 		for (int i = 0; i < mBackground1.size(); i++) {
 			mBackground1.get(i).draw(sb, nanoTime);
 		}
-		for (int i = 0; i < mActorsObjects.size(); i++) {
-			mActorsObjects.get(i).draw(sb, nanoTime);
-		}
 		for (int i = 0; i < mTerrain.size(); i++) {
 			mTerrain.get(i).draw(sb, nanoTime);
+		}
+		for (int i = 0; i < mActorsObjects.size(); i++) {
+			mActorsObjects.get(i).draw(sb, nanoTime);
 		}
 		for (int i = 0; i < mForeGround.size(); i++) {
 			mForeGround.get(i).draw(sb, nanoTime);
 		}
+		for (int i = 0; i < mHUD.size(); i++) {
+			mHUD.get(i).draw(sb, nanoTime);
+		}
 	}
 
 	public void addDrawableSprite(Sprite sprite, int layer) {
-		if(layer==LAYER_FOREGROUND){
+		if(layer==LAYER_HUD){
+			mHUD.add(sprite);
+		}else if(layer==LAYER_FOREGROUND){
 			mForeGround.add(sprite);
-		}else if(layer==LAYER_TERRAIN){
-			mTerrain.add(sprite);
 		}else if(layer==LAYER_ACTORS_OBJECTS){
 			mActorsObjects.add(sprite);
+		}else if(layer==LAYER_TERRAIN){
+			mTerrain.add(sprite);
 		}else if(layer==LAYER_BACKGROUND1){
 			mBackground1.add(sprite);
 		}else if(layer==LAYER_BACKGROUND2){

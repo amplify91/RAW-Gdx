@@ -1,12 +1,18 @@
 package com.detourgames.raw;
 
-public class HUDButton {/*extends Sprite{
+public class HUDButton extends HUDElement{
 	
-	public HUDElement() {
-		super(mPhysics, mAnimation, mState);
+	public HUDButton(Camera camera) {
+		super(new PhysicsHUDElement(camera), new AnimationButton() , new StateNone(), new ControllerComponent());
+		// TODO Auto-generated constructor stub
 	}
-	*/
 	
-	//mBody.getFixtureList().get(0).testPoint(x, y);
-
+	public void resize(){
+		((PhysicsHUDElement)mPhysics).resize();
+	}
+	
+	public boolean isTouchInside(float x, float y){
+		return ((PhysicsHUDElement)mPhysics).isTouchInside(x, y);
+	}
+	
 }

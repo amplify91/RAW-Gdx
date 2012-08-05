@@ -41,7 +41,11 @@ public class Input implements InputProcessor{
 	public boolean touchDown(int x, int y, int pointer, int button) {
 		
 		if(checkHUDButtons(x, y)){
-			jump();
+			if(mButton==HUD.BUTTON_JUMP){
+				jump();
+			}else if(mButton==HUD.BUTTON_DASH){
+				dash();
+			}
 			return true;
 		}else{
 			shoot(x, y);
@@ -51,9 +55,14 @@ public class Input implements InputProcessor{
 
 	private boolean checkHUDButtons(int x, int y) {
 		
-		boolean handled = GameManager.getGameManager().getHUD().checkButton(x, y, mButton);
+		mButton = 0;
+		mButton = GameManager.getGameManager().getHUD().checkButton(x, y);
 		
-		return handled;
+		if(mButton==0){
+			return false;
+		}else{
+			return true;
+		}
 	}
 
 	@Override

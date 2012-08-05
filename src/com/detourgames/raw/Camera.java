@@ -69,9 +69,9 @@ public class Camera {
 	}
 	
 	public Vector2 translatePixelToWorldCoordinates(int x, int y){
-		Vector3 vec=new Vector3(x,y,0);
+		Vector3 vec = new Vector3(x,y,0);
 		mCamera.unproject(vec);
-		Vector2 returnVector=new Vector2(vec.x,vec.y);
+		Vector2 returnVector = new Vector2(vec.x, vec.y);
 		return returnVector;
 	}
 	
