@@ -5,6 +5,8 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.detourgames.raw.game.StateHero;
+import com.detourgames.raw.game.StateProjectile;
 
 public class ContactListenerRAW implements ContactListener{
 	
@@ -38,16 +40,20 @@ public class ContactListenerRAW implements ContactListener{
 		Fixture fixtureB = contact.getFixtureB();
 		if(fixtureA.getUserData() != null){
 			if((Integer)fixtureA.getUserData() == FixtureType.HERO_GROUND_SENSOR){
-				((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_RUNNING);
-				numGroundContacts++;
-				((StateHero)((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState).isOnGround=true;
+				if((Integer)fixtureB.getUserData() == FixtureType.TERRAIN){
+					((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_RUNNING);
+					numGroundContacts++;
+					((StateHero)((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState).isOnGround=true;
+				}
 			}
 		}
 		if(fixtureB.getUserData() != null){
 			if((Integer)fixtureB.getUserData() == FixtureType.HERO_GROUND_SENSOR){
-				((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_RUNNING);
-				numGroundContacts++;
-				((StateHero)((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState).isOnGround=true;
+				if((Integer)fixtureA.getUserData() == FixtureType.TERRAIN){
+					((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_RUNNING);
+					numGroundContacts++;
+					((StateHero)((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState).isOnGround=true;
+				}
 			}
 		}
 	}
@@ -57,19 +63,23 @@ public class ContactListenerRAW implements ContactListener{
 		Fixture fixtureB = contact.getFixtureB();
 		if(fixtureA.getUserData() != null){
 			if((Integer)fixtureA.getUserData() == FixtureType.HERO_GROUND_SENSOR){
-				numGroundContacts--;
-				if(numGroundContacts==0){
-					//((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_FALLING);
-					((StateHero)((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState).isOnGround=false;
+				if((Integer)fixtureB.getUserData() == FixtureType.TERRAIN){
+					numGroundContacts--;
+					if(numGroundContacts==0){
+						//((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_FALLING);
+						((StateHero)((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState).isOnGround=false;
+					}
 				}
 			}
 		}
 		if(fixtureB.getUserData() != null){
 			if((Integer)fixtureB.getUserData() == FixtureType.HERO_GROUND_SENSOR){
-				numGroundContacts--;
-				if(numGroundContacts==0){
-					//((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_FALLING);
-					((StateHero)((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState).isOnGround=false;
+				if((Integer)fixtureA.getUserData() == FixtureType.TERRAIN){
+					numGroundContacts--;
+					if(numGroundContacts==0){
+						//((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.setState(StateComponent.STATE_FALLING);
+						((StateHero)((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState).isOnGround=false;
+					}
 				}
 			}
 		}

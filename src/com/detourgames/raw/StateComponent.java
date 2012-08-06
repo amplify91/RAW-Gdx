@@ -60,6 +60,6 @@ public abstract class StateComponent {
 		mAvailableStates = states;
 	}
 	
-	protected abstract void setInitialState(); // initialize fields like mHealth
+	public abstract void setInitialState(); // initialize fields like mHealth
 	
 }

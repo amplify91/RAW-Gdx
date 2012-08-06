@@ -1,4 +1,4 @@
-package com.detourgames.raw.turretElement;
+package com.detourgames.raw.game;
 
 import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.StateComponent;
@@ -14,7 +14,7 @@ public class StateTurret extends StateComponent{
 	}
 	
 	@Override
-	protected void setInitialState() {
+	public void setInitialState() {
 		mMaxHealth = 100;
 		mHealth = mMaxHealth;
 		setState(STATE_IDLE);

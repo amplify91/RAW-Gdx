@@ -1,4 +1,4 @@
-package com.detourgames.raw.turretElement;
+package com.detourgames.raw.game;
 import com.badlogic.gdx.math.Vector2;
 import com.detourgames.raw.ControllerComponent;
 import com.detourgames.raw.GameManager;
@@ -6,7 +6,7 @@ import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.Sprite;
 import com.detourgames.raw.StateComponent;
 
-public class TurretController extends ControllerComponent {
+public class ControllerTurret extends ControllerComponent {
 	
 	Sprite mTarget;
 	
@@ -14,7 +14,7 @@ public class TurretController extends ControllerComponent {
 	public void update(StateComponent state, PhysicsComponent physics){
 		getNextAction(state);
 		if(state.getState()==StateComponent.STATE_SHOOTING){
-			((TurretComponent)physics).fireMissileAtTarget(new Vector2(mTarget.getX(),mTarget.getY()));
+			((PhysicsTurret)physics).fireMissileAtTarget(new Vector2(mTarget.getX(),mTarget.getY()));
 			state.setState(StateComponent.STATE_IDLE);
 		}
 	}

@@ -1,11 +1,10 @@
-package com.detourgames.raw.turretElement;
+package com.detourgames.raw.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.detourgames.raw.EventQueue;
-import com.detourgames.raw.FireProjectileEvent;
 import com.detourgames.raw.PhysicsComponent;
 
-public class TurretComponent extends PhysicsComponent{
+public class PhysicsTurret extends PhysicsComponent{
 	
 	@Override
 	public void update(){

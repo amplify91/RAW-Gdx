@@ -1,6 +1,10 @@
-package com.detourgames.raw;
+package com.detourgames.raw.game;
 
 import com.badlogic.gdx.physics.box2d.World;
+import com.detourgames.raw.Camera;
+import com.detourgames.raw.HUDButton;
+import com.detourgames.raw.PhysicsHUDElement;
+import com.detourgames.raw.SpriteSheet;
 
 public class HUDButtonDash extends HUDButton{
 	

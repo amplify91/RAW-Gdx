@@ -1,6 +1,14 @@
-package com.detourgames.raw;
+package com.detourgames.raw.game;
 
 import com.badlogic.gdx.physics.box2d.World;
+import com.detourgames.raw.AnimationComponent;
+import com.detourgames.raw.AnimationStatic;
+import com.detourgames.raw.ControllerComponent;
+import com.detourgames.raw.GameManager;
+import com.detourgames.raw.PhysicsScrolling;
+import com.detourgames.raw.Sprite;
+import com.detourgames.raw.SpriteSheet;
+import com.detourgames.raw.StateNone;
 
 public class BackgroundTile extends Sprite{
 	

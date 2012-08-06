@@ -6,8 +6,8 @@ public abstract class Sprite implements IFocusable{
 
 	protected PhysicsComponent mPhysics;
 	protected StateComponent mState;
-	AnimationComponent mAnimation;
-	ControllerComponent mController;
+	protected AnimationComponent mAnimation;
+	protected ControllerComponent mController;
 	
 	float mCameraOffsetX = 0;
 	float mCameraOffsetY = 0;

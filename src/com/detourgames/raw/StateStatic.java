@@ -14,7 +14,7 @@ public class StateStatic extends StateComponent{
 	}
 	
 	@Override
-	protected void setInitialState() {
+	public void setInitialState() {
 		// TODO Auto-generated method stub
 		
 	}

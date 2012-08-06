@@ -11,7 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 public abstract class PhysicsComponent {
 	
 	protected Sprite mParent;
-	Body mBody;
+	protected Body mBody;
 	Vector2[] mVertices;
 	
 	//collision group indices

@@ -14,7 +14,7 @@ public class StateNone extends StateComponent{
 	}
 
 	@Override
-	protected void setInitialState() {
+	public void setInitialState() {
 		setState(0);
 		
 	}

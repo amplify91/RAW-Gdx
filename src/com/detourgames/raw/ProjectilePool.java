@@ -2,6 +2,8 @@ package com.detourgames.raw;
 
 import java.util.ArrayList;
 
+import com.detourgames.raw.game.Projectile;
+
 public class ProjectilePool {
 	
 	private static ProjectilePool mProjectilePool = new ProjectilePool();

@@ -1,7 +1,10 @@
-package com.detourgames.raw;
+package com.detourgames.raw.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.detourgames.raw.Event;
+import com.detourgames.raw.GameManager;
+import com.detourgames.raw.ProjectilePool;
+import com.detourgames.raw.Sprite;
 
 public class FireProjectileEvent extends Event {
 

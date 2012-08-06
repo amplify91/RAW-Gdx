@@ -1,8 +1,16 @@
-package com.detourgames.raw;
+package com.detourgames.raw.game;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.detourgames.raw.AnimationComponent;
+import com.detourgames.raw.AnimationStatic;
+import com.detourgames.raw.ControllerComponent;
+import com.detourgames.raw.FixtureType;
+import com.detourgames.raw.PhysicsStatic;
+import com.detourgames.raw.Sprite;
+import com.detourgames.raw.SpriteSheet;
+import com.detourgames.raw.StateStatic;
 
 public class Tile extends Sprite{
 	

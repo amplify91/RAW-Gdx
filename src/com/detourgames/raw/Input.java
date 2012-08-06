@@ -3,6 +3,9 @@ package com.detourgames.raw;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.detourgames.raw.game.DashEvent;
+import com.detourgames.raw.game.FireProjectileEvent;
+import com.detourgames.raw.game.JumpEvent;
 
 public class Input implements InputProcessor{
 	

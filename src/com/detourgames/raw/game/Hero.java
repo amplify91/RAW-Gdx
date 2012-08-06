@@ -1,10 +1,14 @@
-package com.detourgames.raw;
+package com.detourgames.raw.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.detourgames.raw.ControllerComponent;
+import com.detourgames.raw.FixtureType;
+import com.detourgames.raw.Sprite;
+import com.detourgames.raw.SpriteSheet;
 
 public class Hero extends Sprite{
 	
@@ -32,7 +36,7 @@ public class Hero extends Sprite{
 		sensorFixtureDef.density = 1.0f;
 		sensorFixtureDef.friction = 0.0f;
 		sensorFixtureDef.isSensor = true;
-		mPhysics.mBody.createFixture(sensorFixtureDef).setUserData(FixtureType.HERO_GROUND_SENSOR);
+		mPhysics.getBody().createFixture(sensorFixtureDef).setUserData(FixtureType.HERO_GROUND_SENSOR);
 	}
 	
 	public void jump(){

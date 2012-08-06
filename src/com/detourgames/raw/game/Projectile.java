@@ -1,8 +1,13 @@
-package com.detourgames.raw;
+package com.detourgames.raw.game;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.detourgames.raw.ControllerComponent;
+import com.detourgames.raw.FixtureType;
+import com.detourgames.raw.IReusable;
+import com.detourgames.raw.Sprite;
+import com.detourgames.raw.SpriteSheet;
 
 public class Projectile extends Sprite implements IReusable{
 	
@@ -29,7 +34,7 @@ public class Projectile extends Sprite implements IReusable{
 	public void create(World world, float x, float y){
 		//TODO
 		mPhysics.create(world, x, y, VERTS_RAW, true, FixtureType.HERO_PROJECTILE);
-		mPhysics.mBody.setBullet(true);
+		mPhysics.getBody().setBullet(true);
 	}
 	
 	public void prepareForSpawn(int type, Sprite parent, Vector2 destination){
@@ -44,7 +49,7 @@ public class Projectile extends Sprite implements IReusable{
 		if(isReadyForSpawn){
 			isActive = true;
 			isReadyForSpawn = false;
-			mPhysics.mBody.setActive(true);//this is the call that sets them going.
+			mPhysics.getBody().setActive(true);//this is the call that sets them going.
 		}else{
 			System.out.println("call prepareForSpawn() before spawn()");
 		}
@@ -53,9 +58,9 @@ public class Projectile extends Sprite implements IReusable{
 	public void recycle() {
 		isActive = false;
 		isReadyForSpawn = false;
-		mPhysics.mBody.setTransform(-1, -1, 0);
-		mPhysics.mBody.setLinearVelocity(0, 0);
-		mPhysics.mBody.setActive(false);
+		mPhysics.getBody().setTransform(-1, -1, 0);
+		mPhysics.getBody().setLinearVelocity(0, 0);
+		mPhysics.getBody().setActive(false);
 		//TODO set to a neutral state that won't interfere with the rest of the game.
 	}
 	
