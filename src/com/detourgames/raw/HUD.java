@@ -50,7 +50,7 @@ public class HUD {
 				new HUDButtonDash(mCamera, level.getWorld(), spriteSheet)
 		};
 		for(int i=0;i<mHUDElements.length;i++){
-			//level.addDrawableSprite(mHUDElements[i], Level.LAYER_HUD); TODO
+			level.addDrawableSprite(mHUDElements[i], Level.LAYER_HUD);
 			level.addUpdateableSprite(mHUDElements[i]);
 		}
 	}

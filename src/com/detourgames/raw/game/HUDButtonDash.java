@@ -14,12 +14,13 @@ public class HUDButtonDash extends HUDButton{
 	private static final float HEIGHT = 1f/10f;
 	
 	public HUDButtonDash(Camera camera, World world, SpriteSheet spriteSheet) {
-		super(camera);
+		super(camera, spriteSheet);
 		create(world);
 	}
 	
 	public void create(World world){
 		((PhysicsHUDElement)mPhysics).create(world, ORIGIN_X, ORIGIN_Y, WIDTH, HEIGHT);
+		mAnimation.setSize(WIDTH*12.5f, HEIGHT*7.5f);//TODO
 	}
 	
 }

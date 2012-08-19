@@ -23,7 +23,7 @@ public class AnimationTurret extends AnimationComponent{
 	public AnimationTurret(SpriteSheet spriteSheet, float width, float height){
 		super(new Animation[]{
 				AnimationComponent.createAnimation(spriteSheet, ANIMATION_PRE_JUMPING),
-				AnimationComponent.createAnimation(spriteSheet, ANIMATION_JUMPING),
+				AnimationComponent.createAnimation(spriteSheet, ANIMATION_JUMPING)
 				//more animations,
 				//more animations,
 				//more animations
@@ -33,9 +33,9 @@ public class AnimationTurret extends AnimationComponent{
 	@Override
 	public void update(StateComponent state) {
 		if(state.getState()==StateTurret.STATE_IDLE)
-			setTransitionAnimation(INDEX_PRE_JUMPING,INDEX_PRE_JUMPING);
+			setAnimation(1);
 		else if(state.getState()==StateTurret.STATE_SHOOTING)
-			setTransitionAnimation(INDEX_JUMPING,INDEX_JUMPING);
+			setTransitionAnimation(0,1);
 		
 	}
 	

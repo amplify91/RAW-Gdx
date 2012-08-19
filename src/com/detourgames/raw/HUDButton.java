@@ -2,8 +2,8 @@ package com.detourgames.raw;
 
 public class HUDButton extends HUDElement{
 	
-	public HUDButton(Camera camera) {
-		super(new PhysicsHUDElement(camera), new AnimationButton() , new StateNone(), new ControllerComponent());
+	public HUDButton(Camera camera, SpriteSheet spriteSheet) {
+		super(new PhysicsHUDElement(camera), new AnimationButton(spriteSheet) , new StateButton(), new ControllerNone());
 		// TODO Auto-generated constructor stub
 	}
 	

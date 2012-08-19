@@ -12,18 +12,18 @@ public class FireProjectileEvent extends Event {
 	float y;
 	Sprite shootingSprite;
 
-	public FireProjectileEvent(float x, float y, Sprite shootingSprite) {
+	public FireProjectileEvent(float x, float y, Sprite shootingSprite){
 
 		this.x = x;
 		this.y = y;
 		this.shootingSprite=shootingSprite;
 
 	}
-	public FireProjectileEvent(Vector2 coordinates, Sprite shootingSprite)
-	{
+	
+	public FireProjectileEvent(Vector2 coordinates, Sprite shootingSprite){
 		this.x = coordinates.x;
 		this.y = coordinates.y;
-		this.shootingSprite=shootingSprite;
+		this.shootingSprite = shootingSprite;
 	
 	}
 
