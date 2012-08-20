@@ -5,6 +5,7 @@ import com.detourgames.raw.Camera;
 import com.detourgames.raw.HUDButton;
 import com.detourgames.raw.PhysicsHUDElement;
 import com.detourgames.raw.SpriteSheet;
+import com.detourgames.raw.StateButton;
 
 public class HUDButtonDash extends HUDButton{
 	
@@ -16,6 +17,7 @@ public class HUDButtonDash extends HUDButton{
 	public HUDButtonDash(Camera camera, World world, SpriteSheet spriteSheet) {
 		super(camera, spriteSheet);
 		create(world);
+		mState.setState(StateButton.STATE_DASH_UP);
 	}
 	
 	public void create(World world){

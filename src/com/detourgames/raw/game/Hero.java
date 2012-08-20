@@ -1,7 +1,6 @@
 package com.detourgames.raw.game;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -13,7 +12,7 @@ import com.detourgames.raw.SpriteSheet;
 public class Hero extends Sprite{
 	
 	Vector2 running;
-	private static final float MAX_SPEED = 10;
+	//private static final float MAX_SPEED = 10;
 	private static final float HEIGHT = 0.9f;
 	private static final float WIDTH = 0.9f;
 	

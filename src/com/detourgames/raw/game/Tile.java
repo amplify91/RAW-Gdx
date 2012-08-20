@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.detourgames.raw.AnimationComponent;
 import com.detourgames.raw.AnimationStatic;
-import com.detourgames.raw.ControllerComponent;
+import com.detourgames.raw.ControllerNone;
 import com.detourgames.raw.FixtureType;
 import com.detourgames.raw.PhysicsStatic;
 import com.detourgames.raw.Sprite;
@@ -55,7 +55,7 @@ public class Tile extends Sprite{
 	public static final Vector2[] VERTS_HALF_RIGHT = new Vector2[]{new Vector2(0f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(0f,0.25f)};
 	
 	public Tile(){
-		super(new PhysicsStatic(), new AnimationStatic(), new StateStatic(), new ControllerComponent());
+		super(new PhysicsStatic(), new AnimationStatic(), new StateStatic(), new ControllerNone());
 		
 	}
 	
