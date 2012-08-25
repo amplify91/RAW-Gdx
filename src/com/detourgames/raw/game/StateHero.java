@@ -8,8 +8,8 @@ public class StateHero extends StateComponent{
 	//TODO Could move these to super class to avoid having to cast to (StateHero),
 	//but it would pollute other classes that didnt need it.
 	public boolean isOnGround = false;
-	boolean canJump = false;
-	boolean canDoubleJump = false;
+	public boolean canJump = false;
+	public boolean canDoubleJump = false;
 	
 	public StateHero() {
 		super(new int[]{STATE_DASHING, STATE_DOUBLE_JUMPING, STATE_FALLING,
@@ -23,7 +23,7 @@ public class StateHero extends StateComponent{
 			canJump = true;
 			canDoubleJump = true;
 		}else{
-			canJump=false;
+			canJump = false;
 			if(physics.getBody().getLinearVelocity().y>0){
 				setState(STATE_JUMPING);
 			}else{

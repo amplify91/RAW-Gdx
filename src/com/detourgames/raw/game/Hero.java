@@ -39,13 +39,25 @@ public class Hero extends Sprite{
 	}
 	
 	public void jump(){
-		((PhysicsHero) mPhysics).jump();
-		mState.setState(StateHero.STATE_JUMPING);
+		if(((StateHero)mState).canJump){
+			((PhysicsHero) mPhysics).jump();
+			mState.setState(StateHero.STATE_JUMPING);
+			((StateHero)mState).canJump = false;
+		}else if(((StateHero)mState).canDoubleJump){
+			((PhysicsHero) mPhysics).jump();
+			mState.setState(StateHero.STATE_DOUBLE_JUMPING);
+			((StateHero)mState).canDoubleJump = false;
+		}
+		
 	}
 	
 	public void dash(){
 		((PhysicsHero) mPhysics).dash();
 		//mState.setState(StateHero.STATE_DASHING);
+	}
+	
+	public void swing(){
+		((PhysicsHero) mPhysics).swing();
 	}
 	
 }

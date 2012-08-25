@@ -13,7 +13,7 @@ public class PhysicsHero extends PhysicsComponent{
 	
 	private Vector2 mVel = new Vector2(); // Current velocity.
 	private Vector2 mRunVel = new Vector2(); // Impulse velocity that needs to be applied to run at correct speed
-	private Vector2 mJumpVel = new Vector2(0, 10);//TODO make movement velocities functions of mass and time
+	private Vector2 mJumpVel = new Vector2(0, 10);
 	private Vector2 mDashVel = new Vector2(20, 0);
 	private Vector2 mTotalVel = new Vector2();
 	
@@ -28,14 +28,14 @@ public class PhysicsHero extends PhysicsComponent{
 	
 	@Override
 	public void update() {
-		mBody.setLinearVelocity(mBody.getLinearVelocity().mul(0.9f)); // Slow down, in case we're above max speed.
+		
 		run();
-		//getInput();
 		mBody.applyLinearImpulse(mTotalVel, mBody.getWorldCenter());
 		mTotalVel.set(Vector2.Zero);
 	}
 	
 	private void run(){
+		mBody.setLinearVelocity(mBody.getLinearVelocity().mul(0.9f)); // Slow down, in case we're above max speed.
 		mRunVel.set(Vector2.Zero);
 		mVel = mBody.getLinearVelocity();
 		velChange = MAX_SPEED - mVel.x;
@@ -52,6 +52,23 @@ public class PhysicsHero extends PhysicsComponent{
 	
 	public void dash(){
 		mTotalVel = mTotalVel.add(mDashVel);
+	}
+	
+	public void swing(){
+		System.out.println("Swing!");
+		/*1 create chainsaw projectile
+		*2 create chain graphic
+		*3 resize chain graphic until chain hits
+		*4 when chainsaw hits terrain and sticks, create solid chain
+		*5 glue chain to RAW and chainsaw using joints
+		*
+		*OR
+		*
+		*1 create chainsaw projectile
+		*2 get distance between chainsaw and RAW and fill with appropriate number of chainlinks (small solid rectangles)
+		*3 glue chainlinks, RAW, and chainsaw together with joints
+		*3 repeat steps 2&3 (adding new links as needed) until chainsaw hits terrain and sticks
+		*/
 	}
 	
 	@Override
@@ -75,6 +92,7 @@ public class PhysicsHero extends PhysicsComponent{
 		fixtureDef.filter.groupIndex = PhysicsComponent.GROUP_ALLY;
 		mBody.createFixture(fixtureDef).setUserData(mainFixtureType);
 		mBody.setGravityScale(1.4f);
+		//mBody.setLinearDamping(10.5f);
 		mBody.setFixedRotation(true);
 		mBody.setUserData(this);
 	}

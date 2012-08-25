@@ -80,6 +80,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 			mBody.createFixture(fixtureDef).setUserData(mainFixtureType);
 			mBody.setGravityScale(0);
 			mBody.setFixedRotation(true);
+			//mBody.setLinearDamping(10.5f);
 			mBody.setUserData(this);
 
 		}
