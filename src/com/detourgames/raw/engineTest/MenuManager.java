@@ -76,7 +76,7 @@ public class MenuManager {
 		// mHeroTexture.
 		if (!levelLoaded) {
 			levelLoader = new MenuLoader(mLevel);
-			levelLoader.createLevelFromFile(level);
+			//levelLoader.createLevelFromFile(level);
 
 			// spriteBatch = new SpriteBatch(1600, SpriteBatch.SPRITE_SHADER,
 			// context, camera);

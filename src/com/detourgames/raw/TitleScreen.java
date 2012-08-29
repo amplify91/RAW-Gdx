@@ -1,8 +1,15 @@
 package com.detourgames.raw;
 
-import com.badlogic.gdx.Screen;;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.detourgames.raw.engineTest.MenuInput;
+import com.detourgames.raw.engineTest.MenuLoop;
+import com.detourgames.raw.engineTest.MenuManager;
 
 public class TitleScreen implements Screen{
+	
+	MenuLoop mMenuLoop = new MenuLoop();
+	MenuManager mMenuManager = MenuManager.getGameManager();
 	
 	GameRAW mGame;
 	
@@ -13,19 +20,21 @@ public class TitleScreen implements Screen{
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
-		
+		mMenuLoop.tick();
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+		float ratio = (float)width/(float)height;
+		mMenuManager.createCamera(7.5f*ratio, 7.5f, width, height);
+		mMenuManager.loadLevel(1);
 	}
 
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+		Gdx.input.setInputProcessor(new MenuInput());
 	}
 
 	@Override
