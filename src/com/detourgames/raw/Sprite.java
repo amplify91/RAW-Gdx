@@ -21,7 +21,7 @@ public abstract class Sprite implements IFocusable{
 		mAnimation = ac;
 		mState = sc;
 		mController = cc;
-		mPhysics.setParentSprite(this);//TODO see if this works or else I need to do this in each subclass
+		mPhysics.setParentSprite(this);
 
 	}
 

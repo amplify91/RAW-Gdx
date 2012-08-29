@@ -18,8 +18,10 @@ public class GameLoop {
 	boolean game_is_running;
 
 	GameManager mGameManager;
+	
+	private static GameLoop mGameLoop = new GameLoop();
 
-	public GameLoop() {
+	private GameLoop() {
 
 		mGameManager = GameManager.getGameManager();
 
@@ -68,6 +70,10 @@ public class GameLoop {
 
 	public void resume() {
 		// TODO manage time discrepancies
+	}
+	
+	public static GameLoop getGameLoop(){
+		return mGameLoop;
 	}
 
 }
