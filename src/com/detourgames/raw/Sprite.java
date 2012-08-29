@@ -1,6 +1,7 @@
 package com.detourgames.raw;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 public abstract class Sprite implements IFocusable{
 
@@ -58,6 +59,10 @@ public abstract class Sprite implements IFocusable{
 	@Override
 	public float getCameraOffsetY() {
 		return mCameraOffsetY;
+	}
+
+	public Vector2 getPosition() {
+		return mPhysics.getPosition();
 	}
 
 	/*

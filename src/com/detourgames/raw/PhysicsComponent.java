@@ -105,6 +105,9 @@ public abstract class PhysicsComponent {
 		return mBody.getPosition().y;
 	}
 	
+	public Vector2 getPosition(){
+		return mBody.getPosition();
+	}
 	public Body getBody(){
 		return mBody;
 	}

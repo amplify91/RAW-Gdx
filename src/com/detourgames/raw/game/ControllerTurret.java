@@ -9,10 +9,10 @@ import com.detourgames.raw.StateComponent;
 
 public class ControllerTurret extends ControllerComponent {
 	
-	Sprite mTarget;
-	long mLastShot = TimeUtils.nanoTime();
-	long mNextShot = 0;
-	private static final long mCooldown = 1000000000; //the amount of time between shots.
+	protected Sprite mTarget;
+	protected long mLastShot = TimeUtils.nanoTime();
+	protected long mNextShot = 0;
+	protected static final long mCooldown = 1000000000; //the amount of time between shots.
 	
 	@Override
 	public void update(StateComponent state, PhysicsComponent physics){
