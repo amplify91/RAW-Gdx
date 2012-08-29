@@ -1,30 +1,51 @@
 package com.detourgames.raw;
 
-import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.TimeUtils;
 
-public class GameRAW implements ApplicationListener {
+public class GameRAW extends Game{
 
-	GameLoop mGameLoop;
-	GameManager mGameManager = GameManager.getGameManager();
+	//GameLoop mGameLoop = GameLoop.getGameLoop();
+	//GameManager mGameManager = GameManager.getGameManager();
+	
+	TitleScreen mTitleScreen;
+	GameScreen mGameScreen;
+	
+	long mLastTime = 0;
+	long mCurrentTime;
+	float mDeltaTime;
      
-    SpriteFactory mSpriteFactory;
-    SpriteSheet mSpriteSheet;
+    //SpriteFactory mSpriteFactory;
+    //SpriteSheet mSpriteSheet;
     
 	@Override
 	public void create() {
-		mGameLoop = new GameLoop();
 		Gdx.input.setInputProcessor(new Input());//TODO make this suck less
+		
+		mTitleScreen = new TitleScreen(this);
+		mGameScreen = new GameScreen(this);
+		setScreen(mGameScreen);
 	}
 
 	@Override
 	public void dispose() {
+		
 	}
 	
 	@Override
 	public void render() {
 		
-		mGameLoop.tick();
+		mCurrentTime = TimeUtils.nanoTime();
+		if(mLastTime==0){
+			mLastTime = mCurrentTime-1;
+		}
+		mDeltaTime = ((float)(mCurrentTime - mLastTime))/1000000000f;
+		
+		getScreen().render(mDeltaTime);
+		
+		mLastTime = mCurrentTime;
+		//mGameLoop.tick();
 		// TODO either allow this to tick my game loop or
 		// create my game loop as a thread and start it in resume().
 		// The latter would require passing the OpenGL context to another
@@ -35,17 +56,19 @@ public class GameRAW implements ApplicationListener {
 	@Override
 	public void resize(int width, int height) {
 		
-		float ratio = (float)width/(float)height;
+		/*float ratio = (float)width/(float)height;
 		mGameManager.createCamera(7.5f*ratio, 7.5f, width, height);
-		mGameManager.loadLevel(1);
+		mGameManager.loadLevel(1);*/
 		
 	}
 
 	@Override
 	public void pause() {
+		
 	}
 
 	@Override
 	public void resume() {
+		
 	}
 }
