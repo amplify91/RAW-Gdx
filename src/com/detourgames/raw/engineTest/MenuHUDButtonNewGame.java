@@ -2,6 +2,8 @@ package com.detourgames.raw.engineTest;
 
 import com.badlogic.gdx.physics.box2d.World;
 import com.detourgames.raw.Camera;
+import com.detourgames.raw.GameRAW;
+import com.detourgames.raw.GameScreen;
 import com.detourgames.raw.HUDButton;
 import com.detourgames.raw.PhysicsHUDElement;
 import com.detourgames.raw.SpriteSheet;
@@ -28,7 +30,7 @@ public class MenuHUDButtonNewGame extends MenuHUDButton{
 	@Override
 	public void Click() {
 		
-		// TODO Auto-generated method stub
+		GameRAW.getGameRAW().setScreen(GameRAW.mGameScreen);
 		System.out.println("New Game!");
 	}
 	

@@ -9,8 +9,8 @@ public class GameRAW extends Game{
 	//GameLoop mGameLoop = GameLoop.getGameLoop();
 	//GameManager mGameManager = GameManager.getGameManager();
 	
-	TitleScreen mTitleScreen;
-	GameScreen mGameScreen;
+	public static TitleScreen mTitleScreen;
+	public static GameScreen mGameScreen;
 	
 	long mLastTime = 0;
 	long mCurrentTime;
@@ -18,14 +18,24 @@ public class GameRAW extends Game{
      
     //SpriteFactory mSpriteFactory;
     //SpriteSheet mSpriteSheet;
+	
+	private static GameRAW mGameRAW = new GameRAW(); //singleton
     
+	private GameRAW(){
+		
+	}
+	
+	public static GameRAW getGameRAW(){
+		return mGameRAW;
+	}
+	
 	@Override
 	public void create() {
 		Gdx.input.setInputProcessor(new Input());//TODO make this suck less
 		
 		mTitleScreen = new TitleScreen(this);
 		mGameScreen = new GameScreen(this);
-		setScreen(mGameScreen);
+		setScreen(mTitleScreen);
 	}
 
 	@Override
