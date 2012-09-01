@@ -96,4 +96,31 @@ public class PhysicsHero extends PhysicsComponent{
 		mBody.setFixedRotation(true);
 		mBody.setUserData(this);
 	}
+	
+	@Override
+	public void create(World world, float x, float y, Vector2 vertices[], boolean dynamic, int mainFixtureType) {
+		
+		//create main fixture (bodies may have more than one)
+		BodyDef bodyDef = new BodyDef();
+		if (dynamic) {
+			bodyDef.type = BodyType.DynamicBody;
+		} else {
+			bodyDef.type = BodyType.StaticBody;
+		}
+		bodyDef.position.set(x, y);
+		mBody = world.createBody(bodyDef);
+
+		PolygonShape dynamicBox = new PolygonShape();
+		dynamicBox.set(vertices);
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = dynamicBox;
+		fixtureDef.density = 1.0f;
+		fixtureDef.friction = 0.0f;
+		fixtureDef.filter.groupIndex = PhysicsComponent.GROUP_ALLY;
+		mBody.createFixture(fixtureDef).setUserData(mainFixtureType);
+		mBody.setGravityScale(1.4f);
+		//mBody.setLinearDamping(10.5f);
+		mBody.setFixedRotation(true);
+		mBody.setUserData(this);
+	}
 }

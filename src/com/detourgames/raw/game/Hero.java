@@ -27,7 +27,6 @@ public class Hero extends Sprite{
 	public void create(World world, float x, float y){
 		//mPhysics.create(world, x, y, WIDTH, HEIGHT, true, FixtureType.HERO_BODY);
 		mPhysics.create(world, x, y, BODY_VERTS, true, FixtureType.HERO_BODY);
-		mPhysics.getBody().setFixedRotation(true);
 		
 		//create ground sensor
 		float sensorHeight = 0.1f;
