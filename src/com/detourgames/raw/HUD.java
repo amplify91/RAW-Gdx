@@ -9,9 +9,6 @@ public class HUD {
 	
 	private Camera mCamera;
 	
-	private float mScreenWidth;
-	private float mScreenHeight;
-	
 	public static final int BUTTON_NONE = 0;
 	public static final int BUTTON_JUMP = 1;
 	public static final int BUTTON_DASH = 2;

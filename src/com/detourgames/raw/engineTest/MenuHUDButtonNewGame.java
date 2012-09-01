@@ -11,10 +11,10 @@ import com.detourgames.raw.StateButton;
 
 public class MenuHUDButtonNewGame extends MenuHUDButton{
 	
-	private static final float ORIGIN_X = 0.1f;
-	private static final float ORIGIN_Y = 0;
-	private static final float WIDTH = 0.20f;
-	private static final float HEIGHT = 1f/10f;
+	private static final float WIDTH = 0.15f;
+	private static final float HEIGHT = 0.25f;
+	private static final float ORIGIN_X = 0.5f - WIDTH/2f;
+	private static final float ORIGIN_Y = 0.5f - HEIGHT/2f;
 	
 	public MenuHUDButtonNewGame(Camera camera, World world, SpriteSheet spriteSheet) {
 		super(camera, spriteSheet);
@@ -28,10 +28,8 @@ public class MenuHUDButtonNewGame extends MenuHUDButton{
 	}
 
 	@Override
-	public void Click() {
-		
+	public void touchDown() {
 		GameRAW.getGameRAW().setScreen(GameRAW.mGameScreen);
-		System.out.println("New Game!");
 	}
 	
 }

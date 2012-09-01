@@ -15,6 +15,7 @@ public class Hero extends Sprite{
 	//private static final float MAX_SPEED = 10;
 	private static final float HEIGHT = 0.9f;
 	private static final float WIDTH = 0.9f;
+	private static final Vector2[] BODY_VERTS = {new Vector2(-0.45f,-0.45f),new Vector2(0.4f,-0.45f),new Vector2(0.45f,-0.4f),new Vector2(0.45f,0.45f),new Vector2(-0.45f,0.45f)};
 	
 	public Hero(SpriteSheet spriteSheet){
 		super(new PhysicsHero(), new AnimationHero(spriteSheet,WIDTH,HEIGHT), new StateHero(), new ControllerComponent());
@@ -24,7 +25,9 @@ public class Hero extends Sprite{
 	}
 	
 	public void create(World world, float x, float y){
-		mPhysics.create(world, x, y, WIDTH, HEIGHT, true, FixtureType.HERO_BODY);
+		//mPhysics.create(world, x, y, WIDTH, HEIGHT, true, FixtureType.HERO_BODY);
+		mPhysics.create(world, x, y, BODY_VERTS, true, FixtureType.HERO_BODY);
+		mPhysics.getBody().setFixedRotation(true);
 		
 		//create ground sensor
 		float sensorHeight = 0.1f;

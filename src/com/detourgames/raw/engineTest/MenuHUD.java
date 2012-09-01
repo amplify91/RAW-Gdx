@@ -40,7 +40,7 @@ public class MenuHUD {
 		for(int i=0;i<mHUDElements.length;i++){
 			if(mHUDElements[i].isTouchInside(vec.x, vec.y)){
 				button = i+1;//TODO make sure mHUDElements is constructed in the same order as the button constants.
-				mHUDElements[i].Click();
+				mHUDElements[i].touchDown();
 				return button;
 			}
 		}

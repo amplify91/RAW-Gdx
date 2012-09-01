@@ -16,5 +16,5 @@ public abstract class MenuHUDElement extends Sprite{
 	
 	public abstract void resize();
 
-	public abstract void Click();
+	public abstract void touchDown();
 }
