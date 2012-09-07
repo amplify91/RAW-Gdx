@@ -42,7 +42,7 @@ public abstract class StateComponent {
 		if(isStateAvailable(state)){
 			mState = state;
 		}else{
-			System.out.println("WARNING! Unavailable State!");
+			System.out.println("WARNING! Unavailable State!" + " State: " + state);
 		}
 		
 	}
@@ -61,5 +61,22 @@ public abstract class StateComponent {
 	}
 	
 	public abstract void setInitialState(); // initialize fields like mHealth
+	
+	public void causeDamage(Sprite target, int damage){
+		target.mState.receiveDamage(damage);
+	}
+	
+	public void receiveDamage(int damage){
+		mHealth -= damage;
+		setState(STATE_HURTING);
+		if(mHealth<0){
+			mHealth = 0;
+			setState(STATE_DEAD);
+		}
+	}
+	
+	public void strikeKillingBlow(){
+		mHealth = 0;
+	}
 	
 }

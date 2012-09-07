@@ -3,7 +3,7 @@ package com.detourgames.raw;
 public class StateStatic extends StateComponent{
 	
 	public StateStatic() {
-		super(new int[]{STATE_IDLE});
+		super(new int[]{STATE_IDLE, STATE_HURTING, STATE_DEAD});
 		// TODO Auto-generated constructor stub
 	}
 	

@@ -2,6 +2,7 @@ package com.detourgames.raw;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.math.Vector2;
 import com.detourgames.raw.game.Projectile;
 
 public class ProjectilePool {
@@ -12,6 +13,8 @@ public class ProjectilePool {
 	
 	private static Level mLevel;
 	private static SpriteFactory mSpriteFactory;
+	
+	public static final Vector2 POOL_LOCATION = new Vector2(-1, -1);
 	
 	private ProjectilePool(){
 		

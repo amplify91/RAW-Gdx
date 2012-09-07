@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.detourgames.raw.ControllerComponent;
 import com.detourgames.raw.FixtureType;
 import com.detourgames.raw.IReusable;
+import com.detourgames.raw.ProjectilePool;
 import com.detourgames.raw.Sprite;
 import com.detourgames.raw.SpriteSheet;
 
@@ -14,12 +15,15 @@ public class Projectile extends Sprite implements IReusable{
 	public boolean isReadyForSpawn = false;
 	
 	public static final int TYPE_RAW = 1;
-	public static final int TYPE_ENEMY=2;
+	public static final int TYPE_ENEMY = 2;
 	
 	public static final float WIDTH_RAW = 0.4f;
 	public static final float HEIGHT_RAW = 0.4f;
 	
 	public static final float VELOCITY_RAW = 25.0f;
+	
+	public static final int DAMAGE_RAW = 100;
+	public static final int DAMAGE_TURRET = 20;
 	
 	public static final Vector2[] VERTS_RAW = new Vector2[]{new Vector2(-0.2f,-0.2f), new Vector2(0.2f,-0.2f), new Vector2(0.2f,0.2f), new Vector2(-0.2f,0.2f)};
 	
@@ -57,8 +61,9 @@ public class Projectile extends Sprite implements IReusable{
 	public void recycle() {
 		isActive = false;
 		isReadyForSpawn = false;
-		mPhysics.getBody().setTransform(-1, -1, 0);
-		mPhysics.getBody().setLinearVelocity(0, 0);
+		mPhysics.die();
+		mPhysics.getBody().setTransform(ProjectilePool.POOL_LOCATION.x, ProjectilePool.POOL_LOCATION.y, 0);
+		//mPhysics.getBody().setLinearVelocity(0, 0);
 		mPhysics.getBody().setActive(false);
 		//TODO set to a neutral state that won't interfere with the rest of the game.
 	}

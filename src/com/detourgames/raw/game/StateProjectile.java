@@ -13,9 +13,9 @@ public class StateProjectile extends StateComponent{
 	@Override
 	public void update(PhysicsComponent physics) {
 		if(mState==STATE_HURTING){
-			
-		}else if(mState==STATE_DEAD){
 			((Projectile)physics.getParentSprite()).recycle();
+		}else if(mState==STATE_DEAD){
+			//spawn explosion
 		}
 		
 	}
@@ -23,6 +23,8 @@ public class StateProjectile extends StateComponent{
 	@Override
 	public void setInitialState() {
 		// TODO Auto-generated method stub
+		mMaxHealth = 1;
+		mHealth = mMaxHealth;
 		mState = STATE_IDLE;
 	}
 

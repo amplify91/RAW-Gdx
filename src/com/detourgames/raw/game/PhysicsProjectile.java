@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.detourgames.raw.FixtureType;
 import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.Sprite;
 
@@ -45,6 +46,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 				{
 					f.getFilterData().groupIndex = PhysicsComponent.GROUP_ALLY;//TODO ideal place to do this, but gets reset by something, so this has no effect.
 					//TODO maybe it is being reset by 16th line of create()?
+					f.setUserData(FixtureType.HERO_PROJECTILE);
 				}
 			}
 			if(type==Projectile.TYPE_ENEMY){
@@ -53,6 +55,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 				for(Fixture f : mBody.getFixtureList())
 				{
 					f.getFilterData().groupIndex = PhysicsComponent.GROUP_ENEMY;
+					f.setUserData(FixtureType.TURRET_PROJECTILE);
 				}
 			}
 			

@@ -37,9 +37,11 @@ public abstract class Sprite implements IFocusable{
 	public void update(float deltaTime) {
 		
 		mState.update(mPhysics);
-		mAnimation.update(mState);
-		mController.update(mState, mPhysics);
-		mPhysics.update();
+		if(mState.getState()!=StateComponent.STATE_DEAD){
+			mAnimation.update(mState);
+			mController.update(mState, mPhysics);
+			mPhysics.update();
+		}
 		
 	}
 

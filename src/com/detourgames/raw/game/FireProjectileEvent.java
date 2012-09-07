@@ -32,7 +32,11 @@ public class FireProjectileEvent extends Event {
 		//System.out.println("Shot at "+x+"' "+y);
 		
 		Projectile p = ProjectilePool.getProjectilePool().getProjectile();
-		p.prepareForSpawn(Projectile.TYPE_RAW, shootingSprite, new Vector2(x,y));
+		if(shootingSprite instanceof Hero){
+			p.prepareForSpawn(Projectile.TYPE_RAW, shootingSprite, new Vector2(x,y));
+		}else{
+			p.prepareForSpawn(Projectile.TYPE_ENEMY, shootingSprite, new Vector2(x,y));
+		}
 		p.spawn(GameManager.getGameManager().getLevel().getWorld());
 	}
 

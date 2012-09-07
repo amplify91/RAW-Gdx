@@ -26,9 +26,10 @@ public class ControllerTurret extends ControllerComponent {
 	}
 	
 	public void getNextAction(StateComponent state){
-		
-		//find target (RAW)
-		startAttackingTarget(state, GameManager.getGameManager().getLevel().getHero());
+		if(state.getState()!=StateComponent.STATE_DEAD){
+			//find target (RAW)
+			startAttackingTarget(state, GameManager.getGameManager().getLevel().getHero());
+		}
 	}
 	
 	public void startAttackingTarget(StateComponent state, Sprite target){
