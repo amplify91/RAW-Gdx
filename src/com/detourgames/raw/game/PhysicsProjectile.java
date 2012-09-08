@@ -3,6 +3,7 @@ package com.detourgames.raw.game;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -44,8 +45,9 @@ public class PhysicsProjectile extends PhysicsComponent{
 				//mVertices = Projectile.VERTS_RAW;
 				for(Fixture f : mBody.getFixtureList())
 				{
-					f.getFilterData().groupIndex = PhysicsComponent.GROUP_ALLY;//TODO ideal place to do this, but gets reset by something, so this has no effect.
-					//TODO maybe it is being reset by 16th line of create()?
+					Filter filter = f.getFilterData();
+					filter.groupIndex = PhysicsComponent.GROUP_ALLY;
+					f.setFilterData(filter);
 					f.setUserData(FixtureType.HERO_PROJECTILE);
 				}
 			}
@@ -54,7 +56,10 @@ public class PhysicsProjectile extends PhysicsComponent{
 				//mVertices = Projectile.VERTS_RAW;
 				for(Fixture f : mBody.getFixtureList())
 				{
-					f.getFilterData().groupIndex = PhysicsComponent.GROUP_ENEMY;
+					Filter filter = f.getFilterData();
+					filter.groupIndex = PhysicsComponent.GROUP_ENEMY;
+					f.setFilterData(filter);
+					//f.getFilterData().groupIndex = PhysicsComponent.GROUP_ENEMY;
 					f.setUserData(FixtureType.TURRET_PROJECTILE);
 				}
 			}
@@ -77,7 +82,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 			dynamicBox.set(vertices);
 			FixtureDef fixtureDef = new FixtureDef();
 			fixtureDef.shape = dynamicBox;
-			fixtureDef.density = 1.0f;
+			fixtureDef.density = 0.1f;
 			fixtureDef.friction = 0.0f;
 			fixtureDef.filter.groupIndex = PhysicsComponent.GROUP_ALLY;
 			mBody.createFixture(fixtureDef).setUserData(mainFixtureType);

@@ -93,7 +93,7 @@ public class ContactListenerRAW implements ContactListener{
 		if(fixtureA.getUserData() != null){
 			if((Integer)fixtureA.getUserData() == FixtureType.HERO_PROJECTILE){
 				((StateProjectile)((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState).setState(StateComponent.STATE_HURTING);
-				((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.strikeKillingBlow();
+				((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.kill();
 				if(fixtureB.getUserData() != null){
 					((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.receiveDamage(Projectile.DAMAGE_RAW);
 				}
@@ -102,7 +102,7 @@ public class ContactListenerRAW implements ContactListener{
 		if(fixtureB.getUserData() != null){
 			if((Integer)fixtureB.getUserData() == FixtureType.HERO_PROJECTILE){
 				((StateProjectile)((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState).setState(StateComponent.STATE_HURTING);
-				((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.strikeKillingBlow();
+				((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.kill();
 				if(fixtureA.getUserData() != null){
 					((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.receiveDamage(Projectile.DAMAGE_RAW);
 				}
@@ -116,7 +116,7 @@ public class ContactListenerRAW implements ContactListener{
 		if(fixtureA.getUserData() != null){
 			if((Integer)fixtureA.getUserData() == FixtureType.TURRET_PROJECTILE && (Integer)fixtureB.getUserData() != FixtureType.TURRET_BODY){
 				((StateProjectile)((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState).setState(StateComponent.STATE_HURTING);
-				((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.strikeKillingBlow();
+				((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.kill();
 				if(fixtureB.getUserData() != null){
 					((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.receiveDamage(Projectile.DAMAGE_TURRET);
 				}
@@ -125,7 +125,7 @@ public class ContactListenerRAW implements ContactListener{
 		if(fixtureB.getUserData() != null){
 			if((Integer)fixtureB.getUserData() == FixtureType.TURRET_PROJECTILE && (Integer)fixtureA.getUserData() != FixtureType.TURRET_BODY){
 				((StateProjectile)((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState).setState(StateComponent.STATE_HURTING);
-				((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.strikeKillingBlow();
+				((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.kill();
 				if(fixtureA.getUserData() != null){
 					((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.receiveDamage(Projectile.DAMAGE_TURRET);
 				}

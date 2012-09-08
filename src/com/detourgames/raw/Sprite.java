@@ -2,6 +2,7 @@ package com.detourgames.raw;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 
 public abstract class Sprite implements IFocusable{
 
@@ -65,6 +66,10 @@ public abstract class Sprite implements IFocusable{
 
 	public Vector2 getPosition() {
 		return mPhysics.getPosition();
+	}
+	
+	public Body getBody(){
+		return mPhysics.getBody();
 	}
 
 	/*

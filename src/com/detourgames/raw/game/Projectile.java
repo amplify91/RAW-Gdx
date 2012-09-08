@@ -20,7 +20,7 @@ public class Projectile extends Sprite implements IReusable{
 	public static final float WIDTH_RAW = 0.4f;
 	public static final float HEIGHT_RAW = 0.4f;
 	
-	public static final float VELOCITY_RAW = 25.0f;
+	public static final float VELOCITY_RAW = 20.0f;
 	
 	public static final int DAMAGE_RAW = 100;
 	public static final int DAMAGE_TURRET = 20;

@@ -75,7 +75,7 @@ public abstract class StateComponent {
 		}
 	}
 	
-	public void strikeKillingBlow(){
+	public void kill(){
 		mHealth = 0;
 	}
 	

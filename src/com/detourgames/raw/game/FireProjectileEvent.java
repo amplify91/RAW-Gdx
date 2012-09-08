@@ -10,20 +10,20 @@ public class FireProjectileEvent extends Event {
 
 	float x;
 	float y;
-	Sprite shootingSprite;
+	Sprite mShootingSprite;
 
 	public FireProjectileEvent(float x, float y, Sprite shootingSprite){
 
 		this.x = x;
 		this.y = y;
-		this.shootingSprite=shootingSprite;
+		this.mShootingSprite = shootingSprite;
 
 	}
 	
 	public FireProjectileEvent(Vector2 coordinates, Sprite shootingSprite){
 		this.x = coordinates.x;
 		this.y = coordinates.y;
-		this.shootingSprite = shootingSprite;
+		this.mShootingSprite = shootingSprite;
 	
 	}
 
@@ -32,10 +32,10 @@ public class FireProjectileEvent extends Event {
 		//System.out.println("Shot at "+x+"' "+y);
 		
 		Projectile p = ProjectilePool.getProjectilePool().getProjectile();
-		if(shootingSprite instanceof Hero){
-			p.prepareForSpawn(Projectile.TYPE_RAW, shootingSprite, new Vector2(x,y));
+		if(mShootingSprite instanceof Hero){
+			p.prepareForSpawn(Projectile.TYPE_RAW, mShootingSprite, new Vector2(x,y));
 		}else{
-			p.prepareForSpawn(Projectile.TYPE_ENEMY, shootingSprite, new Vector2(x,y));
+			p.prepareForSpawn(Projectile.TYPE_ENEMY, mShootingSprite, new Vector2(x,y));
 		}
 		p.spawn(GameManager.getGameManager().getLevel().getWorld());
 	}
