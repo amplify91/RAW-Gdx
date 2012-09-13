@@ -8,36 +8,36 @@ import com.detourgames.raw.Sprite;
 
 public class FireProjectileEvent extends Event {
 
-	float x;
-	float y;
+	float mX;
+	float mY;
+	int mType;
 	Sprite mShootingSprite;
 
-	public FireProjectileEvent(float x, float y, Sprite shootingSprite){
+	public FireProjectileEvent(float x, float y, int type, Sprite shootingSprite){
 
-		this.x = x;
-		this.y = y;
-		this.mShootingSprite = shootingSprite;
-
+		mX = x;
+		mY = y;
+		mType = type;
+		mShootingSprite = shootingSprite;
+		
 	}
 	
-	public FireProjectileEvent(Vector2 coordinates, Sprite shootingSprite){
-		this.x = coordinates.x;
-		this.y = coordinates.y;
-		this.mShootingSprite = shootingSprite;
+	public FireProjectileEvent(Vector2 coordinates, int type, Sprite shootingSprite){
+		
+		mX = coordinates.x;
+		mY = coordinates.y;
+		mType = type;
+		mShootingSprite = shootingSprite;
 	
 	}
 
 	@Override
 	public void executeEvent() {
-		//System.out.println("Shot at "+x+"' "+y);
 		
 		Projectile p = ProjectilePool.getProjectilePool().getProjectile();
-		if(mShootingSprite instanceof Hero){
-			p.prepareForSpawn(Projectile.TYPE_RAW, mShootingSprite, new Vector2(x,y));
-		}else{
-			p.prepareForSpawn(Projectile.TYPE_ENEMY, mShootingSprite, new Vector2(x,y));
-		}
+		p.prepareForSpawn(mType, mShootingSprite, new Vector2(mX,mY));
 		p.spawn(GameManager.getGameManager().getLevel().getWorld());
+		
 	}
 
 }

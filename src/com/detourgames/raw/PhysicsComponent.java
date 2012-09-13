@@ -120,7 +120,7 @@ public abstract class PhysicsComponent {
 	public Vector2 die(){
 		mBody.setLinearVelocity(0f, 0f);
 		mDeathPos = mBody.getPosition();
-		//mBody.getWorld().destroyBody(mBody); TODO this breaks stuff hard.
+		//mBody.getWorld().destroyBody(mBody);// TODO this breaks stuff hard.
 		return mDeathPos;
 	}
 

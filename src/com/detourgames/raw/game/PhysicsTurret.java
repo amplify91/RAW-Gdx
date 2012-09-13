@@ -13,6 +13,6 @@ public class PhysicsTurret extends PhysicsComponent{
 	
 	public void fireMissileAtTarget(Vector2 target){
 		//System.out.println("Shooting at "+target.x +", "+target.y);
-		EventQueue.getEventQueue().queue(new FireProjectileEvent(new Vector2(target.x,target.y),this.mParent));
+		EventQueue.getEventQueue().queue(new FireProjectileEvent(new Vector2(target.x,target.y), Projectile.TYPE_ENEMY, this.mParent));
 	}
 }

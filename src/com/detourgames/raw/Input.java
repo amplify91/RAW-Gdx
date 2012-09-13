@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.detourgames.raw.game.DashEvent;
 import com.detourgames.raw.game.FireProjectileEvent;
 import com.detourgames.raw.game.JumpEvent;
+import com.detourgames.raw.game.Projectile;
 import com.detourgames.raw.game.SwingEvent;
 
 public class Input implements InputProcessor{
@@ -107,7 +108,7 @@ public class Input implements InputProcessor{
 	
 	private void shoot(int x, int y){
 		Vector2 worldCoords = GameManager.getGameManager().getCamera().translatePixelToWorldCoordinates(x, y);
-		EventQueue.getEventQueue().queue(new FireProjectileEvent(worldCoords,GameManager.getGameManager().getLevel().getHero()));
+		EventQueue.getEventQueue().queue(new FireProjectileEvent(worldCoords, Projectile.TYPE_RAW, GameManager.getGameManager().getLevel().getHero()));
 	}
 	
 }
