@@ -14,6 +14,8 @@ import com.detourgames.raw.SpriteSheet;
 
 public class Hero extends Sprite{
 	
+	Fixture mSensorFixture;
+	
 	Vector2 running;
 	//private static final float MAX_SPEED = 10;
 	private static final float HEIGHT = 0.9f;
@@ -40,11 +42,11 @@ public class Hero extends Sprite{
 		sensorFixtureDef.density = 1.0f;
 		sensorFixtureDef.friction = 0.0f;
 		sensorFixtureDef.isSensor = true;
-		Fixture sensorFixture = mPhysics.getBody().createFixture(sensorFixtureDef);
-		Filter filter = sensorFixture.getFilterData();
+		mSensorFixture = mPhysics.getBody().createFixture(sensorFixtureDef);
+		Filter filter = mSensorFixture.getFilterData();
 		filter.groupIndex = PhysicsComponent.GROUP_ALLY;
-		sensorFixture.setFilterData(filter);
-		sensorFixture.setUserData(FixtureType.HERO_GROUND_SENSOR);
+		mSensorFixture.setFilterData(filter);
+		mSensorFixture.setUserData(FixtureType.HERO_GROUND_SENSOR);
 	}
 	
 	public void jump(){

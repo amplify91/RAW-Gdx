@@ -27,8 +27,11 @@ public class LevelLoader {
 
 	public LevelLoader(Level level) {
 		mLevel = level;
-		Texture texture = new Texture(Gdx.files.internal("sprite_tiles.png"));
-		mSpriteSheet = new SpriteSheet(texture, 3, new int[]{3,1,5}, new int[]{8,8,4,0,7,16,16,16,16}, new int[]{128,1024,64}, new int[]{128,320,64});
+		Texture texture = new Texture(Gdx.files.internal("sprite_sheet_w1.png"));
+		//mSpriteSheet = new SpriteSheet(texture, 3, new int[]{3,1,5}, new int[]{8,8,4,0,7,16,16,16,16}, new int[]{128,1024,64}, new int[]{128,320,64});
+		mSpriteSheet = new SpriteSheet(texture, 5, new int[]{2,7,14,3,2},
+				new int[]{128,128,64,64,64,64,64,64,64,32,32,32,32,32,32,32,32,32,32,32,32,32,32,16,16,16,8,8},
+				new int[]{32,64,128,256,512}, new int[]{32,64,128,256,512});
 		mLevel.setSpriteSheet(mSpriteSheet);
 		mSpriteFactory = new SpriteFactory(mLevel);
 		// if(lvln==0){
@@ -47,8 +50,6 @@ public class LevelLoader {
 		String jsonString=jsonId.readString();
 		Object o=reader.parse(jsonString);
 		CreateLevelFromJsonObject((OrderedMap<String, Object>)o);
-
-
 	}
 
 	private FileHandle getFileHandle(int ln) {

@@ -17,8 +17,8 @@ public class Tile extends Sprite{
 	private static final float HEIGHT = 0.5f;
 	private static final float WIDTH = 0.5f;
 	
-	public static final int[] FRAME_TEST_TILES = { 28, 29, 30, 31, 32, 33, 34,
-		35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
+	public static final int[] FRAME_TEST_TILES = { 284, 285, 286, 287, 288, 289, 290,
+		291, 292, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
 		52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
 		69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85,
 		86, 87, 88, 89, 90, 91 };
@@ -43,8 +43,17 @@ public class Tile extends Sprite{
 	public static final Vector2[] VERTS_30_UP_BIG = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(-0.25f,0f)};
 	public static final Vector2[] VERTS_30_DOWN_SMALL = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(-0.25f,0f)};
 	public static final Vector2[] VERTS_30_DOWN_BIG = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0f),new Vector2(-0.25f,0.25f)};
+	public static final Vector2[] VERTS_30_UP_SMALL_INVERT = new Vector2[]{new Vector2(0.25f,0f),new Vector2(0.25f,0.25f),new Vector2(-0.25f,0.25f)};
+	public static final Vector2[] VERTS_30_UP_BIG_INVERT = new Vector2[]{new Vector2(-0.25f,0f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(-0.25f,0.25f)};
+	public static final Vector2[] VERTS_30_DOWN_SMALL_INVERT = new Vector2[]{new Vector2(-0.25f,0f),new Vector2(0.25f,0.25f),new Vector2(-0.25f,0.25f)};
+	public static final Vector2[] VERTS_30_DOWN_BIG_INVERT = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,0f),new Vector2(0.25f,0.25f),new Vector2(-0.25f,0.25f)};
 	public static final Vector2[] VERTS_45_UP = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f)};
 	public static final Vector2[] VERTS_45_DOWN = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(-0.25f,0.25f)};
+	public static final Vector2[] VERTS_45_HALF_UP_SMALL = new Vector2[]{new Vector2(0f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0f)};
+	public static final Vector2[] VERTS_45_HALF_UP_BIG = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(0f,0.25f),new Vector2(-0.25f,0f)};
+	public static final Vector2[] VERTS_45_HALF_UP_SMALL_INVERT = new Vector2[]{new Vector2(0f,0.25f),new Vector2(0.25f,0f),new Vector2(0.25f,0.25f)};
+	public static final Vector2[] VERTS_45_HALF_UP_BIG_INVERT = new Vector2[]{new Vector2(0f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(-0.25f,0.25f),new Vector2(-0.25f,0f)};
+	//TODO 45_HALF_DOWN_ALL x4 & 60_ALL_INVERT
 	public static final Vector2[] VERTS_60_UP_BIG = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(0f,0.25f)};
 	public static final Vector2[] VERTS_60_UP_SMALL = new Vector2[]{new Vector2(0f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f)};
 	public static final Vector2[] VERTS_60_DOWN_BIG = new Vector2[]{new Vector2(0f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(-0.25f,0.25f)};
@@ -121,11 +130,30 @@ public class Tile extends Sprite{
 	
 	private int getShapeFromFrame(int frame){
 		int shape = SHAPE_SQUARE;
-		
-		if(frame==27){
+		System.out.println(frame);
+		if(frame==327 || frame==343){
+			shape = SHAPE_30_UP_SMALL;
+		}else if(frame==328 || frame==344){
+			shape = SHAPE_30_UP_BIG;
+		}else if(frame==331 || frame==347){
+			shape = SHAPE_30_DOWN_SMALL;
+		}else if(frame==330 || frame==346){
+			shape = SHAPE_30_DOWN_BIG;
+		}else if(frame==328 || frame==344){
+			shape = SHAPE_30_UP_BIG;
+		}else if(frame==388 || frame==404){
+			shape = SHAPE_45_UP;
+		}else if(frame==389 || frame==405){
+			shape = SHAPE_45_DOWN;
+		}else if(frame==256 || frame==257 || frame==258 || frame==267 || frame==268 || frame==269 || frame==270 || frame==271 || frame==272 || frame==273 || frame==274
+				 || frame==320 || frame==321 || frame==322 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256
+				 || frame==384 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256
+				 || frame==448 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256 || frame==256){
+			shape = SHAPE_SQUARE;
+		}else{
 			shape = SHAPE_SQUARE;
 		}
-		//TODO plug in values from final spritesheet
+		//TODO plug in remaining values from final spritesheet
 		
 		return shape;
 	}

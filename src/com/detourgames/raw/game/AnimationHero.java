@@ -13,12 +13,14 @@ public class AnimationHero extends AnimationComponent{
 	public static final int INDEX_PRE_FALLING = 3;
 	public static final int INDEX_FALLING = 4;
 	public static final int INDEX_LANDING = 5;
-	public static final int[] ANIMATION_RUNNING = {0,1,2,3,4,5,6,7};
-	public static final int[] ANIMATION_PRE_JUMPING = {8,9,10,11};
-	public static final int[] ANIMATION_JUMPING = {12};
-	public static final int[] ANIMATION_PRE_FALLING = {13};
-	public static final int[] ANIMATION_FALLING = {14};
-	public static final int[] ANIMATION_LANDING = {15};
+	public static final int[] ANIMATION_RUNNING = {704,705,706,707,708,709,710,711};
+	public static final int[] ANIMATION_PRE_JUMPING = {712,713,714,715};
+	public static final int[] ANIMATION_JUMPING = {716};
+	public static final int[] ANIMATION_PRE_FALLING = {717};
+	public static final int[] ANIMATION_FALLING = {718};
+	public static final int[] ANIMATION_LANDING = {719,720};
+	public static final int[] ANIMATION_DASHING = {722,723,724,725,726,727};
+	public static final int[] ANIMATION_HURT = {736,737,738,739};
 	
 	public AnimationHero(SpriteSheet spriteSheet, float width, float height){
 		super(new Animation[]{

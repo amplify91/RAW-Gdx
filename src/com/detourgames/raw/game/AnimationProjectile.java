@@ -9,8 +9,8 @@ public class AnimationProjectile extends AnimationComponent{
 	
 	public static final int INDEX_IDLE = 0;
 	public static final int INDEX_HURTING = 1;
-	public static final int[] ANIMATION_IDLE = {20};
-	public static final int[] ANIMATION_HURTING = {21,22,23};
+	public static final int[] ANIMATION_IDLE = {518};
+	public static final int[] ANIMATION_HURTING = {519,520,521};
 	
 	public AnimationProjectile(SpriteSheet spriteSheet, float width, float height){
 		super(new Animation[]{
