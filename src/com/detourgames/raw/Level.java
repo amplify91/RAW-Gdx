@@ -16,7 +16,9 @@ public class Level {
 	Hero mHero;
 	ArrayList<Sprite> mHUD = new ArrayList<Sprite>();
 	ArrayList<Sprite> mForeGround = new ArrayList<Sprite>();
+	ArrayList<Sprite> mOverGFX = new ArrayList<Sprite>();
 	ArrayList<Sprite> mActorsObjects = new ArrayList<Sprite>();
+	ArrayList<Sprite> mUnderGFX = new ArrayList<Sprite>();
 	ArrayList<Sprite> mTerrain = new ArrayList<Sprite>();
 	ArrayList<Sprite> mBackground1 = new ArrayList<Sprite>();
 	ArrayList<Sprite> mBackground2 = new ArrayList<Sprite>();
@@ -26,11 +28,13 @@ public class Level {
 	
 	public static final int LAYER_HUD = 1;
 	public static final int LAYER_FOREGROUND = 2;
-	public static final int LAYER_ACTORS_OBJECTS = 3;
-	public static final int LAYER_TERRAIN = 4;
-	public static final int LAYER_BACKGROUND1 = 5;
-	public static final int LAYER_BACKGROUND2 = 6;
-	public static final int LAYER_BACKGROUND3 = 7;
+	public static final int LAYER_OVER_GFX = 3;
+	public static final int LAYER_ACTORS_OBJECTS = 4;
+	public static final int LAYER_UNDER_GFX = 5;
+	public static final int LAYER_TERRAIN = 6;
+	public static final int LAYER_BACKGROUND1 = 7;
+	public static final int LAYER_BACKGROUND2 = 8;
+	public static final int LAYER_BACKGROUND3 = 9;
 
 	// B2DDebugDraw debug;
 
@@ -82,8 +86,14 @@ public class Level {
 		for (int i = 0; i < mTerrain.size(); i++) {
 			mTerrain.get(i).draw(sb, nanoTime);
 		}
+		for (int i = 0; i < mUnderGFX.size(); i++) {
+			mTerrain.get(i).draw(sb, nanoTime);
+		}
 		for (int i = 0; i < mActorsObjects.size(); i++) {
 			mActorsObjects.get(i).draw(sb, nanoTime);
+		}
+		for (int i = 0; i < mOverGFX.size(); i++) {
+			mTerrain.get(i).draw(sb, nanoTime);
 		}
 		for (int i = 0; i < mForeGround.size(); i++) {
 			mForeGround.get(i).draw(sb, nanoTime);
@@ -98,8 +108,12 @@ public class Level {
 			mHUD.add(sprite);
 		}else if(layer==LAYER_FOREGROUND){
 			mForeGround.add(sprite);
+		}else if(layer==LAYER_OVER_GFX){
+			mOverGFX.add(sprite);
 		}else if(layer==LAYER_ACTORS_OBJECTS){
 			mActorsObjects.add(sprite);
+		}else if(layer==LAYER_UNDER_GFX){
+			mUnderGFX.add(sprite);
 		}else if(layer==LAYER_TERRAIN){
 			mTerrain.add(sprite);
 		}else if(layer==LAYER_BACKGROUND1){

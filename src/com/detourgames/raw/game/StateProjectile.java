@@ -12,14 +12,14 @@ public class StateProjectile extends StateComponent{
 
 	@Override
 	public void update(PhysicsComponent physics) {
+		if(mHealth==0){
+			setState(STATE_DEAD);
+		}
 		if(mState==STATE_HURTING){
 			
 		}else if(mState==STATE_DEAD){
 			//spawn explosion
 			((Projectile)physics.getParentSprite()).recycle();
-		}
-		if(mHealth==0){
-			setState(STATE_DEAD);
 		}
 		
 	}
