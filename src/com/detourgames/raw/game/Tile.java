@@ -71,6 +71,7 @@ public class Tile extends Sprite{
 	public void create(World world, float x, float y, int frame, SpriteSheet spriteSheet){
 		mAnimation.setSize(WIDTH, HEIGHT);
 		//mPhysics.create(world, x, y, 0.5f, 0.5f, false);
+		//System.out.println("Tile created at: "+x+", "+y+".");
 		mPhysics.create(world, x, y, getTileVertices(getShapeFromFrame(frame)), false, FixtureType.TERRAIN);
 		Animation animation = AnimationComponent.createAnimation(spriteSheet, new int[]{frame});
 		mAnimation.setAnimation(animation);
@@ -130,7 +131,7 @@ public class Tile extends Sprite{
 	
 	private int getShapeFromFrame(int frame){
 		int shape = SHAPE_SQUARE;
-		System.out.println(frame);
+		//System.out.println(frame);
 		if(frame==327 || frame==343){
 			shape = SHAPE_30_UP_SMALL;
 		}else if(frame==328 || frame==344){

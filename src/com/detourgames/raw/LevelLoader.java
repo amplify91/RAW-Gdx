@@ -5,6 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
 import com.detourgames.raw.game.BackgroundTile;
 
@@ -56,7 +57,7 @@ public class LevelLoader {
 		FileHandle levelID = null;
 
 		if (ln == 1) {
-			levelID = Gdx.files.internal("levels/RAWtest2.json");
+			levelID = Gdx.files.internal("levels/RAWtest3.json");
 		}
 
 		return levelID;
@@ -68,9 +69,14 @@ public class LevelLoader {
 		levelWidth = ((Float)map.get("width")).intValue();
 		levelHeight = ((Float)map.get("height")).intValue();
 		
-		Array<?> tileSetO = (Array<?>)map.get("tilesets");
-		OrderedMap<String, ?> tileSetProperties = (OrderedMap<String, ?>)tileSetO.items[0];
-		OrderedMap<String, ?> tileProperties = (OrderedMap<String, ?>)tileSetProperties.get("tileproperties");
+		Array<?> tileSets = (Array<?>)map.get("tilesets");
+		Array<OrderedMap<String, ?>> tileSetsTileProperties = new Array<OrderedMap<String,?>>(tileSets.size);
+		for(int i=0;i<tileSets.size;i++){
+			tileSetsTileProperties.insert(i, (OrderedMap<String, ?>)((OrderedMap<String, ?>) tileSets.items[i]).get("tileproperties"));
+		}
+		//OrderedMap<String, ?> tileSetProperties = (OrderedMap<String, ?>)tileSets.items[0];
+		//XXX bug: there is more than one tile set.
+		//OrderedMap<String, ?> tileProperties = (OrderedMap<String, ?>)tileSetProperties.get("tileproperties");
 		
 		Array<?> layers = (Array<?>) map.get("layers");
 		OrderedMap<String, ?> foregroundLayer = null;
@@ -147,107 +153,123 @@ public class LevelLoader {
 		for(int y=levelHeight-1;y>-1;y--){
 			for(int x=0;x<levelWidth;x++){
 				if(foreground[i]!=0){
-					int tileNum = foreground[i]-1;
-					if(!tileProperties.containsKey(""+tileNum)){
-						i++;
-						continue;
+					int tileNum = foreground[i];
+					
+					int tileType = -1;
+					for(int i2=0;i2<tileSets.size;i2++){
+						OrderedMap<String, ?> tileSet = (OrderedMap<String, ?>) tileSets.get(i2);
+						int firstGid = (int)(float)(Float)tileSet.get("firstgid");
+						if(tileNum >= firstGid-1 &&
+								tileNum <= firstGid - 1 + ((OrderedMap<String, ?>)tileSet.get("tileproperties")).size){
+							tileType = Integer.parseInt((String)((ObjectMap<String, ?>)((OrderedMap<String, ?>)tileSet.get("tileproperties")).get(""+(tileNum - (int)(float)(Float)tileSet.get("firstgid")))).get("TileType"));
+							break;
+						}
 					}
-					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
-					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
-					//mSpriteFactory.createTile((float)x/MAP_SCALE, (float)y/MAP_SCALE, 0, tileType);
+					if(tileType!=-1){
+						mSpriteFactory.createSpriteFromTileNumber((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType, Level.LAYER_FOREGROUND);
+					}else{
+						System.out.println("Could not find tile type! Check LevelLoader.class");
+					}
 				}
-				i++;
-			}
-		}
-		i = 0;
-		for(int y=levelHeight-1;y>-1;y--){
-			for(int x=0;x<levelWidth;x++){
 				if(terrain[i]!=0){
-					int tileNum = terrain[i]-1;//XXX -1 because of apparent flaw (OBO error) in Tiled? Aaron: "Yup. First index is 1."
-					if(!tileProperties.containsKey(""+tileNum)){
-						i++;
-						continue;
+					int tileNum = terrain[i];
+					
+					int tileType = -1;
+					for(int i2=0;i2<tileSets.size;i2++){
+						OrderedMap<String, ?> tileSet = (OrderedMap<String, ?>) tileSets.get(i2);
+						int firstGid = (int)(float)(Float)tileSet.get("firstgid");
+						if(tileNum >= firstGid-1 &&
+								tileNum <= firstGid - 1 + ((OrderedMap<String, ?>)tileSet.get("tileproperties")).size){
+							tileType = Integer.parseInt((String)((ObjectMap<String, ?>)((OrderedMap<String, ?>)tileSet.get("tileproperties")).get(""+(tileNum - (int)(float)(Float)tileSet.get("firstgid")))).get("TileType"));
+							break;
+						}
 					}
-					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
-					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
-					mSpriteFactory.createTile((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType);
+					if(tileType!=-1){
+						mSpriteFactory.createSpriteFromTileNumber((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType, Level.LAYER_TERRAIN);
+					}else{
+						System.out.println("Could not find tile type! Check LevelLoader.class");
+					}
 				}
-				i++;
-			}
-		}
-		i = 0;
-		for(int y=levelHeight-1;y>-1;y--){
-			for(int x=0;x<levelWidth;x++){
 				if(actorsObjects[i]!=0){
-					int tileNum = actorsObjects[i]-1;
-					if(!tileProperties.containsKey(""+tileNum)){
-						i++;
-						continue;
+					int tileNum = actorsObjects[i];
+					
+					int tileType = -1;
+					for(int i2=0;i2<tileSets.size;i2++){
+						OrderedMap<String, ?> tileSet = (OrderedMap<String, ?>) tileSets.get(i2);
+						int firstGid = (int)(float)(Float)tileSet.get("firstgid");
+						if(tileNum >= firstGid-1 &&
+								tileNum <= firstGid - 1 + ((OrderedMap<String, ?>)tileSet.get("tileproperties")).size){
+							tileType = Integer.parseInt((String)((ObjectMap<String, ?>)((OrderedMap<String, ?>)tileSet.get("tileproperties")).get(""+(tileNum - (int)(float)(Float)tileSet.get("firstgid")))).get("TileType"));
+							break;
+						}
 					}
-					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
-					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
-					/*if(tileType==HERO){
-						mSpriteFactory.createHero((float)x/MAP_SCALE, (float)y/MAP_SCALE);
-					}else if(tileType==blahblah){
-						
-					}*/
+					if(tileType!=-1){
+						mSpriteFactory.createSpriteFromTileNumber((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType, Level.LAYER_ACTORS_OBJECTS);
+					}else{
+						System.out.println("Could not find tile type! Check LevelLoader.class");
+					}
 				}
-				i++;
-			}
-		}
-		// TODO events
-		i = 0;
-		for(int y=levelHeight-1;y>-1;y--){
-			for(int x=0;x<levelWidth;x++){
 				if(background1[i]!=0){
-					int tileNum = background1[i]-1;
-					if(!tileProperties.containsKey(""+tileNum)){
-						i++;
-						continue;
+					int tileNum = background1[i];
+					
+					int tileType = -1;
+					for(int i2=0;i2<tileSets.size;i2++){
+						OrderedMap<String, ?> tileSet = (OrderedMap<String, ?>) tileSets.get(i2);
+						int firstGid = (int)(float)(Float)tileSet.get("firstgid");
+						if(tileNum >= firstGid-1 &&
+								tileNum <= firstGid - 1 + ((OrderedMap<String, ?>)tileSet.get("tileproperties")).size){
+							tileType = Integer.parseInt((String)((ObjectMap<String, ?>)((OrderedMap<String, ?>)tileSet.get("tileproperties")).get(""+(tileNum - (int)(float)(Float)tileSet.get("firstgid")))).get("TileType"));
+							break;
+						}
 					}
-					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
-					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
-					mSpriteFactory.createBackgroundTile((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType, BackgroundTile.BACKGROUND1_SCROLL_FACTOR);
+					if(tileType!=-1){
+						mSpriteFactory.createSpriteFromTileNumber((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType, Level.LAYER_BACKGROUND1);
+					}else{
+						System.out.println("Could not find tile type! Check LevelLoader.class");
+					}
 				}
-				i++;
-			}
-		}
-		i = 0;
-		for(int y=levelHeight-1;y>-1;y--){
-			for(int x=0;x<levelWidth;x++){
 				if(background2[i]!=0){
-					int tileNum = background2[i]-1;
-					if(!tileProperties.containsKey(""+tileNum)){
-						i++;
-						continue;
+					int tileNum = background2[i];
+					
+					int tileType = -1;
+					for(int i2=0;i2<tileSets.size;i2++){
+						OrderedMap<String, ?> tileSet = (OrderedMap<String, ?>) tileSets.get(i2);
+						int firstGid = (int)(float)(Float)tileSet.get("firstgid");
+						if(tileNum >= firstGid-1 &&
+								tileNum <= firstGid - 1 + ((OrderedMap<String, ?>)tileSet.get("tileproperties")).size){
+							tileType = Integer.parseInt((String)((ObjectMap<String, ?>)((OrderedMap<String, ?>)tileSet.get("tileproperties")).get(""+(tileNum - (int)(float)(Float)tileSet.get("firstgid")))).get("TileType"));
+							break;
+						}
 					}
-					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
-					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
-					mSpriteFactory.createBackgroundTile((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType, BackgroundTile.BACKGROUND2_SCROLL_FACTOR);
+					if(tileType!=-1){
+						mSpriteFactory.createSpriteFromTileNumber((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType, Level.LAYER_BACKGROUND2);
+					}else{
+						System.out.println("Could not find tile type! Check LevelLoader.class");
+					}
 				}
-				i++;
-			}
-		}
-		i = 0;
-		for(int y=levelHeight-1;y>-1;y--){
-			for(int x=0;x<levelWidth;x++){
 				if(background3[i]!=0){
-					int tileNum = background3[i]-1;
-					if(!tileProperties.containsKey(""+tileNum)){
-						i++;
-						continue;
+					int tileNum = background3[i];
+					
+					int tileType = -1;
+					for(int i2=0;i2<tileSets.size;i2++){
+						OrderedMap<String, ?> tileSet = (OrderedMap<String, ?>) tileSets.get(i2);
+						int firstGid = (int)(float)(Float)tileSet.get("firstgid");
+						if(tileNum >= firstGid-1 &&
+								tileNum <= firstGid - 1 + ((OrderedMap<String, ?>)tileSet.get("tileproperties")).size){
+							tileType = Integer.parseInt((String)((ObjectMap<String, ?>)((OrderedMap<String, ?>)tileSet.get("tileproperties")).get(""+(tileNum - (int)(float)(Float)tileSet.get("firstgid")))).get("TileType"));
+							break;
+						}
 					}
-					OrderedMap<String, ?> tileTypeOM = (OrderedMap<String, ?>)tileProperties.get(""+tileNum);
-					int tileType = Integer.parseInt((String)tileTypeOM.get("TileType"));
-					mSpriteFactory.createBackgroundTile((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType, BackgroundTile.BACKGROUND3_SCROLL_FACTOR);
+					if(tileType!=-1){
+						mSpriteFactory.createSpriteFromTileNumber((float)x/MAP_SCALE, (float)y/MAP_SCALE, tileType, Level.LAYER_BACKGROUND3);
+					}else{
+						System.out.println("Could not find tile type! Check LevelLoader.class");
+					}
 				}
 				i++;
 			}
 		}
 		
-		mSpriteFactory.createHero(2, 2);
-		mSpriteFactory.createTurret(4,4);
-		mSpriteFactory.createBackgroundTile(6.25f, 3.75f, 28, 0.2f);
 		mSpriteFactory.createHUDElements();
 	}
 }

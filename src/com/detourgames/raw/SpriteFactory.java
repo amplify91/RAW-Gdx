@@ -70,4 +70,17 @@ public class SpriteFactory {
 		GameManager.getGameManager().getHUD().createElements(mLevel, mSpriteSheet);
 	}
 	
+	public Sprite createSpriteFromTileNumber(float x, float y, int tileNumber, int levelLayer){
+		//TODO finish this.
+		if(tileNumber>=256 && tileNumber<=511){
+			return createTile(x, y, tileNumber);
+		}else if(tileNumber==704){
+			return createHero(x, y);
+		}else{
+			System.out.println("Missed one! Finish SpriteFactory.createSpriteFromTileNumber or check your tile number value.");
+			return null;
+		}
+		
+	}
+	
 }

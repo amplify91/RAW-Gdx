@@ -15,6 +15,8 @@ public class TSXFileEditor {
 	 * 
 	 */
 	
+	private static boolean mFirstTime = true;
+	
 	static PrintWriter mNewFile;
 	
 	public static void main(String[] args) throws IOException{
@@ -25,13 +27,18 @@ public class TSXFileEditor {
 	private static void welcome() throws IOException{
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		
-		//System.out.println("Welcome! Create new .tsx file? (yes/no)");
-		//String yesNo = in.readLine();
+		if(mFirstTime){
+			System.out.println("Type \"help\" for additional commands.");
+			mFirstTime = false;
+		}
 		String yesNo = checkText("Welcome! Create new .tsx file? (yes/no)", in);
 		if(yesNo.equalsIgnoreCase("yes")){
 			createNewFile();
 		}else if(yesNo.equalsIgnoreCase("no")){
 			loadOldFile();
+		}else if(yesNo.equalsIgnoreCase("help") || yesNo.equalsIgnoreCase("exit")){
+			System.out.println("Sorry, I suck at programming. Could you repeat that?");
+			welcome();
 		}else{
 			System.out.println("Invalid response. Please try again.");
 			welcome();
@@ -40,11 +47,7 @@ public class TSXFileEditor {
 	
 	private static void createNewFile() throws IOException{
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		//System.out.println("New file name?");
-		//String name = in.readLine();
 		String name = checkText("New file name?", in);
-		//System.out.println("New file location? (ex: C:\\"+"\\...");
-		//String location = in.readLine();
 		String location = checkText("New file location? (ex: C:\\"+"\\...", in);
 		if(name.endsWith(".tsx")){
 			mNewFile = new PrintWriter(new FileWriter(location+name));
@@ -53,23 +56,17 @@ public class TSXFileEditor {
 		}
 		
 		mNewFile.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-		//System.out.println("New tile set name?");
 		String ts_name = checkText("New tile set name?", in);
-		//System.out.println("Size of tiles? (All tiles are assumed squares)");
 		String tile_size = checkText("Size of tiles? (All tiles are assumed squares)", in);
 		mNewFile.println("<tileset name=\""+ts_name+"\" tilewidth=\""+tile_size+"\" tileheight=\""+tile_size+"\">");
-		//System.out.println("Enter tile set image source: ");
 		String image = checkText("Enter tile set image source: ", in);
-		//System.out.println("Image width?");
 		String width = checkText("Image width?", in);
-		//System.out.println("Image height?");
 		String height = checkText("Image height?", in);
 		mNewFile.println(" <image source=\"" + image + "\" width=\"" + width + "\" height=\"" + height + "\"/>");
 		//TODO finish creating file
 		mNewFile.close();
 		System.out.println("New tile set created!");
 		
-		//System.out.println("Run again?");
 		String again = checkText("Run again?", in);
 		if(again.equalsIgnoreCase("yes")){
 			welcome();
@@ -84,9 +81,7 @@ public class TSXFileEditor {
 	}
 	
 	private static void loadOldFile() throws IOException{
-		//System.out.println("Old");
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-		//System.out.println("Enter file path and name: ");
 		String file_name = checkText("Enter file path and name: ", console);
 		
 		BufferedReader in = new BufferedReader(new FileReader(file_name)); 
@@ -97,7 +92,7 @@ public class TSXFileEditor {
 		
 		File oldFile = new File(file_name);
 		if(oldFile.delete()){
-			System.out.println("Deleted old file.");
+			//System.out.println("Deleted old file.");
 		}else{
 			System.out.println("faq");
 		}
@@ -113,11 +108,8 @@ public class TSXFileEditor {
 		mNewFile.println(line2);
 		mNewFile.println(line3);
 		
-		//System.out.println("How many tiles does this set contain? (integers only please)");
-		//String numberTiles = console.readLine();
 		String numberTiles = checkText("How many tiles does this set contain? (integers only please)", console);
 		int numTiles =  Integer.valueOf(numberTiles);
-		//System.out.println("What number should they start with? (integers only please)");
 		String startNumber = checkText("What number should they start with? (integers only please)", console);
 		int startNum = Integer.valueOf(startNumber);
 		
@@ -139,7 +131,10 @@ public class TSXFileEditor {
 	private static String checkText(String prompt, BufferedReader console) throws IOException{
 		System.out.println(prompt);
 		String input = console.readLine();
-		if(input.equalsIgnoreCase("exit")){
+		if(input.equalsIgnoreCase("help")){
+			System.out.println("Type \"exit\" to end application.");
+			checkText(prompt, console);
+		}else if(input.equalsIgnoreCase("exit")){
 			System.out.println("Are you sure you want to exit? (yes/no)");
 			String input2 = console.readLine();
 			while(!input2.equalsIgnoreCase("yes")){
