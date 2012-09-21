@@ -11,8 +11,8 @@ public abstract class Sprite implements IFocusable{
 	protected AnimationComponent mAnimation;
 	protected ControllerComponent mController;
 	
-	float mCameraOffsetX = 0;
-	float mCameraOffsetY = 0;
+	protected float mCameraOffsetX = 0;
+	protected float mCameraOffsetY = 0;
 
 	public Sprite(PhysicsComponent pc, AnimationComponent ac, StateComponent sc, ControllerComponent cc) {
 		

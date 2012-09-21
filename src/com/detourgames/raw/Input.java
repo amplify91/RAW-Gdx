@@ -1,6 +1,8 @@
 package com.detourgames.raw;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.detourgames.raw.game.DashEvent;
@@ -61,6 +63,11 @@ public class Input implements InputProcessor{
 	private boolean checkHUDButtons(int x, int y) {
 		
 		mButton = 0;
+		
+		if(Gdx.app.getType()!=ApplicationType.Android){
+			return false;
+		}
+		
 		mButton = GameManager.getGameManager().getHUD().checkButton(x, y);
 		
 		if(mButton==0){

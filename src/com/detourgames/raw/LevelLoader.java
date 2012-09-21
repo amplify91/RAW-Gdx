@@ -1,6 +1,7 @@
 package com.detourgames.raw;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
@@ -270,6 +271,8 @@ public class LevelLoader {
 			}
 		}
 		
-		mSpriteFactory.createHUDElements();
+		if(Gdx.app.getType()==ApplicationType.Android){
+			mSpriteFactory.createHUDElements();
+		}
 	}
 }

@@ -2,6 +2,9 @@ package com.detourgames.raw;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Gdx.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -98,9 +101,12 @@ public class Level {
 		for (int i = 0; i < mForeGround.size(); i++) {
 			mForeGround.get(i).draw(sb, nanoTime);
 		}
-		for (int i = 0; i < mHUD.size(); i++) {
-			mHUD.get(i).draw(sb, nanoTime);
+		if(Gdx.app.getType()==ApplicationType.Android){
+			for (int i = 0; i < mHUD.size(); i++) {
+				mHUD.get(i).draw(sb, nanoTime);
+			}
 		}
+		
 	}
 
 	public void addDrawableSprite(Sprite sprite, int layer) {

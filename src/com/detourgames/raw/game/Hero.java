@@ -25,6 +25,8 @@ public class Hero extends Sprite{
 	public Hero(SpriteSheet spriteSheet){
 		super(new PhysicsHero(), new AnimationHero(spriteSheet,WIDTH,HEIGHT), new StateHero(), new ControllerComponent());
 		running = new Vector2(25, 0);
+		mCameraOffsetX = (-1f * 12.5f)/6f;//TODO this is not how this should be done.
+		mCameraOffsetY = (-1f * 7.5f)/6f; // Consider making changes to Camera class.
 		//mAnimation.setAnimation(Animation.ANIMATION_RUNNING);
 		
 	}
