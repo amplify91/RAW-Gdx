@@ -76,6 +76,10 @@ public class SpriteFactory {
 			return createTile(x, y, tileNumber);
 		}else if(tileNumber==704){
 			return createHero(x, y);
+		}else if(tileNumber==755){
+			return createTurret(x, y);
+		}else if(tileNumber==1200){
+			return createBackgroundTile(x, y, 1200, BackgroundTile.BACKGROUND1_SCROLL_FACTOR);
 		}else{
 			System.out.println("Missed one! Finish SpriteFactory.createSpriteFromTileNumber or check your tile number value.");
 			return null;

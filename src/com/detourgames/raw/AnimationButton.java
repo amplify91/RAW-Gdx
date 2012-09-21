@@ -6,19 +6,25 @@ public class AnimationButton extends AnimationComponent{
 	
 	public static final int INDEX_JUMP_UP = 0;
 	public static final int INDEX_JUMP_DOWN = 1;
-	public static final int INDEX_DASH_UP = 2;
-	public static final int INDEX_DASH_DOWN = 3;
-	public static final int INDEX_DASH_UNAVAILABLE = 4;
-	public static final int[] ANIMATION_JUMP_UP = {16};
-	public static final int[] ANIMATION_JUMP_DOWN = {17};
-	public static final int[] ANIMATION_DASH_UP = {24};
-	public static final int[] ANIMATION_DASH_DOWN = {25};
-	public static final int[] ANIMATION_DASH_UNAVAILABLE = {26};
+	public static final int INDEX_DOUBLE_JUMP_UP = 2;
+	public static final int INDEX_DOUBLE_JUMP_DOWN = 3;
+	public static final int INDEX_DASH_UP = 4;
+	public static final int INDEX_DASH_DOWN = 5;
+	public static final int INDEX_DASH_UNAVAILABLE = 6;
+	public static final int[] ANIMATION_JUMP_UP = {768};
+	public static final int[] ANIMATION_JUMP_DOWN = {769};
+	public static final int[] ANIMATION_DOUBLE_JUMP_UP = {770};
+	public static final int[] ANIMATION_DOUBLE_JUMP_DOWN = {771};
+	public static final int[] ANIMATION_DASH_UP = {512};
+	public static final int[] ANIMATION_DASH_DOWN = {513};
+	public static final int[] ANIMATION_DASH_UNAVAILABLE = {514};
 	
 	public AnimationButton(SpriteSheet spriteSheet){
 		super(new Animation[]{
 				AnimationComponent.createAnimation(spriteSheet, ANIMATION_JUMP_UP),
 				AnimationComponent.createAnimation(spriteSheet, ANIMATION_JUMP_DOWN),
+				AnimationComponent.createAnimation(spriteSheet, ANIMATION_DOUBLE_JUMP_UP),
+				AnimationComponent.createAnimation(spriteSheet, ANIMATION_DOUBLE_JUMP_DOWN),
 				AnimationComponent.createAnimation(spriteSheet, ANIMATION_DASH_UP),
 				AnimationComponent.createAnimation(spriteSheet, ANIMATION_DASH_DOWN),
 				AnimationComponent.createAnimation(spriteSheet, ANIMATION_DASH_UNAVAILABLE)

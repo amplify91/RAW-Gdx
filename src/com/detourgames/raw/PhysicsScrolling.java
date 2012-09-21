@@ -59,7 +59,7 @@ public class PhysicsScrolling extends PhysicsComponent{
 		
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
-		bodyDef.position.set(x, y);
+		bodyDef.position.set(x + (width/2), y + (height/2)); // TODO fix
 		mBody = world.createBody(bodyDef);
 		
 		PolygonShape dynamicBox = new PolygonShape();
