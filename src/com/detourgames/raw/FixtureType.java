@@ -12,5 +12,6 @@ public class FixtureType {
 	public static final int HERO_PROJECTILE = 4;
 	public static final int TURRET_BODY = 5;
 	public static final int TURRET_PROJECTILE = 6;
+	public static final int HERO_ARM = 7;
 	
 }

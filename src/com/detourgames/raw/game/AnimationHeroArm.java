@@ -21,7 +21,6 @@ public class AnimationHeroArm extends AnimationComponent{
 	
 	@Override
 	public void update(StateComponent state) {
-		// TODO Auto-generated method stub
 		
 	}
 	

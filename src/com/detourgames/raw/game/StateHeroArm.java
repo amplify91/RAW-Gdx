@@ -6,19 +6,18 @@ import com.detourgames.raw.StateComponent;
 public class StateHeroArm extends StateComponent{
 	
 	public StateHeroArm() {
-		super(new int[]{});
-		// TODO Auto-generated constructor stub
+		super(new int[]{STATE_SHOOTING});
 	}
 
 	@Override
 	public void update(PhysicsComponent physics) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void setInitialState() {
 		// TODO Auto-generated method stub
+		setState(STATE_SHOOTING);
 		
 	}
 	

@@ -1,7 +1,11 @@
 package com.detourgames.raw.game;
 
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.detourgames.raw.ControllerNone;
+import com.detourgames.raw.FixtureType;
+import com.detourgames.raw.GameManager;
+import com.detourgames.raw.Level;
+import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.Sprite;
 import com.detourgames.raw.SpriteSheet;
 
@@ -11,16 +15,16 @@ public class HeroArm extends Sprite{
 		super(new PhysicsGun(hero), new AnimationHeroArm(spriteSheet), new StateHeroArm(), new ControllerNone());
 	}
 	
-	//TODO move this shoot() method back into hero.
-	public void shoot(float x, float y){
-		float angle = (float)Math.atan2(y-mPhysics.getY(), x-mPhysics.getX());
-		((PhysicsGun)mPhysics).setAngleRadians(angle);
+	public void setAngle(float radians){
+		((PhysicsGun) mPhysics).setAngleRadians(radians);
 	}
 	
-	public void shoot(Vector2 target){
-		target = target.sub(mPhysics.getPosition());
-		float angle = (float)Math.atan2(target.y, target.x);
-		((PhysicsGun)mPhysics).setAngleRadians(angle);
+	public void create(World world, Sprite hero){
+		
+		mPhysics.create(world, hero.getX(), hero.getY(), 0.5f, 0.5f, true, FixtureType.HERO_ARM);
+		mPhysics.getBody().getFixtureList().get(0).getFilterData().groupIndex = PhysicsComponent.GROUP_ALLY;
+		GameManager.getGameManager().getLevel().addDrawableSprite(this, Level.LAYER_UNDER_GFX);
+		GameManager.getGameManager().getLevel().addUpdateableSprite(this);
 	}
 	
 }

@@ -53,7 +53,7 @@ public class Hero extends Sprite{
 		mSensorFixture.setUserData(FixtureType.HERO_GROUND_SENSOR);
 		
 		//create arm
-		
+		mArm.create(world, this);
 	}
 	
 	public void jump(){
@@ -71,7 +71,8 @@ public class Hero extends Sprite{
 	
 	public void shoot(Vector2 target){
 		((PhysicsHero) mPhysics).shoot(target);
-		//mArm.shoot(target.x, target.y);
+		float angle = (float)Math.atan2(target.y-mPhysics.getY(), target.x-mPhysics.getX());
+		mArm.setAngle(angle);
 	}
 	
 	public void dash(){

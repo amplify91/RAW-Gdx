@@ -12,10 +12,10 @@ public class PhysicsGun extends PhysicsComponent{
 	float mAngle = 0f;
 	
 	public PhysicsGun(Sprite gunHolder){
-		this(gunHolder, new Vector2(0f,0f), new Vector2(0f,0f));
+		this(gunHolder, new Vector2(0f,0.2f), new Vector2(-0.5f,0f));
 	}
 	
-	public PhysicsGun(Sprite gunHolder, Vector2 localGunAcnhor, Vector2 localParentAchor){
+	public PhysicsGun(Sprite gunHolder, Vector2 localParentAchor, Vector2 localGunAcnhor){
 		mGunHolder = gunHolder;
 		mLocalGunAnchor = localGunAcnhor;
 		mLocalParentAnchor = localParentAchor;
@@ -23,7 +23,7 @@ public class PhysicsGun extends PhysicsComponent{
 	
 	@Override
 	public void update() {
-		mBody.setTransform(mGunHolder.getBody().getPosition().add(mLocalParentAnchor).sub(mLocalGunAnchor), mAngle);
+		mBody.setTransform(Vector2.Zero, mAngle);
 		
 	}
 	
@@ -33,6 +33,16 @@ public class PhysicsGun extends PhysicsComponent{
 	
 	public void setAngleDegrees(float degrees){
 		mAngle = (float)Math.toRadians(degrees);
+	}
+	
+	@Override
+	public float getX(){
+		return mGunHolder.getX()+mLocalParentAnchor.x-mLocalGunAnchor.x;
+	}
+	
+	@Override
+	public float getY(){
+		return mGunHolder.getY()+mLocalParentAnchor.y-mLocalGunAnchor.y;
 	}
 	
 }

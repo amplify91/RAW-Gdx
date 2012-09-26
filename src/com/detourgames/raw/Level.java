@@ -90,13 +90,13 @@ public class Level {
 			mTerrain.get(i).draw(sb, nanoTime);
 		}
 		for (int i = 0; i < mUnderGFX.size(); i++) {
-			mTerrain.get(i).draw(sb, nanoTime);
+			mUnderGFX.get(i).draw(sb, nanoTime);
 		}
 		for (int i = 0; i < mActorsObjects.size(); i++) {
 			mActorsObjects.get(i).draw(sb, nanoTime);
 		}
 		for (int i = 0; i < mOverGFX.size(); i++) {
-			mTerrain.get(i).draw(sb, nanoTime);
+			mOverGFX.get(i).draw(sb, nanoTime);
 		}
 		for (int i = 0; i < mForeGround.size(); i++) {
 			mForeGround.get(i).draw(sb, nanoTime);
