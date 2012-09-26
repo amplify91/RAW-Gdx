@@ -3,6 +3,7 @@ package com.detourgames.raw;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.detourgames.raw.game.SpriteDeathEvent;
 
 public abstract class Sprite implements IFocusable{
 
@@ -84,4 +85,10 @@ public abstract class Sprite implements IFocusable{
 	 * mProjectileSpawnPoint; }
 	 */
 	
-}
+	public void die(){
+		Vector2 deathSpot = mPhysics.die();
+		EventQueue.getEventQueue().queue(new SpriteDeathEvent(this));
+		//TODO remove child sprites
+		//TODO spawn death graphic
+	}
+}	

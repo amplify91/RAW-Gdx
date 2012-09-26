@@ -115,7 +115,7 @@ public class Input implements InputProcessor{
 	
 	private void shoot(int x, int y){
 		Vector2 worldCoords = GameManager.getGameManager().getCamera().translatePixelToWorldCoordinates(x, y);
-		EventQueue.getEventQueue().queue(new FireProjectileEvent(worldCoords, Projectile.TYPE_RAW, GameManager.getGameManager().getLevel().getHero()));
+		GameManager.getGameManager().getLevel().getHero().shoot(worldCoords);
 	}
 	
 }

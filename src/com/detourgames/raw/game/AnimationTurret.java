@@ -22,7 +22,7 @@ public class AnimationTurret extends AnimationComponent{
 	@Override
 	public void update(StateComponent state) {
 		if(state.getState()==StateTurret.STATE_IDLE && mCurrentAnimation!=INDEX_IDLE){
-			setAnimation(1);
+			setAnimation(INDEX_IDLE);
 		}
 	}
 	

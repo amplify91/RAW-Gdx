@@ -15,11 +15,12 @@ import com.detourgames.raw.SpriteSheet;
 public class Hero extends Sprite{
 	
 	Fixture mSensorFixture;
+	HeroArm mArm;
 	
 	Vector2 running;
 	//private static final float MAX_SPEED = 10;
-	private static final float HEIGHT = 0.9f;
-	private static final float WIDTH = 0.9f;
+	public static final float HEIGHT = 0.9f;
+	public static final float WIDTH = 0.9f;
 	private static final Vector2[] BODY_VERTS = {new Vector2(-0.45f,-0.45f),new Vector2(0.4f,-0.45f),new Vector2(0.45f,-0.4f),new Vector2(0.45f,0.45f),new Vector2(-0.45f,0.45f)};
 	
 	public Hero(SpriteSheet spriteSheet){
@@ -28,6 +29,7 @@ public class Hero extends Sprite{
 		mCameraOffsetX = (-1f * 12.5f)/6f;//TODO this is not how this should be done.
 		mCameraOffsetY = (-1f * 7.5f)/6f; // Consider making changes to Camera class.
 		//mAnimation.setAnimation(Animation.ANIMATION_RUNNING);
+		mArm = new HeroArm(spriteSheet, this);
 		
 	}
 	
@@ -49,6 +51,9 @@ public class Hero extends Sprite{
 		filter.groupIndex = PhysicsComponent.GROUP_ALLY;
 		mSensorFixture.setFilterData(filter);
 		mSensorFixture.setUserData(FixtureType.HERO_GROUND_SENSOR);
+		
+		//create arm
+		
 	}
 	
 	public void jump(){
@@ -62,6 +67,11 @@ public class Hero extends Sprite{
 			((StateHero)mState).canDoubleJump = false;
 		}
 		
+	}
+	
+	public void shoot(Vector2 target){
+		((PhysicsHero) mPhysics).shoot(target);
+		//mArm.shoot(target.x, target.y);
 	}
 	
 	public void dash(){

@@ -135,6 +135,11 @@ public class Level {
 	public void addUpdateableSprite(Sprite sprite) {
 		mUpdateableSprites.add(sprite);
 	}
+	
+	public void removeSprite(Sprite sprite){
+		mUpdateableSprites.remove(sprite);
+		//TODO
+	}
 
 	void step(float deltaTime) {
 		mWorld.step(deltaTime, 8, 3);

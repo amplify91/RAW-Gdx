@@ -6,6 +6,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.detourgames.raw.EventQueue;
+import com.detourgames.raw.GameManager;
 import com.detourgames.raw.PhysicsComponent;
 
 
@@ -44,6 +46,10 @@ public class PhysicsHero extends PhysicsComponent{
 	    	mRunVel.set(runImpulse, 0);
 	    }
 	    mTotalVel = mTotalVel.add(mRunVel);
+	}
+	
+	public void shoot(Vector2 target){
+		EventQueue.getEventQueue().queue(new FireProjectileEvent(target, Projectile.TYPE_RAW, mParent));
 	}
 	
 	public void jump(){
