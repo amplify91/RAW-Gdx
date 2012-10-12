@@ -20,10 +20,6 @@ public class GameRAW extends Game{
     //SpriteSheet mSpriteSheet;
 	
 	private static GameRAW mGameRAW = new GameRAW(); //singleton
-    
-	private GameRAW(){
-		
-	}
 	
 	public static GameRAW getGameRAW(){
 		return mGameRAW;
