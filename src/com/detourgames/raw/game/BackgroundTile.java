@@ -7,6 +7,7 @@ import com.detourgames.raw.ControllerComponent;
 import com.detourgames.raw.GameManager;
 import com.detourgames.raw.PhysicsScrolling;
 import com.detourgames.raw.Sprite;
+import com.detourgames.raw.SpriteFactory;
 import com.detourgames.raw.SpriteSheet;
 import com.detourgames.raw.StateNone;
 
@@ -20,6 +21,7 @@ public class BackgroundTile extends Sprite{
 	
 	public BackgroundTile() {
 		super(new PhysicsScrolling(GameManager.getGameManager().getLevel().getHero()), new AnimationStatic(), new StateNone(), new ControllerComponent());
+		this.mPool=SpriteFactory.pools.get(BackgroundTile.class);
 		// might need to be created AFTER Hero.
 	}
 	

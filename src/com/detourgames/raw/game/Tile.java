@@ -9,6 +9,7 @@ import com.detourgames.raw.ControllerNone;
 import com.detourgames.raw.FixtureType;
 import com.detourgames.raw.PhysicsStatic;
 import com.detourgames.raw.Sprite;
+import com.detourgames.raw.SpriteFactory;
 import com.detourgames.raw.SpriteSheet;
 import com.detourgames.raw.StateStatic;
 
@@ -59,6 +60,7 @@ public class Tile extends Sprite{
 	
 	public Tile(){
 		super(new PhysicsStatic(), new AnimationStatic(), new StateStatic(), new ControllerNone());
+		this.mPool = SpriteFactory.pools.get(Tile.class);
 		
 	}
 	

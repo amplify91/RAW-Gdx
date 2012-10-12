@@ -10,6 +10,7 @@ import com.detourgames.raw.ControllerComponent;
 import com.detourgames.raw.FixtureType;
 import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.Sprite;
+import com.detourgames.raw.SpriteFactory;
 import com.detourgames.raw.SpriteSheet;
 
 public class Hero extends Sprite{
@@ -25,6 +26,7 @@ public class Hero extends Sprite{
 	
 	public Hero(SpriteSheet spriteSheet){
 		super(new PhysicsHero(), new AnimationHero(spriteSheet,WIDTH,HEIGHT), new StateHero(), new ControllerComponent());
+		this.mPool = SpriteFactory.pools.get(Hero.class);
 		running = new Vector2(25, 0);
 		mCameraOffsetX = (-1f * 12.5f)/6f;//TODO this is not how this should be done.
 		mCameraOffsetY = (-1f * 7.5f)/6f; // Consider making changes to Camera class.

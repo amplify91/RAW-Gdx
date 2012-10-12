@@ -3,6 +3,7 @@ package com.detourgames.raw.game;
 import com.badlogic.gdx.physics.box2d.World;
 import com.detourgames.raw.FixtureType;
 import com.detourgames.raw.Sprite;
+import com.detourgames.raw.SpriteFactory;
 import com.detourgames.raw.SpriteSheet;
 import com.detourgames.raw.game.AnimationTurret;
 import com.detourgames.raw.game.StateTurret;
@@ -14,6 +15,7 @@ public class Turret extends Sprite{
 	
 	public Turret(SpriteSheet spriteSheet){
 		super(new PhysicsTurret(), new AnimationTurret(spriteSheet,WIDTH,HEIGHT), new StateTurret(), new ControllerTurret());
+		this.mPool = SpriteFactory.pools.get(Turret.class);
 		
 	}
 	

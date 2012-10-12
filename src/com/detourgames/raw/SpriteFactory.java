@@ -1,5 +1,8 @@
 package com.detourgames.raw;
 
+import java.util.Hashtable;
+
+import com.badlogic.gdx.utils.Pool;
 import com.detourgames.raw.game.BackgroundTile;
 import com.detourgames.raw.game.Hero;
 import com.detourgames.raw.game.Projectile;
@@ -10,15 +13,30 @@ public class SpriteFactory {
 
 	Level mLevel;
 	SpriteSheet mSpriteSheet;
+	public static Hashtable<Class,GenericPool> pools;
 
 	public SpriteFactory(Level level) {
 		mLevel = level;
 		mSpriteSheet = mLevel.getSpriteSheet();
+		pools=GeneratePools();
 		
+	}	
+	
+	private static Hashtable<Class,GenericPool> GeneratePools(){
+		Hashtable<Class, GenericPool> pools=new Hashtable<Class, GenericPool>();
+		pools.put(Projectile.class, new GenericPool<Projectile>());
+		pools.put(Turret.class, new GenericPool<Turret>());
+		pools.put(Hero.class, new GenericPool<Hero>());
+		pools.put(Tile.class, new GenericPool<Tile>());
+		pools.put(BackgroundTile.class, new GenericPool<BackgroundTile>());
+		
+		return pools;
 	}
 
 	public Hero createHero(float x, float y){
-		Hero hero = new Hero(mSpriteSheet);
+		Hero hero = (Hero) pools.get(Hero.class).obtain();
+		if(hero==null)
+			hero = new Hero(mSpriteSheet);
 		hero.create(mLevel.getWorld(), x, y);
 		mLevel.addDrawableSprite(hero, Level.LAYER_ACTORS_OBJECTS);
 		mLevel.addUpdateableSprite(hero);
@@ -28,17 +46,20 @@ public class SpriteFactory {
 		return hero;
 	}
 	public Turret createTurret(float x, float y){
-		Turret hero = new Turret(mSpriteSheet);
-		hero.create(mLevel.getWorld(), x, y);
-		mLevel.addDrawableSprite(hero, Level.LAYER_ACTORS_OBJECTS);
-		mLevel.addUpdateableSprite(hero);
+		Turret turret = (Turret)pools.get(Turret.class).obtain();
+		if(turret==null)
+			turret = new Turret(mSpriteSheet);
+		turret.create(mLevel.getWorld(), x, y);
+		mLevel.addDrawableSprite(turret, Level.LAYER_ACTORS_OBJECTS);
+		mLevel.addUpdateableSprite(turret);
 		
-		return hero;
+		return turret;
 	}
 	
 	public BackgroundTile createBackgroundTile(float x, float y, int frame, float scrollFactor){
-		
-		BackgroundTile bgt = new BackgroundTile();
+		BackgroundTile bgt = (BackgroundTile) pools.get(BackgroundTile.class).obtain();
+		if(bgt==null)
+			bgt = new BackgroundTile();
 		bgt.create(mLevel.getWorld(), x, y, mSpriteSheet, frame, scrollFactor);
 		mLevel.addDrawableSprite(bgt, Level.LAYER_BACKGROUND1);
 		mLevel.addUpdateableSprite(bgt);
@@ -48,7 +69,9 @@ public class SpriteFactory {
 	
 	public Tile createTile(float x, float y, int frame){
 		
-		Tile tile = new Tile();
+		Tile tile = (Tile)pools.get(Tile.class).obtain();
+		if(tile==null)
+			tile= new Tile();
 		
 		
 		tile.create(mLevel.getWorld(), x, y, frame, mSpriteSheet);
@@ -58,7 +81,9 @@ public class SpriteFactory {
 	}
 	
 	public Projectile createProjectile(){
-		Projectile projectile = new Projectile(mSpriteSheet);
+		Projectile projectile = (Projectile)pools.get(Projectile.class).obtain();
+		if(projectile==null)
+			projectile = new Projectile(mSpriteSheet);
 		projectile.create(mLevel.getWorld(), -1, -1);
 		mLevel.addDrawableSprite(projectile, Level.LAYER_ACTORS_OBJECTS);
 		mLevel.addUpdateableSprite(projectile);
@@ -86,5 +111,7 @@ public class SpriteFactory {
 		}
 		
 	}
+	
+
 	
 }

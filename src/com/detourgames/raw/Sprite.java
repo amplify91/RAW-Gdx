@@ -11,6 +11,7 @@ public abstract class Sprite implements IFocusable{
 	protected StateComponent mState;
 	protected AnimationComponent mAnimation;
 	protected ControllerComponent mController;
+	protected GenericPool<Sprite> mPool;
 	
 	protected float mCameraOffsetX = 0;
 	protected float mCameraOffsetY = 0;
@@ -28,7 +29,8 @@ public abstract class Sprite implements IFocusable{
 	}
 
 	public void destroy() {
-		// TODO
+		if(this.mPool!=null)
+			this.mPool.free(this);
 	}
 
 	public void draw(SpriteBatch sb, long nanoTime) {

@@ -1,5 +1,7 @@
 package com.detourgames.raw.game;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -85,6 +87,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 			fixtureDef.density = 0.1f;
 			fixtureDef.friction = 0.0f;
 			fixtureDef.filter.groupIndex = PhysicsComponent.GROUP_ALLY;
+			ArrayList<Fixture> fixies = mBody.getFixtureList();
 			mBody.createFixture(fixtureDef).setUserData(mainFixtureType);
 			mBody.setGravityScale(0);
 			mBody.setFixedRotation(true);

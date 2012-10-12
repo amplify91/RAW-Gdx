@@ -7,6 +7,7 @@ import com.detourgames.raw.FixtureType;
 import com.detourgames.raw.IReusable;
 import com.detourgames.raw.ProjectilePool;
 import com.detourgames.raw.Sprite;
+import com.detourgames.raw.SpriteFactory;
 import com.detourgames.raw.SpriteSheet;
 
 public class Projectile extends Sprite implements IReusable{
@@ -27,10 +28,10 @@ public class Projectile extends Sprite implements IReusable{
 	
 	public static final Vector2[] VERTS_RAW = new Vector2[]{new Vector2(-0.2f,-0.2f), new Vector2(0.2f,-0.2f), new Vector2(0.2f,0.2f), new Vector2(-0.2f,0.2f)};
 	
-	
 	public Projectile(SpriteSheet spriteSheet){
 		
 		super(new PhysicsProjectile(), new AnimationProjectile(spriteSheet,WIDTH_RAW,HEIGHT_RAW), new StateProjectile(), new ControllerComponent());
+		this.mPool = SpriteFactory.pools.get(Projectile.class);
 		
 	}
 	
