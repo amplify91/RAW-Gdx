@@ -49,8 +49,6 @@ public class SpriteFactory {
 	public Tile createTile(float x, float y, int frame){
 		
 		Tile tile = new Tile();
-		
-		
 		tile.create(mLevel.getWorld(), x, y, frame, mSpriteSheet);
 		mLevel.addDrawableSprite(tile, Level.LAYER_TERRAIN);
 		

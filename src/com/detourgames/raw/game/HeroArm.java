@@ -21,8 +21,8 @@ public class HeroArm extends Sprite{
 	
 	public void create(World world, Sprite hero){
 		
-		mPhysics.create(world, hero.getX(), hero.getY(), 0.5f, 0.5f, true, FixtureType.HERO_ARM);
-		mPhysics.getBody().getFixtureList().get(0).getFilterData().groupIndex = PhysicsComponent.GROUP_ALLY;
+		//mPhysics.create(world, hero.getX(), hero.getY(), 0.5f, 0.5f, true, FixtureType.HERO_ARM);
+		//mPhysics.getBody().getFixtureList().get(0).getFilterData().groupIndex = PhysicsComponent.GROUP_ALLY;
 		GameManager.getGameManager().getLevel().addDrawableSprite(this, Level.LAYER_UNDER_GFX);
 		GameManager.getGameManager().getLevel().addUpdateableSprite(this);
 	}

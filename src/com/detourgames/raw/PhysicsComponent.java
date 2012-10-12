@@ -11,9 +11,12 @@ import com.badlogic.gdx.physics.box2d.World;
 public abstract class PhysicsComponent {
 	
 	protected Sprite mParent;
-	protected Body mBody;
+	protected Body mBody = null;
 	Vector2[] mVertices;
 	private Vector2 mDeathPos = null;
+	protected float mAngle = 0;//radians
+	protected float mXPos = 0;
+	protected float mYPos = 0;
 	
 	//collision group indices
 	//negative means they never collide with each other, positive means always collide
@@ -99,11 +102,35 @@ public abstract class PhysicsComponent {
 	}
 
 	public float getX() {
-		return mBody.getPosition().x;
+		if(mBody!=null){
+			return mBody.getPosition().x;
+		}else{
+			return mXPos;
+		}
 	}
 
 	public float getY() {
-		return mBody.getPosition().y;
+		if(mBody!=null){
+			return mBody.getPosition().y;
+		}else{
+			return mYPos;
+		}
+	}
+	
+	public float getAngle(){
+		if(mBody!=null){
+			return mBody.getAngle();
+		}else{
+			return mAngle;
+		}
+	}
+	
+	public void setAngleRadians(float radians){
+		mAngle = radians;
+	}
+	
+	public void setAngleDegrees(float degrees){
+		mAngle = (float)Math.toRadians(degrees);
 	}
 	
 	public Vector2 getPosition(){
