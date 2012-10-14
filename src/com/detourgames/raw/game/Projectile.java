@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.detourgames.raw.ControllerComponent;
 import com.detourgames.raw.FixtureType;
+import com.detourgames.raw.GenericPool;
 import com.detourgames.raw.IReusable;
 import com.detourgames.raw.ProjectilePool;
 import com.detourgames.raw.Sprite;
@@ -29,10 +30,10 @@ public class Projectile extends Sprite implements IReusable{
 	public static final Vector2[] VERTS_RAW = new Vector2[]{new Vector2(-0.2f,-0.2f), new Vector2(0.2f,-0.2f), new Vector2(0.2f,0.2f), new Vector2(-0.2f,0.2f)};
 	
 	
-	public Projectile(SpriteSheet spriteSheet){
+	public Projectile(SpriteSheet spriteSheet, GenericPool<Projectile> pool){
 		
 		super(new PhysicsProjectile(), new AnimationProjectile(spriteSheet,WIDTH_RAW,HEIGHT_RAW), new StateProjectile(), new ControllerComponent());
-		this.mPool = SpriteFactory.pools.get(Projectile.class);
+		mPool = pool;
 		
 	}
 	

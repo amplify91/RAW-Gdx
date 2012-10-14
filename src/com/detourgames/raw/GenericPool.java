@@ -2,10 +2,15 @@ package com.detourgames.raw;
 
 import com.badlogic.gdx.utils.Pool;
 
-public class GenericPool<T> extends Pool {
-
+public class GenericPool<T> extends Pool<T> {
+	
 	@Override
-	protected Object newObject() {
+	protected T newObject(){
 		return null;
 	}
+	
+	public void free(T sprite){
+		free(sprite);
+	}
+	
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.detourgames.raw.ControllerComponent;
 import com.detourgames.raw.FixtureType;
+import com.detourgames.raw.GenericPool;
 import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.Sprite;
 import com.detourgames.raw.SpriteSheet;
@@ -23,13 +24,14 @@ public class Hero extends Sprite{
 	public static final float WIDTH = 0.9f;
 	private static final Vector2[] BODY_VERTS = {new Vector2(-0.45f,-0.45f),new Vector2(0.4f,-0.45f),new Vector2(0.45f,-0.4f),new Vector2(0.45f,0.45f),new Vector2(-0.45f,0.45f)};
 	
-	public Hero(SpriteSheet spriteSheet){
+	public Hero(SpriteSheet spriteSheet, GenericPool<Hero> pool){
 		super(new PhysicsHero(), new AnimationHero(spriteSheet,WIDTH,HEIGHT), new StateHero(), new ControllerComponent());
 		running = new Vector2(25, 0);
 		mCameraOffsetX = (-1f * 12.5f)/6f;//TODO this is not how this should be done.
 		mCameraOffsetY = (-1f * 7.5f)/6f; // Consider making changes to Camera class.
 		//mAnimation.setAnimation(Animation.ANIMATION_RUNNING);
 		mArm = new HeroArm(spriteSheet, this);
+		mPool = pool;
 		
 	}
 	

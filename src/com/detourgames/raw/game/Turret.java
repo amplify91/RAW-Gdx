@@ -2,6 +2,7 @@ package com.detourgames.raw.game;
 
 import com.badlogic.gdx.physics.box2d.World;
 import com.detourgames.raw.FixtureType;
+import com.detourgames.raw.GenericPool;
 import com.detourgames.raw.Sprite;
 import com.detourgames.raw.SpriteFactory;
 import com.detourgames.raw.SpriteSheet;
@@ -13,10 +14,9 @@ public class Turret extends Sprite{
 	private static final float HEIGHT = 1;
 	private static final float WIDTH = 1;
 	
-	public Turret(SpriteSheet spriteSheet){
+	public Turret(SpriteSheet spriteSheet, GenericPool<Turret> pool){
 		super(new PhysicsTurret(), new AnimationTurret(spriteSheet,WIDTH,HEIGHT), new StateTurret(), new ControllerTurret());
-		this.mPool = SpriteFactory.pools.get(Turret.class);
-		
+		mPool = pool;
 	}
 	
 	public void create(World world, float x, float y){
