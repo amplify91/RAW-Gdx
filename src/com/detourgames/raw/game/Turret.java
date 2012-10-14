@@ -13,14 +13,17 @@ public class Turret extends Sprite{
 	
 	private static final float HEIGHT = 1;
 	private static final float WIDTH = 1;
+	TurretBarrel mBarrel;
 	
 	public Turret(SpriteSheet spriteSheet, GenericPool<Turret> pool){
 		super(new PhysicsTurret(), new AnimationTurret(spriteSheet,WIDTH,HEIGHT), new StateTurret(), new ControllerTurret());
 		mPool = pool;
+		mBarrel = new TurretBarrel(spriteSheet, this);
 	}
 	
 	public void create(World world, float x, float y){
 		mPhysics.create(world, x, y, WIDTH, HEIGHT, false, FixtureType.TURRET_BODY);
+		mBarrel.create(world);
 	}
 	
 }

@@ -10,22 +10,37 @@ public class PhysicsGun extends PhysicsNone{
 	Sprite mGunHolder;
 	Vector2 mLocalGunAnchor;
 	Vector2 mLocalParentAnchor;
+	Vector2 mRectangularRadial;
+	float mRadialLength;
+	float mRadialTheta;
 	
 	public PhysicsGun(Sprite gunHolder){
-		this(gunHolder, new Vector2(0f,0.2f), new Vector2(-0.5f,0f));
+		this(gunHolder, new Vector2(0f,0f), new Vector2(0f,0f));
 	}
 	
-	public PhysicsGun(Sprite gunHolder, Vector2 localParentAchor, Vector2 localGunAcnhor){
+	public PhysicsGun(Sprite gunHolder, Vector2 localParentAchor, Vector2 localGunAnchor){
 		super();
 		mGunHolder = gunHolder;
-		mLocalGunAnchor = localGunAcnhor;
+		mLocalGunAnchor = localGunAnchor;
 		mLocalParentAnchor = localParentAchor;
+		mRectangularRadial = new Vector2(mXPos-localGunAnchor.x, mYPos-localGunAnchor.y);
+		mRadialLength = (float)Math.sqrt((mRectangularRadial.x*mRectangularRadial.x)+(mRectangularRadial.y*mRectangularRadial.y));
+		mRadialTheta = (float)Math.atan2(mRectangularRadial.y, mRectangularRadial.x);
+	}
+	
+	public void setRotatedPosition(float radians){
+		mRadialTheta = radians;
+		mRectangularRadial.x = (float) (mRadialLength * Math.cos(mRadialTheta));
+		mRectangularRadial.y = (float) (mRadialLength * Math.sin(mRadialTheta));
+	}
+	
+	public void setParentAnchor(Vector2 localParentAnchor){
+		mLocalParentAnchor = localParentAnchor;
 	}
 	
 	@Override
 	public void update() {
-		//use vector math to change position offset by anchor points.
-		setPosition(mGunHolder.getX()+mLocalParentAnchor.x-mLocalGunAnchor.x, mGunHolder.getY()+mLocalParentAnchor.y-mLocalGunAnchor.y);
+		setPosition(mGunHolder.getX()+mLocalParentAnchor.x+mRectangularRadial.x, mGunHolder.getY()+mLocalParentAnchor.y+mRectangularRadial.y);
 	}
 	
 }
