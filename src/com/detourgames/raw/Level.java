@@ -138,7 +138,16 @@ public class Level {
 	
 	public void removeSprite(Sprite sprite){
 		mUpdateableSprites.remove(sprite);
-		//TODO
+		mHUD.remove(sprite);
+		mForeGround.remove(sprite);
+		mOverGFX.remove(sprite);
+		mActorsObjects.remove(sprite);
+		mUnderGFX.remove(sprite);
+		mTerrain.remove(sprite);
+		mBackground1.remove(sprite);
+		mBackground2.remove(sprite);
+		mBackground3.remove(sprite);
+		//TODO make sure this works^
 	}
 
 	void step(float deltaTime) {

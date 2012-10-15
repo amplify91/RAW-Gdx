@@ -93,6 +93,8 @@ public class SpriteFactory {
 		if(projectile==null){
 			projectile = new Projectile(mSpriteSheet, mPools.get(Projectile.class));
 			projectile.create(mLevel.getWorld(), -1, -1);
+		}else{
+			//set propeties like, x, y, etc...
 		}
 		mLevel.addDrawableSprite(projectile, Level.LAYER_ACTORS_OBJECTS);
 		mLevel.addUpdateableSprite(projectile);

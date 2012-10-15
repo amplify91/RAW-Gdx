@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.detourgames.raw.ControllerComponent;
 import com.detourgames.raw.FixtureType;
+import com.detourgames.raw.GameManager;
 import com.detourgames.raw.GenericPool;
 import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.Sprite;

@@ -12,5 +12,9 @@ public class GenericPool<T> extends Pool<T> {
 	public void free(T sprite){
 		free(sprite);
 	}
+
+	public void free(Sprite sprite) {
+		free((T)sprite);
+	}
 	
 }

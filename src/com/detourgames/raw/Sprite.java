@@ -3,6 +3,7 @@ package com.detourgames.raw;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.detourgames.raw.game.Hero;
 import com.detourgames.raw.game.SpriteDeathEvent;
 
 public abstract class Sprite implements IFocusable{
@@ -27,9 +28,10 @@ public abstract class Sprite implements IFocusable{
 		mPhysics.setParentSprite(this);
 
 	}
-
-	public void destroy() {
-		//TODO
+	
+	public void destroy(){
+		mPool.free(this);
+		GameManager.getGameManager().getLevel().removeSprite(this);
 	}
 
 	public void draw(SpriteBatch sb, long nanoTime) {
