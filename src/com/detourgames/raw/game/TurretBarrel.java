@@ -10,8 +10,11 @@ import com.detourgames.raw.SpriteSheet;
 
 public class TurretBarrel extends Sprite{
 	
+	public static final float WIDTH = Turret.WIDTH/2f;
+	public static final float HEIGHT = Turret.HEIGHT/2f;
+	
 	public TurretBarrel(SpriteSheet spriteSheet, Sprite turret) {
-		super(new PhysicsGun(turret, new Vector2(Hero.WIDTH/3f+0.05f,-0.03f), new Vector2(-Hero.WIDTH/4f,0f)), new AnimationHeroArm(spriteSheet), new StateHeroArm(), new ControllerNone());
+		super(new PhysicsGun(turret, new Vector2(Turret.WIDTH/3f+0.05f,Turret.HEIGHT/3f), new Vector2(-WIDTH/0.6f,0f)), new AnimationTurretBarrel(spriteSheet), new StateHeroArm(), new ControllerNone());
 	}
 	
 	public void rotateTo(float radians){

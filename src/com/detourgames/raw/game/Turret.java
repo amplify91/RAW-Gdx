@@ -11,9 +11,10 @@ import com.detourgames.raw.game.StateTurret;
 
 public class Turret extends Sprite{
 	
-	private static final float HEIGHT = 1;
-	private static final float WIDTH = 1;
 	TurretBarrel mBarrel;
+	
+	public static final float WIDTH = 1f;
+	public static final float HEIGHT = 1f;
 	
 	public Turret(SpriteSheet spriteSheet, GenericPool<Turret> pool){
 		super(new PhysicsTurret(), new AnimationTurret(spriteSheet,WIDTH,HEIGHT), new StateTurret(), new ControllerTurret());

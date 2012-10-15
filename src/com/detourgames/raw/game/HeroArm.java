@@ -11,9 +11,12 @@ import com.detourgames.raw.Sprite;
 import com.detourgames.raw.SpriteSheet;
 
 public class HeroArm extends Sprite{
-
+	
+	public static final float WIDTH = Hero.WIDTH/2f;
+	public static final float HEIGHT = Hero.HEIGHT/2f;
+	
 	public HeroArm(SpriteSheet spriteSheet, Sprite hero) {
-		super(new PhysicsGun(hero, new Vector2(Hero.WIDTH/3f+0.05f,-0.03f), new Vector2(-Hero.WIDTH/4f,0f)), new AnimationHeroArm(spriteSheet), new StateHeroArm(), new ControllerNone());
+		super(new PhysicsGun(hero, new Vector2(Hero.WIDTH/3f+0.05f,-0.03f), new Vector2(-WIDTH/2f,0f)), new AnimationHeroArm(spriteSheet), new StateHeroArm(), new ControllerNone());
 	}
 	
 	public void rotateTo(float radians){
