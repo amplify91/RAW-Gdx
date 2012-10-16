@@ -19,7 +19,7 @@ public class LevelLoader {
 	 */
 
 	Level mLevel;
-	SpriteFactory mSpriteFactory;
+	SpriteFactory mSpriteFactory = SpriteFactory.getSpriteFactory();
 	SpriteSheet mSpriteSheet;
 
 	int levelWidth = 0;
@@ -35,7 +35,7 @@ public class LevelLoader {
 				new int[]{128,128,64,64,64,64,64,64,64,32,32,32,32,32,32,32,32,32,32,32,32,32,32,16,16,16,8,8},
 				new int[]{32,64,128,256,512}, new int[]{32,64,128,256,512});
 		mLevel.setSpriteSheet(mSpriteSheet);
-		mSpriteFactory = new SpriteFactory(mLevel);
+		mSpriteFactory.setLevel(mLevel);
 		// if(lvln==0){
 		// createRandomTileMap(); TODO
 		// }else{

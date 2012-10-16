@@ -9,7 +9,6 @@ import com.detourgames.raw.game.DashEvent;
 import com.detourgames.raw.game.FireProjectileEvent;
 import com.detourgames.raw.game.JumpEvent;
 import com.detourgames.raw.game.Projectile;
-import com.detourgames.raw.game.SwingEvent;
 
 public class Input implements InputProcessor{
 	
@@ -107,10 +106,6 @@ public class Input implements InputProcessor{
 	
 	private void jump(){
 		EventQueue.getEventQueue().queue(new JumpEvent());
-	}
-	
-	private void swing(){
-		EventQueue.getEventQueue().queue(new SwingEvent());
 	}
 	
 	private void shoot(int x, int y){

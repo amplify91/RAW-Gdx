@@ -14,9 +14,11 @@ public class SpriteDeathEvent extends Event{
 	
 	@Override
 	public void executeEvent() {
-		mSprite.die();
+		mSprite.recycle();
 		GameManager.getGameManager().getLevel().removeSprite(mSprite);
-		
+		//TODO remove from world
+		mSprite.getBody().getWorld().destroyBody(mSprite.getBody());
+		//TODO spawn death graphic
 	}
 
 }

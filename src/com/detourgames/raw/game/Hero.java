@@ -56,7 +56,7 @@ public class Hero extends Sprite{
 		mSensorFixture.setUserData(FixtureType.HERO_GROUND_SENSOR);
 		
 		//create arm
-		mArm.create(world);
+		mArm.create();
 	}
 	
 	public void jump(){
@@ -81,10 +81,6 @@ public class Hero extends Sprite{
 	public void dash(){
 		((PhysicsHero) mPhysics).dash();
 		//mState.setState(StateHero.STATE_DASHING);
-	}
-	
-	public void swing(){
-		((PhysicsHero) mPhysics).swing();
 	}
 	
 }

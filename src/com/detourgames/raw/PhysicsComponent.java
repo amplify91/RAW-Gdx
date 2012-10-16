@@ -13,7 +13,6 @@ public abstract class PhysicsComponent {
 	protected Sprite mParent;
 	protected Body mBody = null;
 	Vector2[] mVertices;
-	private Vector2 mDeathPos = null;
 	protected float mAngle = 0;//radians
 	protected float mXPos = 0;
 	protected float mYPos = 0;
@@ -142,13 +141,6 @@ public abstract class PhysicsComponent {
 	
 	public Vector2 getDistanceVectorToPoint(Vector2 point){
 		return new Vector2(point.x-getX(), point.y-getY());
-	}
-	
-	public Vector2 die(){
-		mBody.setLinearVelocity(0f, 0f);
-		mDeathPos = mBody.getPosition();
-		//mBody.getWorld().destroyBody(mBody);// TODO this breaks stuff hard.
-		return mDeathPos;
 	}
 
 }

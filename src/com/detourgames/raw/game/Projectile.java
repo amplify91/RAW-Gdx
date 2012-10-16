@@ -6,9 +6,7 @@ import com.detourgames.raw.ControllerComponent;
 import com.detourgames.raw.FixtureType;
 import com.detourgames.raw.GenericPool;
 import com.detourgames.raw.IReusable;
-import com.detourgames.raw.ProjectilePool;
 import com.detourgames.raw.Sprite;
-import com.detourgames.raw.SpriteFactory;
 import com.detourgames.raw.SpriteSheet;
 
 public class Projectile extends Sprite implements IReusable{
@@ -61,11 +59,11 @@ public class Projectile extends Sprite implements IReusable{
 		}
 	}
 
-	public void recycle() {
+	public void recycle2() {//going to be removed soon
 		isActive = false;
 		isReadyForSpawn = false;
-		mPhysics.die();
-		mPhysics.getBody().setTransform(ProjectilePool.POOL_LOCATION.x, ProjectilePool.POOL_LOCATION.y, 0);
+		//mPhysics.die();
+		//mPhysics.getBody().setTransform(ProjectilePool.POOL_LOCATION.x, ProjectilePool.POOL_LOCATION.y, 0);
 		//mPhysics.getBody().setLinearVelocity(0, 0);
 		mPhysics.getBody().setActive(false);
 		//TODO set to a neutral state that won't interfere with the rest of the game.

@@ -3,8 +3,8 @@ package com.detourgames.raw.game;
 import com.badlogic.gdx.math.Vector2;
 import com.detourgames.raw.Event;
 import com.detourgames.raw.GameManager;
-import com.detourgames.raw.ProjectilePool;
 import com.detourgames.raw.Sprite;
+import com.detourgames.raw.SpriteFactory;
 
 public class FireProjectileEvent extends Event {
 
@@ -33,8 +33,7 @@ public class FireProjectileEvent extends Event {
 
 	@Override
 	public void executeEvent() {
-		
-		Projectile p = ProjectilePool.getProjectilePool().getProjectile();
+		Projectile p = SpriteFactory.getSpriteFactory().createProjectile();
 		p.prepareForSpawn(mType, mShootingSprite, new Vector2(mX,mY));
 		p.spawn(GameManager.getGameManager().getLevel().getWorld());
 		

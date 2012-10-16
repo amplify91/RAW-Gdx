@@ -9,12 +9,12 @@ public class GenericPool<T> extends Pool<T> {
 		return null;
 	}
 	
-	public void free(T sprite){
-		free(sprite);
-	}
+	/*public void free(T sprite){
+		super.free(sprite);
+	}*/
 
 	public void free(Sprite sprite) {
-		free((T)sprite);
+		super.free((T)sprite);
 	}
 	
 }

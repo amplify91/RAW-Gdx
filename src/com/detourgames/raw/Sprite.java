@@ -29,9 +29,8 @@ public abstract class Sprite implements IFocusable{
 
 	}
 	
-	public void destroy(){
+	public void recycle(){
 		mPool.free(this);
-		GameManager.getGameManager().getLevel().removeSprite(this);
 	}
 
 	public void draw(SpriteBatch sb, long nanoTime) {
@@ -89,9 +88,11 @@ public abstract class Sprite implements IFocusable{
 	 */
 	
 	public void die(){
-		Vector2 deathSpot = mPhysics.die();
+		Vector2 deathPosition = mPhysics.getPosition();
+		float deathAngle = mPhysics.getAngle();
 		EventQueue.getEventQueue().queue(new SpriteDeathEvent(this));
 		//TODO remove child sprites
-		//TODO spawn death graphic
+		//suggest adding abstract createChildren() and destroyChildren()
+		//call destroyChildren() here.
 	}
 }	

@@ -27,7 +27,7 @@ public class HeroArm extends Sprite{
 		((PhysicsGun) mPhysics).setRotatedPosition(radians);
 	}
 	
-	public void create(World world){
+	public void create(){
 		GameManager.getGameManager().getLevel().addDrawableSprite(this, Level.LAYER_UNDER_GFX);
 		GameManager.getGameManager().getLevel().addUpdateableSprite(this);
 	}

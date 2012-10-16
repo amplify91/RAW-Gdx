@@ -19,7 +19,7 @@ public class StateProjectile extends StateComponent{
 			
 		}else if(mState==STATE_DEAD){
 			//spawn explosion
-			((Projectile)physics.getParentSprite()).recycle();
+			((Projectile)physics.getParentSprite()).die();
 		}
 		
 	}

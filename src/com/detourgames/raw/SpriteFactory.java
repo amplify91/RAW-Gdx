@@ -10,16 +10,28 @@ import com.detourgames.raw.game.Turret;
 
 public class SpriteFactory {
 
-	Level mLevel;
-	SpriteSheet mSpriteSheet;
+	private static Level mLevel;
+	static SpriteSheet mSpriteSheet;
 	private static Hashtable<Class,GenericPool> mPools;
+	
+	private static final SpriteFactory mSpriteFactory = new SpriteFactory();
 
-	public SpriteFactory(Level level) {
+	public SpriteFactory() {
+		mPools = generatePools();
+	}
+	
+	public static SpriteFactory getSpriteFactory(){
+		return mSpriteFactory;
+	}
+	
+	public static Level getLevel(){
+		return mLevel;
+	}
+	
+	public static void setLevel(Level level){
 		mLevel = level;
 		mSpriteSheet = mLevel.getSpriteSheet();
-		mPools = generatePools();
-		
-	}	
+	}
 	
 	private static Hashtable<Class,GenericPool> generatePools(){
 		Hashtable<Class, GenericPool> pools = new Hashtable<Class, GenericPool>();

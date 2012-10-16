@@ -13,7 +13,7 @@ public class StateTurret extends StateComponent{
 	public void update(PhysicsComponent physics) {
 		if(mHealth==0){
 			setState(STATE_DEAD);
-			physics.die();
+			physics.getParentSprite().die();
 		}
 	}
 	
