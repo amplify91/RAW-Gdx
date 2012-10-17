@@ -3,6 +3,7 @@ package com.detourgames.raw.game;
 import com.detourgames.raw.Event;
 import com.detourgames.raw.GameManager;
 import com.detourgames.raw.Sprite;
+import com.detourgames.raw.SpriteFactory;
 
 public class SpriteDeathEvent extends Event{
 	
@@ -14,10 +15,13 @@ public class SpriteDeathEvent extends Event{
 	
 	@Override
 	public void executeEvent() {
-		mSprite.recycle();
+		
 		GameManager.getGameManager().getLevel().removeSprite(mSprite);
 		//TODO remove from world
+		//SpriteFactory.getLevel().getWorld().destroyBody(mSprite.getBody());
 		mSprite.getBody().getWorld().destroyBody(mSprite.getBody());
+		mSprite.recycle();
+		System.out.println(mSprite.getBody());
 		//TODO spawn death graphic
 	}
 

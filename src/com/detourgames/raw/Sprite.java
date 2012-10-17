@@ -31,6 +31,7 @@ public abstract class Sprite implements IFocusable{
 	
 	public void recycle(){
 		mPool.free(this);
+		mPhysics.recycle();
 	}
 
 	public void draw(SpriteBatch sb, long nanoTime) {

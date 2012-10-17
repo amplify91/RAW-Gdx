@@ -96,8 +96,11 @@ public abstract class PhysicsComponent {
 		mParent = parent;
 	}
 	
-	public void destroy() {
-		// TODO
+	public void recycle() {
+		mBody = null;
+		mAngle = 0;
+		mXPos = 0;
+		mYPos = 0;
 	}
 
 	public float getX() {

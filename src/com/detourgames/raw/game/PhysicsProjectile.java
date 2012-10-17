@@ -29,11 +29,11 @@ public class PhysicsProjectile extends PhysicsComponent{
 		
 		public void setProjectileProperties(int type, Sprite parent, Vector2 destinationPoint){
 			//TODO finish. also swap parent for just vec2 spawnpoint if no other info is needed from parent.
-			mBody.setTransform(parent.getX(), parent.getY(), 0);
+			//mBody.setTransform(parent.getX(), parent.getY(), 0);
 			//mType = type;
 			mDestinationPoint = destinationPoint;
 			setType(type);
-			mBody.setTransform(mBody.getPosition(), (float)Math.toRadians(getDistanceVectorToPoint(destinationPoint).angle()));
+			mBody.setTransform(parent.getPosition(), (float)Math.toRadians(getDistanceVectorToPoint(destinationPoint).angle()));
 			mBody.applyLinearImpulse( getDistanceVectorToPoint(destinationPoint).nor().mul(mVelocity).mul(mBody.getMass()), mBody.getWorldCenter());
 			
 		}
@@ -77,7 +77,7 @@ public class PhysicsProjectile extends PhysicsComponent{
 			}
 			bodyDef.position.set(x, y);
 			mBody = world.createBody(bodyDef);
-
+			
 			PolygonShape dynamicBox = new PolygonShape();
 			dynamicBox.set(vertices);
 			FixtureDef fixtureDef = new FixtureDef();

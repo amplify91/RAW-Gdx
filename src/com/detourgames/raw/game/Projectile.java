@@ -53,7 +53,7 @@ public class Projectile extends Sprite implements IReusable{
 		if(isReadyForSpawn){
 			isActive = true;
 			isReadyForSpawn = false;
-			mPhysics.getBody().setActive(true);//this is the call that sets them going.
+			//mPhysics.getBody().setActive(true);//this is the call that sets them going.
 		}else{
 			System.out.println("call prepareForSpawn() before spawn()");
 		}
