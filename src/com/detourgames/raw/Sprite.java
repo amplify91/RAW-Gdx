@@ -92,7 +92,7 @@ public abstract class Sprite implements IFocusable{
 	 */
 	
 	public void die(){
-		System.out.println("Kill: "+this);
+		//System.out.println("Kill: "+this);
 		Vector2 deathPosition = mPhysics.getPosition();
 		float deathAngle = mPhysics.getAngle();
 		EventQueue.getEventQueue().queue(new SpriteDeathEvent(this));
