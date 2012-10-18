@@ -41,6 +41,7 @@ public class SpriteFactory {
 		pools.put(Hero.class, new GenericPool<Hero>());
 		pools.put(Tile.class, new GenericPool<Tile>());
 		pools.put(BackgroundTile.class, new GenericPool<BackgroundTile>());
+		pools.put(TurretProjectile.class,new GenericPool<TurretProjectile>());
 		
 		return pools;
 	}
@@ -107,6 +108,21 @@ public class SpriteFactory {
 		if(projectile==null){
 			//System.out.println("Create new.");
 			projectile = new HeroProjectile(mSpriteSheet, mPools.get(HeroProjectile.class));
+			projectile.create(mLevel.getWorld(), parent, destination);
+		}else{
+			//System.out.println("Use old.");
+			projectile.create(mLevel.getWorld(), parent, destination);
+		}
+		mLevel.addDrawableSprite(projectile, Level.LAYER_ACTORS_OBJECTS);
+		mLevel.addUpdateableSprite(projectile);
+		
+		return projectile;
+	}
+	public TurretProjectile createTurretProjectile(Sprite parent, Vector2 destination){
+		TurretProjectile projectile = (TurretProjectile)mPools.get(TurretProjectile.class).obtain();
+		if(projectile==null){
+			//System.out.println("Create new.");
+			projectile = new TurretProjectile(mSpriteSheet, mPools.get(TurretProjectile.class));
 			projectile.create(mLevel.getWorld(), parent, destination);
 		}else{
 			//System.out.println("Use old.");
