@@ -36,7 +36,7 @@ public class SpriteFactory {
 	
 	private static Hashtable<Class,GenericPool> generatePools(){
 		Hashtable<Class, GenericPool> pools = new Hashtable<Class, GenericPool>();
-		//pools.put(Projectile.class, new GenericPool<Projectile>());
+		pools.put(HeroProjectile.class, new GenericPool<HeroProjectile>());
 		pools.put(Turret.class, new GenericPool<Turret>());
 		pools.put(Hero.class, new GenericPool<Hero>());
 		pools.put(Tile.class, new GenericPool<Tile>());
@@ -59,6 +59,7 @@ public class SpriteFactory {
 		
 		return hero;
 	}
+	
 	public Turret createTurret(float x, float y){
 		Turret turret = (Turret)mPools.get(Turret.class).obtain();
 		if(turret==null){

@@ -17,8 +17,7 @@ public class Turret extends Sprite{
 	public static final float HEIGHT = 1f;
 	
 	public Turret(SpriteSheet spriteSheet, GenericPool<Turret> pool){
-		super(new PhysicsTurret(), new AnimationTurret(spriteSheet,WIDTH,HEIGHT), new StateTurret(), new ControllerTurret());
-		mPool = pool;
+		super(new PhysicsTurret(), new AnimationTurret(spriteSheet,WIDTH,HEIGHT), new StateTurret(), new ControllerTurret(), pool);
 		mBarrel = new TurretBarrel(spriteSheet, this);
 		mState.setInitialState();
 	}

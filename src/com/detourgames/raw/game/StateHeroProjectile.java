@@ -5,21 +5,25 @@ import com.detourgames.raw.StateComponent;
 
 public class StateHeroProjectile extends StateComponent{
 	
-	public static final int STATE_IDLE = 0;
+	public static final int STATE_IDLE = StateComponent.STATE_IDLE;
+	public static final int STATE_DEAD = StateComponent.STATE_DEAD;
 	
 	public StateHeroProjectile() {
-		super(new int[]{STATE_IDLE});
+		super(new int[]{STATE_IDLE, STATE_DEAD});
 	}
 
 	@Override
 	public void update(PhysicsComponent physics) {
-		// TODO Auto-generated method stub
-		
+		if(mState==STATE_DEAD){
+			physics.getParentSprite().die();
+		}
 	}
 
 	@Override
 	public void setInitialState() {
-		// TODO Auto-generated method stub
+		mMaxHealth = 1;
+		mHealth = mMaxHealth;
+		mState = STATE_IDLE;
 		
 	}
 

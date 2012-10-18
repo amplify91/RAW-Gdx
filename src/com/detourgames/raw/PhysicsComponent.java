@@ -13,7 +13,6 @@ public abstract class PhysicsComponent {
 	
 	protected Sprite mParent;
 	protected Body mBody = null;
-	Vector2[] mVertices;
 	protected float mAngle = 0;//radians
 	protected float mXPos = 0;
 	protected float mYPos = 0;
@@ -21,7 +20,7 @@ public abstract class PhysicsComponent {
 	//collision group indices
 	//negative means they never collide with each other, positive means always collide
 	//if groups don't match or either one is 0, determine collision by category/mask
-	public static final short GROUP_NO_COLLISIONS = 0;
+	public static final short GROUP_NO_GROUP = 0;
 	public static final short GROUP_ALLY = -1;
 	public static final short GROUP_ENEMY = -2;
 	public static final short GROUP_NEUTRAL = -3;
@@ -34,7 +33,8 @@ public abstract class PhysicsComponent {
 	public static final short CATEGORY_NO_COLLISIONS = 0;
 	public static final short CATEGORY_ALLY = 1;
 	public static final short CATEGORY_ENEMY = 2;
-	public static final short MASK_NO_COLLISIONS = -1;
+	public static final short MASK_ALL_COLLISIONS = -1;
+	public static final short MASK_NO_COLLISIONS = 0;
 	
 	public PhysicsComponent() {
 		
@@ -132,7 +132,7 @@ public abstract class PhysicsComponent {
 	}
 	
 	public Fixture createFixture(Vector2 vertices[], int fixtureType){
-		return createFixture(vertices, fixtureType, 1.0f, 0.0f, 0.0f, false, GROUP_NO_COLLISIONS, CATEGORY_NO_COLLISIONS, MASK_NO_COLLISIONS);
+		return createFixture(vertices, fixtureType, 1.0f, 0.0f, 0.0f, false, GROUP_NO_GROUP, CATEGORY_NO_COLLISIONS, MASK_NO_COLLISIONS);
 	}
 
 	public abstract void update();

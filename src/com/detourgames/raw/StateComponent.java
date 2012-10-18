@@ -77,6 +77,7 @@ public abstract class StateComponent {
 	
 	public void kill(){
 		mHealth = 0;
+		setState(STATE_DEAD);
 	}
 	
 }

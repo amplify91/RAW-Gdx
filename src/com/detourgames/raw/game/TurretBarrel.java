@@ -14,7 +14,7 @@ public class TurretBarrel extends Sprite{
 	public static final float HEIGHT = Turret.HEIGHT/2f;
 	
 	public TurretBarrel(SpriteSheet spriteSheet, Sprite turret) {
-		super(new PhysicsGun(turret, new Vector2(Turret.WIDTH/3f+0.05f,Turret.HEIGHT/3f), new Vector2(-WIDTH/0.6f,0f)), new AnimationTurretBarrel(spriteSheet), new StateHeroArm(), new ControllerNone());
+		super(new PhysicsGun(turret, new Vector2(Turret.WIDTH/3f+0.05f,Turret.HEIGHT/3f), new Vector2(-WIDTH/0.6f,0f)), new AnimationTurretBarrel(spriteSheet), new StateHeroArm(), new ControllerNone(), null);
 	}
 	
 	public void rotateTo(float radians){

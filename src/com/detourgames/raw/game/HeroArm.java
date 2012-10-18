@@ -19,7 +19,7 @@ public class HeroArm extends Sprite{
 	//It should always stay with its parent and if we free() it to a pool, we can't guarantee that.
 	
 	public HeroArm(SpriteSheet spriteSheet, Sprite hero) {
-		super(new PhysicsGun(hero, new Vector2(Hero.WIDTH/3f+0.05f,-0.03f), new Vector2(-WIDTH/2f,0f)), new AnimationHeroArm(spriteSheet), new StateHeroArm(), new ControllerNone());
+		super(new PhysicsGun(hero, new Vector2(Hero.WIDTH/3f+0.05f,-0.03f), new Vector2(-WIDTH/2f,0f)), new AnimationHeroArm(spriteSheet), new StateHeroArm(), new ControllerNone(), null);
 	}
 	
 	public void rotateTo(float radians){

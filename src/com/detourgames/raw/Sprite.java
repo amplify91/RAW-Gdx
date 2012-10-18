@@ -16,7 +16,7 @@ public abstract class Sprite implements IFocusable{
 	protected float mCameraOffsetX = 0;
 	protected float mCameraOffsetY = 0;
 
-	public Sprite(PhysicsComponent pc, AnimationComponent ac, StateComponent sc, ControllerComponent cc) {
+	public Sprite(PhysicsComponent pc, AnimationComponent ac, StateComponent sc, ControllerComponent cc, GenericPool<?> pool) {
 		
 		// all sprites will create their own animations in their own constructors.
 		// that means each sprite subclass must have a SpriteSheet param in their constructor.
@@ -24,12 +24,14 @@ public abstract class Sprite implements IFocusable{
 		mAnimation = ac;
 		mState = sc;
 		mController = cc;
+		mPool = pool;
 		mPhysics.setParentSprite(this);
 
 	}
 	
 	public void recycle(){
-		mPool.free(this);
+		//System.out.println("Sprite = "+this+" Pool = "+mPool );
+		mPool.free(this);//pool is null for some reason
 		mPhysics.recycle();
 	}
 	

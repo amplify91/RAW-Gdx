@@ -49,7 +49,7 @@ public class PhysicsHero extends PhysicsComponent{
 	}
 	
 	public void shoot(Vector2 target){
-		//EventQueue.getEventQueue().queue(new FireProjectileEvent(target, Projectile.TYPE_RAW, mParent));
+		EventQueue.getEventQueue().queue(new FireProjectileEvent(target,  mParent));
 	}
 	
 	public void jump(){

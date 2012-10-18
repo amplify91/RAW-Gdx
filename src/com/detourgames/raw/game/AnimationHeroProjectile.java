@@ -18,9 +18,9 @@ public class AnimationHeroProjectile extends AnimationComponent{
 	
 	@Override
 	public void update(StateComponent state) {
-		/*if(state.getState()==StateHeroProjectile.STATE_IDLE && mCurrentAnimation!=INDEX_IDLE){
+		if(state.getState()==StateHeroProjectile.STATE_IDLE && mCurrentAnimation!=INDEX_IDLE){
 			setAnimation(INDEX_IDLE);
-		}*/
+		}
 	}
 
 }

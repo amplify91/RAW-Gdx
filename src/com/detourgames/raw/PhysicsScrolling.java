@@ -68,8 +68,8 @@ public class PhysicsScrolling extends PhysicsComponent{
 		fixtureDef.shape = dynamicBox;
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.0f;
-		fixtureDef.filter.groupIndex = PhysicsComponent.GROUP_NO_COLLISIONS;
-		fixtureDef.filter.maskBits = PhysicsComponent.CATEGORY_NO_COLLISIONS;
+		fixtureDef.filter.groupIndex = PhysicsComponent.GROUP_NO_GROUP;
+		fixtureDef.filter.maskBits = PhysicsComponent.MASK_NO_COLLISIONS;
 		mBody.createFixture(fixtureDef);
 		mBody.setFixedRotation(true);
 		mBody.setGravityScale(0);

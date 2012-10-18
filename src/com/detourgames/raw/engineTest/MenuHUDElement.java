@@ -9,7 +9,7 @@ import com.detourgames.raw.StateComponent;
 public abstract class MenuHUDElement extends Sprite{
 
 	public MenuHUDElement(PhysicsComponent pc, AnimationComponent ac, StateComponent sc, ControllerComponent cc) {
-		super(pc, ac, sc, cc);
+		super(pc, ac, sc, cc, null);
 	}
 	
 	public abstract boolean isTouchInside(float x, float y);

@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.detourgames.raw.game.HeroProjectile;
 import com.detourgames.raw.game.StateHero;
 
 public class ContactListenerRAW implements ContactListener{
@@ -14,7 +15,7 @@ public class ContactListenerRAW implements ContactListener{
 	@Override
 	public void beginContact(Contact contact) {
 		beginGroundContact(contact);
-		//beginHeroProjectileContact(contact);
+		beginHeroProjectileContact(contact);
 		//beginEnemyProjectileContact(contact);
 	}
 
@@ -85,30 +86,28 @@ public class ContactListenerRAW implements ContactListener{
 		}
 	}
 	
-	/*private void beginHeroProjectileContact(Contact contact){
+	private void beginHeroProjectileContact(Contact contact){
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
 		if(fixtureA.getUserData() != null){
 			if((Integer)fixtureA.getUserData() == FixtureType.HERO_PROJECTILE){
-				((StateProjectile)((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState).setState(StateComponent.STATE_HURTING);
 				((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.kill();
 				if(fixtureB.getUserData() != null){
-					((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.receiveDamage(Projectile.DAMAGE_RAW);
+					((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.receiveDamage(HeroProjectile.DAMAGE);
 				}
 			}
 		}
 		if(fixtureB.getUserData() != null){
 			if((Integer)fixtureB.getUserData() == FixtureType.HERO_PROJECTILE){
-				((StateProjectile)((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState).setState(StateComponent.STATE_HURTING);
 				((PhysicsComponent)fixtureB.getBody().getUserData()).getParentSprite().mState.kill();
 				if(fixtureA.getUserData() != null){
-					((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.receiveDamage(Projectile.DAMAGE_RAW);
+					((PhysicsComponent)fixtureA.getBody().getUserData()).getParentSprite().mState.receiveDamage(HeroProjectile.DAMAGE);
 				}
 			}
 		}
 	}
 	
-	private void beginEnemyProjectileContact(Contact contact){
+	/*private void beginEnemyProjectileContact(Contact contact){
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
 		if(fixtureA.getUserData() != null){
