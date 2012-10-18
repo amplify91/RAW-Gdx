@@ -38,6 +38,9 @@ public class FireProjectileEvent extends Event {
 		if(mShootingSprite.getClass()==Hero.class){
 			HeroProjectile p = SpriteFactory.getSpriteFactory().createHeroProjectile(mShootingSprite, mTarget);
 		}
+		if(mShootingSprite.getClass()==Turret.class){
+			TurretProjectile p = SpriteFactory.getSpriteFactory().createTurretProjectile(mShootingSprite, mTarget);
+		}
 		
 		//p.spawn(GameManager.getGameManager().getLevel().getWorld());
 		
