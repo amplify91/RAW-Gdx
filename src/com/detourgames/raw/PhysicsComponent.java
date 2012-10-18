@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -33,7 +34,8 @@ public abstract class PhysicsComponent {
 	public static final short CATEGORY_NO_COLLISIONS = 0;
 	public static final short CATEGORY_ALLY = 1;
 	public static final short CATEGORY_ENEMY = 2;
-
+	public static final short MASK_NO_COLLISIONS = -1;
+	
 	public PhysicsComponent() {
 		
 	}
@@ -84,6 +86,53 @@ public abstract class PhysicsComponent {
 		//mBody.setFixedRotation(true);
 		mBody.setUserData(this);
 
+	}
+	
+	public void createBody(World world, float x, float y, boolean dynamic, boolean fixedRotation, boolean isBullet, float gravityScale, float linearDamping, float angularDamping) {
+
+		BodyDef bodyDef = new BodyDef();
+		if (dynamic) {
+			bodyDef.type = BodyType.DynamicBody;
+		} else {
+			bodyDef.type = BodyType.StaticBody;
+		}
+		bodyDef.position.set(x, y);
+		bodyDef.angularDamping = angularDamping;
+		bodyDef.bullet = isBullet;
+		bodyDef.fixedRotation = fixedRotation;
+		bodyDef.gravityScale = gravityScale;
+		bodyDef.linearDamping = linearDamping;
+		mBody = world.createBody(bodyDef);
+		mBody.setUserData(this);
+
+	}
+	
+	public void createBody(World world, float x, float y){
+		createBody(world, x, y, true, false, false, 1.0f, 0.0f, 0.0f);
+	}
+	
+	public Fixture createFixture(Vector2 vertices[], int fixtureType, float density, float friction, float restitution, boolean isSensor, short groupIndex, short categoryBits, short maskBits){
+		
+		PolygonShape dynamicBox = new PolygonShape();
+		dynamicBox.set(vertices);
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = dynamicBox;
+		fixtureDef.density = density;
+		fixtureDef.friction = friction;
+		fixtureDef.isSensor = isSensor;
+		fixtureDef.filter.groupIndex = groupIndex;
+		fixtureDef.filter.categoryBits = categoryBits;
+		fixtureDef.filter.maskBits = maskBits;
+		
+		Fixture f = mBody.createFixture(fixtureDef);
+		f.setUserData(fixtureType);
+		
+		return f;
+		
+	}
+	
+	public Fixture createFixture(Vector2 vertices[], int fixtureType){
+		return createFixture(vertices, fixtureType, 1.0f, 0.0f, 0.0f, false, GROUP_NO_COLLISIONS, CATEGORY_NO_COLLISIONS, MASK_NO_COLLISIONS);
 	}
 
 	public abstract void update();

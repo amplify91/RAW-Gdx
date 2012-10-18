@@ -2,9 +2,10 @@ package com.detourgames.raw;
 
 import java.util.Hashtable;
 
+import com.badlogic.gdx.math.Vector2;
 import com.detourgames.raw.game.BackgroundTile;
 import com.detourgames.raw.game.Hero;
-import com.detourgames.raw.game.Projectile;
+import com.detourgames.raw.game.HeroProjectile;
 import com.detourgames.raw.game.Tile;
 import com.detourgames.raw.game.Turret;
 
@@ -35,7 +36,7 @@ public class SpriteFactory {
 	
 	private static Hashtable<Class,GenericPool> generatePools(){
 		Hashtable<Class, GenericPool> pools = new Hashtable<Class, GenericPool>();
-		pools.put(Projectile.class, new GenericPool<Projectile>());
+		//pools.put(Projectile.class, new GenericPool<Projectile>());
 		pools.put(Turret.class, new GenericPool<Turret>());
 		pools.put(Hero.class, new GenericPool<Hero>());
 		pools.put(Tile.class, new GenericPool<Tile>());
@@ -100,13 +101,13 @@ public class SpriteFactory {
 		return tile;
 	}
 	
-	public Projectile createProjectile(){
-		Projectile projectile = (Projectile)mPools.get(Projectile.class).obtain();
+	public HeroProjectile createHeroProjectile(Sprite parent, Vector2 destination){
+		HeroProjectile projectile = (HeroProjectile)mPools.get(HeroProjectile.class).obtain();
 		if(projectile==null){
-			projectile = new Projectile(mSpriteSheet, mPools.get(Projectile.class));
-			projectile.create(mLevel.getWorld(), -1, -1);
+			projectile = new HeroProjectile(mSpriteSheet, mPools.get(HeroProjectile.class));
+			projectile.create(mLevel.getWorld(), parent, destination);
 		}else{
-			//set propeties like, x, y, etc...
+			projectile.create(mLevel.getWorld(), parent, destination);
 		}
 		mLevel.addDrawableSprite(projectile, Level.LAYER_ACTORS_OBJECTS);
 		mLevel.addUpdateableSprite(projectile);

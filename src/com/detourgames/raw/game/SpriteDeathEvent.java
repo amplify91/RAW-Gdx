@@ -19,9 +19,10 @@ public class SpriteDeathEvent extends Event{
 		GameManager.getGameManager().getLevel().removeSprite(mSprite);
 		//TODO remove from world
 		//SpriteFactory.getLevel().getWorld().destroyBody(mSprite.getBody());
+		System.out.println(mSprite.getBody());
 		mSprite.getBody().getWorld().destroyBody(mSprite.getBody());
 		mSprite.recycle();
-		System.out.println(mSprite.getBody());
+		
 		//TODO spawn death graphic
 	}
 

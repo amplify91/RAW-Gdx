@@ -49,7 +49,7 @@ public class PhysicsHero extends PhysicsComponent{
 	}
 	
 	public void shoot(Vector2 target){
-		EventQueue.getEventQueue().queue(new FireProjectileEvent(target, Projectile.TYPE_RAW, mParent));
+		//EventQueue.getEventQueue().queue(new FireProjectileEvent(target, Projectile.TYPE_RAW, mParent));
 	}
 	
 	public void jump(){
@@ -58,23 +58,6 @@ public class PhysicsHero extends PhysicsComponent{
 	
 	public void dash(){
 		mTotalVel = mTotalVel.add(mDashVel);
-	}
-	
-	public void swing(){
-		System.out.println("Swing!");
-		/*1 create chainsaw projectile
-		*2 create chain graphic
-		*3 resize chain graphic until chain hits
-		*4 when chainsaw hits terrain and sticks, create solid chain
-		*5 glue chain to RAW and chainsaw using joints
-		*
-		*OR
-		*
-		*1 create chainsaw projectile
-		*2 get distance between chainsaw and RAW and fill with appropriate number of chainlinks (small solid rectangles)
-		*3 glue chainlinks, RAW, and chainsaw together with joints
-		*3 repeat steps 2&3 (adding new links as needed) until chainsaw hits terrain and sticks
-		*/
 	}
 	
 	@Override

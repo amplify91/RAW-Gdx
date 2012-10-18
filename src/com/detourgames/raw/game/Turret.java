@@ -20,6 +20,7 @@ public class Turret extends Sprite{
 		super(new PhysicsTurret(), new AnimationTurret(spriteSheet,WIDTH,HEIGHT), new StateTurret(), new ControllerTurret());
 		mPool = pool;
 		mBarrel = new TurretBarrel(spriteSheet, this);
+		mState.setInitialState();
 	}
 	
 	public void create(World world, float x, float y){

@@ -3,7 +3,6 @@ package com.detourgames.raw;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.detourgames.raw.game.Hero;
 import com.detourgames.raw.game.SpriteDeathEvent;
 
 public abstract class Sprite implements IFocusable{
@@ -33,6 +32,8 @@ public abstract class Sprite implements IFocusable{
 		mPool.free(this);
 		mPhysics.recycle();
 	}
+	
+	//public abstract void create(World world, float x, float y);
 
 	public void draw(SpriteBatch sb, long nanoTime) {
 		//sb.draw(mAnimation.getFrame(nanoTime), mPhysics.getX()+mAnimation.getOffsetX(), mPhysics.getY()+mAnimation.getOffsetY(), mAnimation.getWidth(), mAnimation.getHeight());
@@ -89,6 +90,7 @@ public abstract class Sprite implements IFocusable{
 	 */
 	
 	public void die(){
+		System.out.println("Kill: "+this);
 		Vector2 deathPosition = mPhysics.getPosition();
 		float deathAngle = mPhysics.getAngle();
 		EventQueue.getEventQueue().queue(new SpriteDeathEvent(this));

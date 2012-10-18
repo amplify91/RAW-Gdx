@@ -69,7 +69,7 @@ public abstract class StateComponent {
 	public void receiveDamage(int damage){
 		mHealth -= damage;
 		setState(STATE_HURTING);
-		if(mHealth<0){
+		if(mHealth<=0){
 			mHealth = 0;
 			setState(STATE_DEAD);
 		}

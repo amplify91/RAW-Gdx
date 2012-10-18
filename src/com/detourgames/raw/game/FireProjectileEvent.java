@@ -10,6 +10,7 @@ public class FireProjectileEvent extends Event {
 
 	float mX;
 	float mY;
+	Vector2 mTarget;
 	int mType;
 	Sprite mShootingSprite;
 
@@ -24,6 +25,7 @@ public class FireProjectileEvent extends Event {
 	
 	public FireProjectileEvent(Vector2 coordinates, int type, Sprite shootingSprite){
 		
+		mTarget = coordinates;
 		mX = coordinates.x;
 		mY = coordinates.y;
 		mType = type;
@@ -33,9 +35,8 @@ public class FireProjectileEvent extends Event {
 
 	@Override
 	public void executeEvent() {
-		Projectile p = SpriteFactory.getSpriteFactory().createProjectile();
-		p.prepareForSpawn(mType, mShootingSprite, new Vector2(mX,mY));
-		p.spawn(GameManager.getGameManager().getLevel().getWorld());
+		HeroProjectile p = SpriteFactory.getSpriteFactory().createHeroProjectile(mShootingSprite, mTarget);
+		//p.spawn(GameManager.getGameManager().getLevel().getWorld());
 		
 	}
 

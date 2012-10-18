@@ -5,9 +5,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.detourgames.raw.game.Projectile;
 import com.detourgames.raw.game.StateHero;
-import com.detourgames.raw.game.StateProjectile;
 
 public class ContactListenerRAW implements ContactListener{
 	
@@ -16,8 +14,8 @@ public class ContactListenerRAW implements ContactListener{
 	@Override
 	public void beginContact(Contact contact) {
 		beginGroundContact(contact);
-		beginHeroProjectileContact(contact);
-		beginEnemyProjectileContact(contact);
+		//beginHeroProjectileContact(contact);
+		//beginEnemyProjectileContact(contact);
 	}
 
 	@Override
@@ -87,7 +85,7 @@ public class ContactListenerRAW implements ContactListener{
 		}
 	}
 	
-	private void beginHeroProjectileContact(Contact contact){
+	/*private void beginHeroProjectileContact(Contact contact){
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
 		if(fixtureA.getUserData() != null){
@@ -131,6 +129,6 @@ public class ContactListenerRAW implements ContactListener{
 				}
 			}
 		}
-	}
+	}*/
 	
 }
