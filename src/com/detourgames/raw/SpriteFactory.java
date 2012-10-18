@@ -105,9 +105,11 @@ public class SpriteFactory {
 	public HeroProjectile createHeroProjectile(Sprite parent, Vector2 destination){
 		HeroProjectile projectile = (HeroProjectile)mPools.get(HeroProjectile.class).obtain();
 		if(projectile==null){
+			//System.out.println("Create new.");
 			projectile = new HeroProjectile(mSpriteSheet, mPools.get(HeroProjectile.class));
 			projectile.create(mLevel.getWorld(), parent, destination);
 		}else{
+			//System.out.println("Use old.");
 			projectile.create(mLevel.getWorld(), parent, destination);
 		}
 		mLevel.addDrawableSprite(projectile, Level.LAYER_ACTORS_OBJECTS);
