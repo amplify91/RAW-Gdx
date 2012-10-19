@@ -3,6 +3,7 @@ package com.detourgames.raw;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.detourgames.raw.game.SpawnGFXEvent;
 import com.detourgames.raw.game.SpriteDeathEvent;
 
 public abstract class Sprite implements IFocusable{
@@ -78,6 +79,11 @@ public abstract class Sprite implements IFocusable{
 	public Body getBody(){
 		return mPhysics.getBody();
 	}
+	
+	public AnimationComponent getAnimationComponent(){
+		return mAnimation;
+	}
+	//TODO make getters for other components
 
 	/*
 	 * public float getOriginX(){ return mPhysics.getX() + mDrawWidth/2f; }
@@ -93,11 +99,20 @@ public abstract class Sprite implements IFocusable{
 	
 	public void die(){
 		//System.out.println("Kill: "+this);
-		Vector2 deathPosition = mPhysics.getPosition();
-		float deathAngle = mPhysics.getAngle();
+		spawnDeathGFX();
 		EventQueue.getEventQueue().queue(new SpriteDeathEvent(this));
 		//TODO remove child sprites
 		//suggest adding abstract createChildren() and destroyChildren()
 		//call destroyChildren() here.
+	}
+	
+	private void spawnDeathGFX(){
+		if(mAnimation.getDeathAnimation()==null){
+			System.out.println("Trying to kill something without a death animation. Sprite: "+this);
+			return;
+		}else if(mAnimation.getDeathAnimation().length!=2){
+			System.out.println("Improper death animation. Sprite: "+this);
+		}
+		EventQueue.getEventQueue().queue(new SpawnGFXEvent(mPhysics.getPosition(), mAnimation.getWidth(), mAnimation.getHeight(), mPhysics.getAngle(), mAnimation.getDeathAnimation()[0], mAnimation.getDeathAnimation()[1]));
 	}
 }	

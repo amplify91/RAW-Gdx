@@ -23,5 +23,10 @@ public class AnimationHeroArm extends AnimationComponent{
 	public void update(StateComponent state) {
 		
 	}
+
+	@Override
+	public Animation[] getDeathAnimation() {
+		return null;
+	}
 	
 }

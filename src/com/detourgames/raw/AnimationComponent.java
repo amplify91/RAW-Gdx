@@ -44,6 +44,8 @@ public abstract class AnimationComponent {
 
 	public abstract void update(StateComponent state);
 	
+	public abstract Animation[] getDeathAnimation();// array should have 2 values: the animation and a final frame animation.
+	
 	public TextureRegion getFrame(long nanoTime){//TODO give current time as a parameter and calculate state time from there
 		
 		mStateTime = (float)(nanoTime-mStartTime)/1000000000f;
@@ -93,6 +95,19 @@ public abstract class AnimationComponent {
 	public void setAnimations(Animation[] animations){
 		mAnimations = animations;
 		setAnimation(0);
+	}
+	
+	public Animation getAnimation(int index){
+		if(index<=mAnimations.length-1){
+			return mAnimations[index];
+		}else{
+			System.out.println("Animation does not exist.");
+			return null;
+		}
+	}
+	
+	public Animation[] getAnimations(){
+		return mAnimations;
 	}
 	
 	public void restartAnimation(){

@@ -2,8 +2,10 @@ package com.detourgames.raw;
 
 import java.util.Hashtable;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.detourgames.raw.game.BackgroundTile;
+import com.detourgames.raw.game.GFXSprite;
 import com.detourgames.raw.game.Hero;
 import com.detourgames.raw.game.HeroProjectile;
 import com.detourgames.raw.game.Tile;
@@ -43,6 +45,7 @@ public class SpriteFactory {
 		pools.put(Tile.class, new GenericPool<Tile>());
 		pools.put(BackgroundTile.class, new GenericPool<BackgroundTile>());
 		pools.put(TurretProjectile.class,new GenericPool<TurretProjectile>());
+		pools.put(GFXSprite.class,new GenericPool<GFXSprite>());
 		
 		return pools;
 	}
@@ -134,6 +137,21 @@ public class SpriteFactory {
 		mLevel.addUpdateableSprite(projectile);
 		
 		return projectile;
+	}
+	
+	public GFXSprite createGFX(float width, float height, float angle, Vector2 position, Animation animation, Animation finalFrame){
+		GFXSprite gfx = (GFXSprite)mPools.get(GFXSprite.class).obtain();
+		
+		if(gfx==null){
+			gfx = new GFXSprite(mSpriteSheet, mPools.get(GFXSprite.class));
+			gfx.create(width, height, angle, position, animation, finalFrame);
+		}else{
+			gfx.create(width, height, angle, position, animation, finalFrame);
+		}
+		mLevel.addDrawableSprite(gfx, Level.LAYER_OVER_GFX);
+		mLevel.addUpdateableSprite(gfx);
+		
+		return null;
 	}
 	
 	public void createHUDElements(){

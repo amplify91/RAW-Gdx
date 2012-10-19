@@ -18,5 +18,10 @@ public class AnimationStatic extends AnimationComponent{
 	public void update(StateComponent state) {
 		// do nothing.
 	}
+
+	@Override
+	public Animation[] getDeathAnimation() {
+		return null;
+	}
 	
 }

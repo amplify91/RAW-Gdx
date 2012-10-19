@@ -25,5 +25,11 @@ public class AnimationTurret extends AnimationComponent{
 			setAnimation(INDEX_IDLE);
 		}
 	}
+
+	@Override
+	public Animation[] getDeathAnimation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

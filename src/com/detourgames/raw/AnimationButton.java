@@ -45,5 +45,10 @@ public class AnimationButton extends AnimationComponent{
 			setAnimation(INDEX_DASH_UP);
 		}
 	}
+
+	@Override
+	public Animation[] getDeathAnimation() {
+		return null;
+	}
 	
 }
