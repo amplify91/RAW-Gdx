@@ -79,6 +79,9 @@ public abstract class Sprite implements IFocusable{
 	public Body getBody(){
 		return mPhysics.getBody();
 	}
+	public PhysicsComponent getPhysics(){
+		return mPhysics;
+	}
 	
 	public AnimationComponent getAnimationComponent(){
 		return mAnimation;
