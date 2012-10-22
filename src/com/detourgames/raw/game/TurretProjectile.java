@@ -25,9 +25,7 @@ public class TurretProjectile extends Sprite{
 	
 	public TurretProjectile(SpriteSheet spriteSheet, GenericPool<?> pool) {
 		super(new PhysicsStatic(), new AnimationTurretProjectile(spriteSheet, WIDTH, HEIGHT), new StateHeroProjectile(),
-				new HomingController( GameManager.getGameManager().getLevel().getHero().getPhysics(), 0.5f)
-				//new ControllerNone()
-		, pool);
+				new HomingController( GameManager.getGameManager().getLevel().getHero(), 2f), pool);
 	}
 	
 	public void create(World world, Sprite parent, Vector2 destinationPoint){
