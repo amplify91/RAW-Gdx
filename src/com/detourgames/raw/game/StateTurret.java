@@ -10,7 +10,8 @@ public class StateTurret extends StateComponent{
 	}
 
 	@Override
-	public void update(PhysicsComponent physics) {
+	public void update(PhysicsComponent physics, long nanoTime) {
+		updateTempState(nanoTime);
 		if(mHealth==0){
 			setState(STATE_DEAD);
 			physics.getParentSprite().die();

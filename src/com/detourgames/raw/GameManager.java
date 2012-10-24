@@ -6,7 +6,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 public class GameManager {
 
 	private static GameManager gameManager = new GameManager();
-
+	
 	private Camera mCamera;
 	private HUD mHUD;
 	// Input input;
@@ -30,15 +30,15 @@ public class GameManager {
 	public static GameManager getGameManager() { // TODO synchronized?
 		return gameManager;
 	}
-
-	public void update(float deltaTime) {
+	
+	public void update(long nanoTime) {
 		if (levelLoaded) {
-			mCamera.update(mLevel.getHero());
 			// (float)mLevel.getHero().getY());
 			// mHUD.update();
 			EventQueue.getEventQueue().processAndRemoveAllEvents();
-			mLevel.update(deltaTime, 8, 3);
-			// TODO update camera AFTER level?
+			mLevel.update(nanoTime);
+			mCamera.update(mLevel.getHero());
+			
 		}
 	}
 	

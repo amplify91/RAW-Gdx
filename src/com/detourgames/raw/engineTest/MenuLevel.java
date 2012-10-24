@@ -13,7 +13,11 @@ import com.detourgames.raw.game.Hero;
 public class MenuLevel {
 	// This class will be used to manage multiple world objects within one
 	// level.
-
+	
+	long mCurrentTime = 0;
+	long mLastTime = 0;
+	float mDeltaTime = 0;
+	
 	World mWorld;
 	SpriteSheet mSpriteSheet;
 	Hero mHero;
@@ -61,12 +65,15 @@ public class MenuLevel {
 	 * "success!!!!"); }
 	 */
 
-	public void update(float deltaTime, int velocityIterations, int positionIterations) {
+	public void update(long nanoTime, int velocityIterations, int positionIterations) {
 		
-		mWorld.step(deltaTime, velocityIterations, positionIterations);
+		mCurrentTime = nanoTime;
+		mDeltaTime = (mCurrentTime-mLastTime) / (float)1000000000;
+		
+		mWorld.step(mDeltaTime, velocityIterations, positionIterations);
 		
 		for (int i = 0; i < mUpdateableSprites.size(); i++) {
-			mUpdateableSprites.get(i).update(deltaTime);
+			mUpdateableSprites.get(i).update(mCurrentTime, mDeltaTime);
 		}
 		
 	}

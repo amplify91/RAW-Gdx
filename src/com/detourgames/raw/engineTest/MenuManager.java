@@ -35,12 +35,12 @@ public class MenuManager {
 		return gameManager;
 	}
 
-	public void update(float deltaTime) {
+	public void update(long nanoTime) {
 		if (levelLoaded) {
 			// (float)mLevel.getHero().getY());
 			// mHUD.update();
 			EventQueue.getEventQueue().processAndRemoveAllEvents();
-			mLevel.update(deltaTime, 8, 3);
+			mLevel.update(nanoTime, 8, 3);
 			// TODO update camera AFTER level?
 		}
 	}

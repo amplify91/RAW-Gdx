@@ -10,7 +10,8 @@ public class StateOneTimeGraphic extends StateComponent{
 	}
 
 	@Override
-	public void update(PhysicsComponent physics) {
+	public void update(PhysicsComponent physics, long nanoTime) {
+		updateTempState(nanoTime);
 		if(physics.getParentSprite().getAnimationComponent().isAnimationFinished()){
 			physics.getParentSprite().die();
 			setState(STATE_DEAD);

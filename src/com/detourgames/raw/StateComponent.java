@@ -6,8 +6,15 @@ public abstract class StateComponent {
 	public int mHealth;
 	
 	protected int mState = 0;
+	protected int mPrevState = 0;
+	protected int mNextState = 0;
+	
+	protected boolean isStateTemp = false;
 	
 	private int[] mAvailableStates;
+	
+	protected long mCurrentTime;
+	protected long mDurationOverTime;
 	
 	public static final int STATE_IDLE = 1;
 	public static final int STATE_RUNNING = 2;
@@ -27,7 +34,7 @@ public abstract class StateComponent {
 		setInitialState();
 	}
 	
-	public abstract void update(PhysicsComponent physics);
+	public abstract void update(PhysicsComponent physics, long nanoTime);
 	
 	public void reset(){
 		setInitialState();
@@ -46,6 +53,26 @@ public abstract class StateComponent {
 		}
 		
 	}
+	
+	public void setTempState(int state, float duration){
+		mPrevState = mState;
+		mState = state;
+		mDurationOverTime = mCurrentTime + (long)(duration*1000000000f);
+		isStateTemp = true;
+	}
+	
+	protected void updateTempState(long nanoTime){
+		mCurrentTime = nanoTime;
+		if(isStateTemp && mCurrentTime>=mDurationOverTime){
+			mState = mPrevState;
+			isStateTemp = false;
+		}
+		
+	}
+	
+	/*public void queueState(int state, float delay){
+		
+	}*/
 	
 	private boolean isStateAvailable(int state){
 		for(int i=0;i<mAvailableStates.length;i++){

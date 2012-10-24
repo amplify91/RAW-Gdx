@@ -29,6 +29,10 @@ public class Level {
 	//ArrayList<ArrayList<Sprite>> mDrawableSprites;
 	ArrayList<Sprite> mUpdateableSprites;
 	
+	long mCurrentTime = 0;
+	long mLastTime = 0;
+	float mDeltaTime = 0;
+	
 	public static final int LAYER_HUD = 1;
 	public static final int LAYER_FOREGROUND = 2;
 	public static final int LAYER_OVER_GFX = 3;
@@ -38,6 +42,9 @@ public class Level {
 	public static final int LAYER_BACKGROUND1 = 7;
 	public static final int LAYER_BACKGROUND2 = 8;
 	public static final int LAYER_BACKGROUND3 = 9;
+	
+	public static final int VELOCITY_ITERATIONS = 8;
+	public static final int POSITION_ITERATIONS = 3;
 
 	// B2DDebugDraw debug;
 
@@ -65,13 +72,18 @@ public class Level {
 	 * "success!!!!"); }
 	 */
 
-	public void update(float deltaTime, int velocityIterations, int positionIterations) {
+	public void update(long nanoTime) {
 		
-		mWorld.step(deltaTime, velocityIterations, positionIterations);
+		mCurrentTime = nanoTime;
+		mDeltaTime = (mCurrentTime-mLastTime) / (float)1000000000;
+		
+		mWorld.step(mDeltaTime, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 		
 		for (int i = 0; i < mUpdateableSprites.size(); i++) {
-			mUpdateableSprites.get(i).update(deltaTime);
+			mUpdateableSprites.get(i).update(mCurrentTime, mDeltaTime);
 		}
+		
+		mLastTime = mCurrentTime;
 		
 	}
 

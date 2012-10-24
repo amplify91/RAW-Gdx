@@ -8,7 +8,7 @@ public class StateNone extends StateComponent{
 	}
 
 	@Override
-	public void update(PhysicsComponent physics) {
+	public void update(PhysicsComponent physics, long nanoTime) {
 		// do nothing.
 		
 	}

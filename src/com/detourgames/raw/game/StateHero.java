@@ -18,7 +18,8 @@ public class StateHero extends StateComponent{
 	}
 
 	@Override
-	public void update(PhysicsComponent physics) {
+	public void update(PhysicsComponent physics, long nanoTime) {
+		updateTempState(nanoTime);
 		if(isOnGround){
 			canJump = true;
 			canDoubleJump = true;

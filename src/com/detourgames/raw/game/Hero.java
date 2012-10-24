@@ -56,6 +56,7 @@ public class Hero extends Sprite{
 		
 		//create arm
 		mArm.create();
+		addChildSprite(mArm);
 	}
 	
 	public void jump(){

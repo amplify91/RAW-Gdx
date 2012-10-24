@@ -3,6 +3,7 @@ package com.detourgames.raw;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.utils.Array;
 import com.detourgames.raw.game.SpawnGFXEvent;
 import com.detourgames.raw.game.SpriteDeathEvent;
 
@@ -12,7 +13,9 @@ public abstract class Sprite implements IFocusable{
 	protected StateComponent mState;
 	protected AnimationComponent mAnimation;
 	protected ControllerComponent mController;
-	protected GenericPool<?> mPool;
+	protected GenericPool<?> mPool = null;
+	
+	protected Array<Sprite> mChildSprites = null;
 	
 	protected float mCameraOffsetX = 0;
 	protected float mCameraOffsetY = 0;
@@ -30,22 +33,41 @@ public abstract class Sprite implements IFocusable{
 
 	}
 	
-	public void recycle(){
+	public void destroy(){
 		//System.out.println("Sprite = "+this+" Pool = "+mPool );
-		mPool.free(this);//pool is null for some reason
+		destroyChildSprites();
+		if(getBody()!=null){
+			SpriteFactory.getLevel().getWorld().destroyBody(getBody());
+		}
+		if(mPool!=null){
+			mPool.free(this);
+		}
 		mPhysics.recycle();
 	}
 	
-	//public abstract void create(World world, float x, float y);
+	protected void addChildSprite(Sprite sprite){
+		if(mChildSprites==null){
+			mChildSprites = new Array<Sprite>(false, 1);
+		}
+		mChildSprites.add(sprite);
+	}
+	
+	protected void destroyChildSprites(){
+		if(mChildSprites!=null){
+			for(Sprite sprite : mChildSprites){
+				sprite.destroy();
+			}
+		}
+	}
 
 	public void draw(SpriteBatch sb, long nanoTime) {
 		//sb.draw(mAnimation.getFrame(nanoTime), mPhysics.getX()+mAnimation.getOffsetX(), mPhysics.getY()+mAnimation.getOffsetY(), mAnimation.getWidth(), mAnimation.getHeight());
 		sb.draw(mAnimation.getFrame(nanoTime), mPhysics.getX()+mAnimation.getOffsetX(), mPhysics.getY()+mAnimation.getOffsetY(), mAnimation.getWidth()/2f, mAnimation.getHeight()/2f, mAnimation.getWidth(), mAnimation.getHeight(), 1, 1, (float)Math.toDegrees(mPhysics.getAngle()));
 	}
 
-	public void update(float deltaTime) {
+	public void update(long nanoTime, float deltaTime) {
 		
-		mState.update(mPhysics);
+		mState.update(mPhysics, nanoTime);
 		if(mState.getState()!=StateComponent.STATE_DEAD){
 			mAnimation.update(mState);
 			mController.update(mState, mPhysics);

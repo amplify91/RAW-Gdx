@@ -59,7 +59,7 @@ public class MenuLoop {
 	}
 
 	private void updateGame(float deltaTime) {
-		mMenuManager.update(deltaTime);
+		mMenuManager.update(TimeUtils.nanoTime());
 	}
 
 	public void pause() {

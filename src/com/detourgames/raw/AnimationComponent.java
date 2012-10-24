@@ -31,12 +31,10 @@ public abstract class AnimationComponent {
 	
 	public AnimationComponent(Animation[] animations) {
 		setAnimations(animations);
-		setAnimation(0);
 	}
 	
 	public AnimationComponent(Animation[] animations, float width, float height) {
 		setAnimations(animations);
-		setAnimation(0);
 		setWidth(width);
 		setHeight(height);
 		calculateOffset();
@@ -56,32 +54,45 @@ public abstract class AnimationComponent {
 		}
 		if(isAnimationFinished){
 			if(isAnimationQueued){
-				setQueuedAnimation();
+				setQueuedAnimation(nanoTime);
 			}
 		}
 		return mAnimation.getKeyFrame(mStateTime, true);
 	}
 	
-	public void setAnimation(Animation animation){
+	public void setAnimation(Animation animation, long nanoTime){
 		mAnimation = animation;
 		isAnimationFinished = false;
-		mStartTime = TimeUtils.nanoTime();
+		mStartTime = nanoTime;
 	}
 	
-	public void setAnimation(int animation){
+	public void setAnimation(int animation, long nanoTime){
 		mCurrentAnimation = animation;
 		mAnimation = mAnimations[mCurrentAnimation];
 		isAnimationFinished = false;
-		mStartTime = TimeUtils.nanoTime();
+		mStartTime = nanoTime;
+	}
+	
+	// TODO the following 3 methods are imperfect temporary fixes
+	public void setAnimation(Animation animation){
+		setAnimation(animation, TimeUtils.nanoTime());
+	}
+	
+	public void setAnimation(int animation){
+		setAnimation(animation, TimeUtils.nanoTime());
 	}
 	
 	public void setTransitionAnimation(int animation, int nextAnimation){
-		setAnimation(animation);
+		setTransitionAnimation(animation, nextAnimation, TimeUtils.nanoTime());
+	}
+	
+	public void setTransitionAnimation(int animation, int nextAnimation, long nanoTime){
+		setAnimation(animation, nanoTime);
 		queueAnimation(nextAnimation);
 	}
 	
-	private void setQueuedAnimation(){
-		setAnimation(mNextAnimation);
+	private void setQueuedAnimation(long nanoTime){
+		setAnimation(mNextAnimation, nanoTime);
 		isAnimationQueued = false;
 		mStateTime = (float)1f/1000000000f;
 	}
@@ -94,7 +105,7 @@ public abstract class AnimationComponent {
 	
 	public void setAnimations(Animation[] animations){
 		mAnimations = animations;
-		setAnimation(0);
+		setAnimation(0, TimeUtils.nanoTime());
 	}
 	
 	public Animation getAnimation(int index){

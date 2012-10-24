@@ -42,7 +42,7 @@ public class GameLoop {
 		loops = 0;
 		
 		while (TimeUtils.nanoTime() > next_game_tick && loops < MAX_FRAMESKIP) {
-			updateGame(STEP_DURATION);
+			updateGame();
 			next_game_tick += TICK_DURATION;
 			loops++;
 		}
@@ -60,8 +60,8 @@ public class GameLoop {
 
 	}
 
-	private void updateGame(float deltaTime) {
-		mGameManager.update(deltaTime);
+	private void updateGame() {
+		mGameManager.update(TimeUtils.nanoTime());
 	}
 
 	public void pause() {

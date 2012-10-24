@@ -25,6 +25,7 @@ public class Turret extends Sprite{
 	public void create(World world, float x, float y){
 		mPhysics.create(world, x, y, WIDTH, HEIGHT, false, FixtureType.TURRET_BODY);
 		mBarrel.create(world);
+		addChildSprite(mBarrel);
 	}
 	
 }

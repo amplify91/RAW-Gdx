@@ -10,8 +10,8 @@ public class StateHeroArm extends StateComponent{
 	}
 
 	@Override
-	public void update(PhysicsComponent physics) {
-		// TODO Auto-generated method stub
+	public void update(PhysicsComponent physics, long nanoTime) {
+		updateTempState(nanoTime);
 	}
 
 	@Override

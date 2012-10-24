@@ -13,7 +13,8 @@ public class StateHeroProjectile extends StateComponent{
 	}
 
 	@Override
-	public void update(PhysicsComponent physics) {
+	public void update(PhysicsComponent physics, long nanoTime) {
+		updateTempState(nanoTime);
 		if(mState==STATE_DEAD){
 			physics.getParentSprite().die();
 		}
