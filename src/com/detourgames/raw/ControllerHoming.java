@@ -6,19 +6,18 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.detourgames.raw.game.HeroProjectile;
 import com.detourgames.raw.steering.Steerer;
 
-public class HomingController extends ControllerComponent{
+public class ControllerHoming extends ControllerComponent{
 
 	Sprite mTarget;
 	float mTurningRate;
 
-	public HomingController(Sprite target, float turningRate){
+	public ControllerHoming(Sprite target, float turningRate){
 		mTurningRate = turningRate;
 		mTarget = target;
 	}
 
 	@Override
-	public void update(StateComponent state, PhysicsComponent physics)
-	{
+	public void update(StateComponent state, PhysicsComponent physics){
 		Iterator<Body> bodies=GameManager.getGameManager().getLevel().getWorld().getBodies();
 		Body toFlee=null;
 

@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.QueryCallback;
 import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class PhysicsComponent {
@@ -111,6 +112,26 @@ public abstract class PhysicsComponent {
 		createBody(world, x, y, true, false, false, 1.0f, 0.0f, 0.0f);
 	}
 	
+	public Fixture createFixture(float width, float height, int fixtureType, float density, float friction, float restitution, boolean isSensor, short groupIndex, short categoryBits, short maskBits){
+		
+		PolygonShape dynamicBox = new PolygonShape();
+		dynamicBox.setAsBox(width / 2f, height / 2f);
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = dynamicBox;
+		fixtureDef.density = density;
+		fixtureDef.friction = friction;
+		fixtureDef.isSensor = isSensor;
+		fixtureDef.filter.groupIndex = groupIndex;
+		fixtureDef.filter.categoryBits = categoryBits;
+		fixtureDef.filter.maskBits = maskBits;
+		
+		Fixture f = mBody.createFixture(fixtureDef);
+		f.setUserData(fixtureType);
+		
+		return f;
+		
+	}
+	
 	public Fixture createFixture(Vector2 vertices[], int fixtureType, float density, float friction, float restitution, boolean isSensor, short groupIndex, short categoryBits, short maskBits){
 		
 		PolygonShape dynamicBox = new PolygonShape();
@@ -194,5 +215,17 @@ public abstract class PhysicsComponent {
 	public Vector2 getDistanceVectorToPoint(Vector2 point){
 		return new Vector2(point.x-getX(), point.y-getY());
 	}
+	
+	/*public void foo(){
+		QueryCallback qcb = new QueryCallback() {
+			int bar;
+			@Override
+			public boolean reportFixture(Fixture fixture) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		};
+		//mBody.getWorld().QueryAABB(callback, lowerX, lowerY, upperX, upperY);
+	}*/
 
 }

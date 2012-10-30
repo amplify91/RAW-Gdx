@@ -2,11 +2,10 @@ package com.detourgames.raw.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.detourgames.raw.ControllerNone;
+import com.detourgames.raw.ControllerHoming;
 import com.detourgames.raw.FixtureType;
 import com.detourgames.raw.GameManager;
 import com.detourgames.raw.GenericPool;
-import com.detourgames.raw.HomingController;
 import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.PhysicsStatic;
 import com.detourgames.raw.Sprite;
@@ -25,7 +24,7 @@ public class TurretProjectile extends Sprite{
 	
 	public TurretProjectile(SpriteSheet spriteSheet, GenericPool<?> pool) {
 		super(new PhysicsStatic(), new AnimationTurretProjectile(spriteSheet, WIDTH, HEIGHT), new StateHeroProjectile(),
-				new HomingController( GameManager.getGameManager().getLevel().getHero(), 2f), pool);
+				new ControllerHoming( GameManager.getGameManager().getLevel().getHero(), 2f), pool);
 	}
 	
 	public void create(World world, Sprite parent, Vector2 destinationPoint){

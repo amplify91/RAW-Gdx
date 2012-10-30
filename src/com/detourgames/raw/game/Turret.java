@@ -3,6 +3,7 @@ package com.detourgames.raw.game;
 import com.badlogic.gdx.physics.box2d.World;
 import com.detourgames.raw.FixtureType;
 import com.detourgames.raw.GenericPool;
+import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.Sprite;
 import com.detourgames.raw.SpriteFactory;
 import com.detourgames.raw.SpriteSheet;
@@ -23,7 +24,9 @@ public class Turret extends Sprite{
 	}
 	
 	public void create(World world, float x, float y){
-		mPhysics.create(world, x, y, WIDTH, HEIGHT, false, FixtureType.TURRET_BODY);
+		//mPhysics.create(world, x, y, WIDTH, HEIGHT, false, FixtureType.TURRET_BODY);
+		mPhysics.createBody(world, x, y, false, true, false, 1, 0, 0);
+		mPhysics.createFixture(WIDTH, WIDTH, FixtureType.TURRET_BODY, 1, 0, 0, false, PhysicsComponent.GROUP_ENEMY, PhysicsComponent.CATEGORY_ENEMY, PhysicsComponent.CATEGORY_ALLY);
 		mBarrel.create(world);
 		addChildSprite(mBarrel);
 	}
