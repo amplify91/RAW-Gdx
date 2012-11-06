@@ -2,8 +2,10 @@ package com.detourgames.raw.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.detourgames.raw.ControllerHoming;
 import com.detourgames.raw.ControllerNone;
 import com.detourgames.raw.FixtureType;
+import com.detourgames.raw.GameManager;
 import com.detourgames.raw.GenericPool;
 import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.Sprite;
@@ -21,7 +23,8 @@ public class HeroProjectile extends Sprite{
 	public static final Vector2[] VERTS_RAW = new Vector2[]{new Vector2(-0.2f,-0.2f), new Vector2(0.2f,-0.2f), new Vector2(0.2f,0.2f), new Vector2(-0.2f,0.2f)};
 	
 	public HeroProjectile(SpriteSheet spriteSheet, GenericPool<HeroProjectile> pool) {
-		super(new PhysicsHeroProjectile(), new AnimationHeroProjectile(spriteSheet, WIDTH, HEIGHT), new StateHeroProjectile(), new ControllerNone(), pool);
+		super(new PhysicsHeroProjectile(), new AnimationHeroProjectile(spriteSheet, WIDTH, HEIGHT), new StateHeroProjectile(),
+				new ControllerHoming(GameManager.getGameManager().getLevel().getHero(), 0), pool);
 	}
 	
 	public void create(World world, Sprite parent, Vector2 destinationPoint){

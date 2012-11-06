@@ -5,6 +5,10 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.detourgames.raw.ContactListenerInterfaces.BeginContactInterface;
+import com.detourgames.raw.ContactListenerInterfaces.EndContactInterface;
+import com.detourgames.raw.ContactListenerInterfaces.PostSolveInterface;
+import com.detourgames.raw.ContactListenerInterfaces.PreSolveInterface;
 import com.detourgames.raw.game.HeroProjectile;
 import com.detourgames.raw.game.StateHero;
 import com.detourgames.raw.game.TurretProjectile;
@@ -18,22 +22,38 @@ public class ContactListenerRAW implements ContactListener{
 		beginGroundContact(contact);
 		beginHeroProjectileContact(contact);
 		beginEnemyProjectileContact(contact);
+
+		 if (contact.getFixtureA() instanceof BeginContactInterface)
+	          ((BeginContactInterface)contact.getFixtureA()).beginContact(contact);
+		 if (contact.getFixtureB() instanceof BeginContactInterface)
+	          ((BeginContactInterface)contact.getFixtureB()).beginContact(contact);
 	}
 
 	@Override
 	public void endContact(Contact contact) {
 		endGroundContact(contact);
+		 if (contact.getFixtureA() instanceof EndContactInterface)
+	          ((EndContactInterface)contact.getFixtureA()).endContact(contact);
+		 if (contact.getFixtureB() instanceof EndContactInterface)
+	          ((EndContactInterface)contact.getFixtureB()).endContact(contact);
 	}
 
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
-		// TODO Auto-generated method stub
+		 if (contact.getFixtureA() instanceof PreSolveInterface)
+	          ((PreSolveInterface)contact.getFixtureA()).preSolve(contact);
+		 if (contact.getFixtureB() instanceof PreSolveInterface)
+	          ((PreSolveInterface)contact.getFixtureB()).preSolve(contact);
+
 		
 	}
 
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
-		// TODO Auto-generated method stub
+		 if (contact.getFixtureA() instanceof PostSolveInterface)
+	          ((PostSolveInterface)contact.getFixtureA()).postSolve(contact);
+		 if (contact.getFixtureB() instanceof PostSolveInterface)
+	          ((PostSolveInterface)contact.getFixtureB()).postSolve(contact);
 		
 	}
 	
