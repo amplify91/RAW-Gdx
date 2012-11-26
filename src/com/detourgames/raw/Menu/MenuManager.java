@@ -1,4 +1,4 @@
-package com.detourgames.raw.engineTest;
+package com.detourgames.raw.Menu;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -60,7 +60,7 @@ public class MenuManager {
 
 	}
 
-	public void loadLevel(int level) {
+	public void loadMenu() {
 
 		levelLoaded = false;
 

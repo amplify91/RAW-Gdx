@@ -1,4 +1,4 @@
-package com.detourgames.raw.engineTest;
+package com.detourgames.raw.Menu;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -14,19 +14,17 @@ public class Menu implements ApplicationListener{
 	@Override
 	public void create() {
 		mGameLoop=new MenuLoop();
-		Gdx.input.setInputProcessor(new MenuInput());//TODO make this suck less
+		Gdx.input.setInputProcessor(new MenuInput());
 
 	}
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -40,13 +38,12 @@ public class Menu implements ApplicationListener{
 	public void resize(int width, int height) {
 		float ratio = (float)width/(float)height;
 		mGameManager.createCamera(7.5f*ratio, 7.5f, width, height);
-		mGameManager.loadLevel(1);
+		mGameManager.loadMenu();
 		
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 		
 	}
 

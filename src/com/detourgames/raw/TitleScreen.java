@@ -2,9 +2,9 @@ package com.detourgames.raw;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.detourgames.raw.engineTest.MenuInput;
-import com.detourgames.raw.engineTest.MenuLoop;
-import com.detourgames.raw.engineTest.MenuManager;
+import com.detourgames.raw.Menu.MenuInput;
+import com.detourgames.raw.Menu.MenuLoop;
+import com.detourgames.raw.Menu.MenuManager;
 
 public class TitleScreen implements Screen{
 	
@@ -28,7 +28,7 @@ public class TitleScreen implements Screen{
 		// TODO Auto-generated method stub
 		float ratio = (float)width/(float)height;
 		mMenuManager.createCamera(7.5f*ratio, 7.5f, width, height);
-		mMenuManager.loadLevel(1);
+		mMenuManager.loadMenu();
 	}
 
 	@Override

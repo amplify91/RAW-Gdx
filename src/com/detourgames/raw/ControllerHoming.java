@@ -19,7 +19,7 @@ public class ControllerHoming extends ControllerComponent{
 
 	@Override
 	public void update(StateComponent state, PhysicsComponent physics){
-				if(RaycastSteerer.AvoidObstacles(physics.getBody())==false)
-					physics.getBody().applyForceToCenter(Steerer.persue(physics.getParentSprite(), mTarget).nor().mul(mTurningRate));
+		if(!RaycastSteerer.AvoidObstacles(physics.getBody(),mTarget.mPhysics.getBody().getFixtureList()))
+			physics.getBody().applyForceToCenter(Steerer.persue(physics.getParentSprite(), mTarget).nor().mul(mTurningRate));
 		}
 	}

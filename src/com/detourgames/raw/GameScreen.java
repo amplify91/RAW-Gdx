@@ -31,7 +31,7 @@ public class GameScreen implements Screen{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		Gdx.input.setInputProcessor(new Input());
+		Gdx.input.setInputProcessor(new RAWInput());
 	}
 
 	@Override

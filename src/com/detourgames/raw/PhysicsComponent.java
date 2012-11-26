@@ -215,6 +215,7 @@ public abstract class PhysicsComponent {
 	public Vector2 getDistanceVectorToPoint(Vector2 point){
 		return new Vector2(point.x-getX(), point.y-getY());
 	}
+
 	
 	/*public void foo(){
 		QueryCallback qcb = new QueryCallback() {

@@ -6,8 +6,6 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameRAW extends Game{
 
-	//GameLoop mGameLoop = GameLoop.getGameLoop();
-	//GameManager mGameManager = GameManager.getGameManager();
 	
 	public static TitleScreen mTitleScreen;
 	public static GameScreen mGameScreen;
@@ -16,8 +14,6 @@ public class GameRAW extends Game{
 	long mCurrentTime;
 	float mDeltaTime;
      
-    //SpriteFactory mSpriteFactory;
-    //SpriteSheet mSpriteSheet;
 	
 	private static GameRAW mGameRAW = new GameRAW(); //singleton
 	
@@ -27,7 +23,7 @@ public class GameRAW extends Game{
 	
 	@Override
 	public void create() {
-		Gdx.input.setInputProcessor(new Input());//TODO make this suck less
+		Gdx.input.setInputProcessor(new RAWInput());//TODO make this suck less
 		
 		mTitleScreen = new TitleScreen(this);
 		mGameScreen = new GameScreen(this);

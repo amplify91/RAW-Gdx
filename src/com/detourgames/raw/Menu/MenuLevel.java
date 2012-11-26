@@ -1,4 +1,4 @@
-package com.detourgames.raw.engineTest;
+package com.detourgames.raw.Menu;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,6 @@ public class MenuLevel {
 	ArrayList<Sprite> mBackground1 = new ArrayList<Sprite>();
 	ArrayList<Sprite> mBackground2 = new ArrayList<Sprite>();
 	ArrayList<Sprite> mBackground3 = new ArrayList<Sprite>();
-	//ArrayList<ArrayList<Sprite>> mDrawableSprites;
 	ArrayList<Sprite> mUpdateableSprites;
 	
 	public static final int LAYER_HUD = 1;
@@ -51,7 +50,7 @@ public class MenuLevel {
 		
 		setContactListeners();
 
-		// debug = new B2DDebugDraw(null, context);//TODO if debug drawing
+		// debug = new B2DDebugDraw(null, context); if debug drawing
 		// doesn't work, this null is probably why.
 
 		// mWorld.setDebugDraw(debug);
