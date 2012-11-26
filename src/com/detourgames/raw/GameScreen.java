@@ -25,12 +25,12 @@ public class GameScreen implements Screen{
 		
 		float ratio = (float)width/(float)height;
 		mGameManager.createCamera(7.5f*ratio, 7.5f, width, height);
-		mGameManager.loadLevel(1);
 	}
 
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
+		mGameManager.loadLevel(1);
 		Gdx.input.setInputProcessor(new RAWInput());
 	}
 

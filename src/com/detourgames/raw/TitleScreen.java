@@ -29,6 +29,7 @@ public class TitleScreen implements Screen{
 		float ratio = (float)width/(float)height;
 		mMenuManager.createCamera(7.5f*ratio, 7.5f, width, height);
 		mMenuManager.loadMenu();
+		
 	}
 
 	@Override

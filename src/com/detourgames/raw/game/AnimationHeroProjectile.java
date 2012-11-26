@@ -13,6 +13,8 @@ public class AnimationHeroProjectile extends AnimationComponent{
 	public static final int[] ANIMATION_IDLE = {518};
 	public static final int[] ANIMATION_EXPLODING = {519,520,521};
 	public static final int[] ANIMATION_EXPLODING_FF = {521};
+	//{817,818,819,820,821,822,823};
+	//public static final int[] ANIMATION_EXPLODING_FF = {823};
 	
 	public AnimationHeroProjectile(SpriteSheet spriteSheet, float width, float height){
 		super(new Animation[]{
