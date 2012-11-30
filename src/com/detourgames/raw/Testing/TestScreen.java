@@ -1,37 +1,25 @@
-package com.detourgames.raw;
+package com.detourgames.raw.Testing;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 
-public class GameScreen implements Screen{
-	
-	GameLoop mGameLoop = GameLoop.getGameLoop();
-	GameManager mGameManager = GameManager.getGameManager();
-	
-	GameRAW mGame;
-	
-	public GameScreen(GameRAW game){
-		mGame = game;
-	}
-	
+public class TestScreen implements Screen{
+
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
-		mGameLoop.tick();
+		
 	}
 
 	@Override
 	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
 		
-		float ratio = (float)width/(float)height;
-		mGameManager.createCamera(7.5f*ratio, 7.5f, width, height);
 	}
 
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		Gdx.input.setInputProcessor(new RAWInput());
-		mGameManager.loadLevel(1);
+		
 	}
 
 	@Override

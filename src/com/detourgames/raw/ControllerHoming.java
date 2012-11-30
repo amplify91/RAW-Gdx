@@ -1,11 +1,7 @@
 package com.detourgames.raw;
 
-import java.util.Iterator;
-
-import com.badlogic.gdx.physics.box2d.Body;
-import com.detourgames.raw.game.HeroProjectile;
-import com.detourgames.raw.steering.RaycastSteerer;
-import com.detourgames.raw.steering.Steerer;
+import com.detourgames.raw.AI.steering.RaycastSteerer;
+import com.detourgames.raw.AI.steering.Steerer;
 
 public class ControllerHoming extends ControllerComponent{
 

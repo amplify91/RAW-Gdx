@@ -58,9 +58,7 @@ public class GameRAW extends Game{
 	@Override
 	public void resize(int width, int height) {
 		
-		/*float ratio = (float)width/(float)height;
-		mGameManager.createCamera(7.5f*ratio, 7.5f, width, height);
-		mGameManager.loadLevel(1);*/
+		float ratio = (float)width/(float)height;
 		
 	}
 

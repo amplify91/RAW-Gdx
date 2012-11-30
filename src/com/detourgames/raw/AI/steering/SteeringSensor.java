@@ -1,4 +1,4 @@
-package com.detourgames.raw.steering;
+package com.detourgames.raw.AI.steering;
 
 import java.util.ArrayList;
 

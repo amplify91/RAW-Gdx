@@ -24,7 +24,7 @@ public class HeroProjectile extends Sprite{
 	
 	public HeroProjectile(SpriteSheet spriteSheet, GenericPool<HeroProjectile> pool) {
 		super(new PhysicsHeroProjectile(), new AnimationHeroProjectile(spriteSheet, WIDTH, HEIGHT), new StateHeroProjectile(),
-				new ControllerHoming(GameManager.getGameManager().getLevel().getHero(), 0), pool);
+				new ControllerNone(), pool);
 	}
 	
 	public void create(World world, Sprite parent, Vector2 destinationPoint){

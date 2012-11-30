@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.detourgames.raw.Camera;
 import com.detourgames.raw.HUDElement;
 import com.detourgames.raw.SpriteSheet;
+import com.detourgames.raw.Testing.MenuHUDButtonTests;
 import com.detourgames.raw.game.HUDButtonDash;
 import com.detourgames.raw.game.HUDButtonJump;
 

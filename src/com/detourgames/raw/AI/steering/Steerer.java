@@ -1,4 +1,4 @@
-package com.detourgames.raw.steering;
+package com.detourgames.raw.AI.steering;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
