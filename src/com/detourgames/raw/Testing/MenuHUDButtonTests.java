@@ -12,15 +12,15 @@ import com.detourgames.raw.Menu.MenuHUDButton;
 
 public class MenuHUDButtonTests extends MenuHUDButton{
 	
-	private static final float WIDTH = 0.15f;
-	private static final float HEIGHT = 0.25f;
+	private static final float WIDTH = 0.2f;
+	private static final float HEIGHT = 0.2f;
 	private static final float ORIGIN_X = 0.5f - WIDTH/2f;
 	private static final float ORIGIN_Y = 0.75f - HEIGHT/2f;
 	
 	public MenuHUDButtonTests(Camera camera, World world, SpriteSheet spriteSheet) {
 		super(camera, spriteSheet);
 		create(world);
-		mState.setState(StateButton.STATE_DASH_UP);
+		mState.setState(StateButton.STATE_DOUBLE_JUMPING);
 	}
 	
 	public void create(World world){
@@ -32,5 +32,6 @@ public class MenuHUDButtonTests extends MenuHUDButton{
 	public void touchDown() {
 		GameRAW.getGameRAW().setScreen(new TestScreen());
 	}
+	//todo how do you change the sprite image for this?
 	
 }

@@ -11,13 +11,14 @@ import com.detourgames.raw.game.HeroProjectile;
 import com.detourgames.raw.game.Tile;
 import com.detourgames.raw.game.Turret;
 import com.detourgames.raw.game.TurretProjectile;
+import com.detourgames.raw.game.launchers.HomingRocketLauncher;
+import com.detourgames.raw.game.launchers.SimpleRocketLauncher;
 
 public class SpriteFactory {
 
 	private static Level mLevel;
 	static SpriteSheet mSpriteSheet;
-	private static Hashtable<Class,GenericPool> mPools;
-	
+	public static Hashtable<Class,GenericPool> mPools;
 	private static final SpriteFactory mSpriteFactory = new SpriteFactory();
 
 	public SpriteFactory() {
@@ -46,6 +47,7 @@ public class SpriteFactory {
 		pools.put(BackgroundTile.class, new GenericPool<BackgroundTile>());
 		pools.put(TurretProjectile.class,new GenericPool<TurretProjectile>());
 		pools.put(GFXSprite.class,new GenericPool<GFXSprite>());
+		pools.put(Projectile.class, new GenericPool<Projectile>());
 		
 		return pools;
 	}
@@ -64,22 +66,28 @@ public class SpriteFactory {
 		
 		return hero;
 	}
-	
-	public Turret createTurret(float x, float y){
+	public Turret createSimpleTurret(float x, float y){
 		Turret turret = (Turret)mPools.get(Turret.class).obtain();
 		if(turret==null){
 			turret = new Turret(mSpriteSheet, mPools.get(Turret.class));
 			turret.create(mLevel.getWorld(), x, y);
-		}else{
-			//set propeties like, x, y, etc...
 		}
+		turret.SetLauncher(SimpleRocketLauncher.getSimpleRocketLauncher());
 		mLevel.addDrawableSprite(turret, Level.LAYER_ACTORS_OBJECTS);
 		mLevel.addUpdateableSprite(turret);
 		
 		return turret;
 	}
 	
+	public Turret createHomingTurret(float x, float y)
+	{
+		Turret t=createSimpleTurret(x,y);
+		t.SetLauncher(HomingRocketLauncher.getHomingRocketLauncher());
+		return t;
+	}
+	
 	public BackgroundTile createBackgroundTile(float x, float y, int frame, float scrollFactor){
+
 		BackgroundTile bgt = (BackgroundTile)mPools.get(BackgroundTile.class).obtain();
 		if(bgt==null){
 			bgt = new BackgroundTile(mPools.get(BackgroundTile.class));
@@ -93,7 +101,7 @@ public class SpriteFactory {
 		return bgt;
 	}
 	
-	public Tile createTile(float x, float y, int frame){
+public Tile createTile(float x, float y, int frame){
 		
 		Tile tile = (Tile)mPools.get(Tile.class).obtain();
 		if(tile==null){
@@ -120,6 +128,13 @@ public class SpriteFactory {
 		mLevel.addDrawableSprite(projectile, Level.LAYER_ACTORS_OBJECTS);
 		mLevel.addUpdateableSprite(projectile);
 		
+		return projectile;
+	}
+	
+	public Projectile createHomingProjectile(Sprite parent, Sprite target)
+	{
+		Projectile projectile = createTurretProjectile(parent,target.getPosition());
+		projectile.setController(new ControllerHoming(target,100));
 		return projectile;
 	}
 	
@@ -165,7 +180,7 @@ public class SpriteFactory {
 		}else if(tileNumber==704){
 			return createHero(x, y);
 		}else if(tileNumber==755){
-			return createTurret(x, y);
+			return createHomingTurret(x, y);
 		}else if(tileNumber==1200){
 			return createBackgroundTile(x, y, 1200, BackgroundTile.BACKGROUND1_SCROLL_FACTOR);
 		}else{

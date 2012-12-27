@@ -57,8 +57,7 @@ public class GameRAW extends Game{
 
 	@Override
 	public void resize(int width, int height) {
-		
-		float ratio = (float)width/(float)height;
+		getScreen().resize(width, height);
 		
 	}
 

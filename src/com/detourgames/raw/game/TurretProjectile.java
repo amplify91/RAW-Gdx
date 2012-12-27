@@ -9,10 +9,11 @@ import com.detourgames.raw.GameManager;
 import com.detourgames.raw.GenericPool;
 import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.PhysicsStatic;
+import com.detourgames.raw.Projectile;
 import com.detourgames.raw.Sprite;
 import com.detourgames.raw.SpriteSheet;
 
-public class TurretProjectile extends Sprite{
+public class TurretProjectile extends Projectile{
 	
 	public static final float WIDTH = 0.4f;
 	public static final float HEIGHT = 0.4f;

@@ -10,7 +10,7 @@ public class AnimationTurretProjectile extends AnimationComponent{
 	public static final int INDEX_IDLE = 0;
 	public static final int INDEX_EXPLODING = 1;
 	public static final int INDEX_EXPLODING_FF = 2;
-	public static final int[] ANIMATION_IDLE = {517};
+	public static final int[] ANIMATION_IDLE = {530};
 	public static final int[] ANIMATION_EXPLODING = {519,520,521};
 	public static final int[] ANIMATION_EXPLODING_FF = {521};
 	

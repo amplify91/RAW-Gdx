@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.detourgames.raw.GameManager;
 import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.PhysicsScrolling;
+import com.detourgames.raw.PhysicsStatic;
 import com.detourgames.raw.game.BackgroundTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -12,14 +13,14 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.RayCastCallback;
 
 public class RaycastSteerer implements RayCastCallback{
-
 	//returns false if no obstacle is found
 	public static boolean AvoidObstacles(Body physics,ArrayList<Fixture>fixturesToIgnore){
+		physics.setAngularVelocity(20);
 		Vector2 linearVelocity=physics.getLinearVelocity().cpy();
 		if(physics.getLinearVelocity().len()==0)
 			return false;
 		Vector2 currentPosition=physics.getPosition().cpy();
-		Vector2 destination = physics.getPosition().cpy().add(linearVelocity);
+		Vector2 destination = physics.getPosition().cpy().add(linearVelocity.mul(.1f));
 		RayCastCallback output = GetSteerer(fixturesToIgnore);
 		lastFixtureReturn=null;
 		lastPointReturn=null;
@@ -41,27 +42,41 @@ public class RaycastSteerer implements RayCastCallback{
 			int m=0;
 		}
 		float speedTowardsFixtureLine=Math.abs(linearVelocity.dot(normal));
-		float distanceFromFixtureLine=Math.abs(pointOfIntersection.cpy().sub(currentPosition).dot(normal));
+
+		ArrayList<Fixture>fixtures=physics.getFixtureList();
+		float width=0;
+		for (Fixture f:fixtures)
+		{
+			if(width<f.getShape().getRadius())
+				width=f.getShape().getRadius();
+		}
+		
+		float distanceFromFixtureLine=Math.abs(pointOfIntersection.cpy().sub(currentPosition).dot(normal)-width);
 		float time=distanceFromFixtureLine/speedTowardsFixtureLine;
 		if(distanceFromFixtureLine>linearVelocity.len())
 		{
 			int m=0;
 		}
-		Vector2 avoidingVelocity=normal.cpy().mul(normal.dot(linearVelocity)*-1);//todo figure out radius of body normal.cpy().mul(distanceFromFixtureLine-radius);
+		Vector2 avoidingVelocity=normal.cpy().mul(normal.dot(linearVelocity));//todo figure out radius of body normal.cpy().mul(distanceFromFixtureLine-radius);
+		Vector2 desiredVelocity = linearVelocity.cpy().sub(avoidingVelocity);
 		float mass = physics.getMass();
-		Vector2 acceleration=avoidingVelocity.cpy().mul(1.0f/time);
+		Vector2 acceleration=desiredVelocity.cpy().sub(linearVelocity).mul(time);
 		Vector2 avoidingForce=acceleration.mul(mass);
 		
-				//		Vector2 avoidingForce=avoidingVelocity.cpy().mul(mass*speedTowardsFixtureLine*speedTowardsFixtureLine/distanceFromFixtureLine/distanceFromFixtureLine);
-		//physics.applyForceToCenter(avoidingForce);
-					physics.setLinearVelocity(physics.getLinearVelocity().add(avoidingVelocity));
-		//			Vector2 newVelocity=physics.getLinearVelocity();
+		//				Vector2 avoidingForce=avoidingVelocity.cpy().mul(mass*speedTowardsFixtureLine*speedTowardsFixtureLine/distanceFromFixtureLine/distanceFromFixtureLine);
+//		physics.applyForceToCenter(avoidingForce);
+					physics.setLinearVelocity(desiredVelocity);
+				//	physics.setActive(false);
+					Vector2 newVelocity=physics.getLinearVelocity();
+					newVelocity.sub(new Vector2(0f,0f));
+					
 		return true;
 	}
 	private static RaycastSteerer steerer=new RaycastSteerer();
 	public static RaycastSteerer GetSteerer(ArrayList<Fixture>fixturesToIgnore){
 		RaycastSteerer.fixturesToIgnore=fixturesToIgnore;
 		return steerer;}
+	
 	final float TERMINATE_RAYCAST_ON_COLLISION=-1;
 	@Override
 	public float reportRayFixture(Fixture fixture, Vector2 point,

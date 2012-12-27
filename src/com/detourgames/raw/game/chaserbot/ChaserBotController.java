@@ -5,14 +5,20 @@ import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.StateComponent;
 import com.detourgames.raw.game.ControllerTurret;
 import com.detourgames.raw.game.PhysicsTurret;
+import com.detourgames.raw.game.Turret;
 
 public class ChaserBotController extends ControllerTurret {
 	
+	public ChaserBotController(Turret mTurret) {
+		super(mTurret);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void update(StateComponent state, PhysicsComponent physics){
 		getNextAction(state);
 		if(state.getState()==StateComponent.STATE_SHOOTING && TimeUtils.nanoTime()>= mNextShot){
-			((PhysicsTurret)physics).fireMissileAtTarget(mTarget.getPosition());
+			mTurret.fireMissileAtTarget(mTarget);
 			mLastShot = TimeUtils.nanoTime();
 			mNextShot = mLastShot + mCooldown;
 			state.setState(StateComponent.STATE_IDLE);

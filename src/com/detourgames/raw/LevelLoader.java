@@ -45,7 +45,7 @@ public class LevelLoader {
 
 		// sprites += HUD.HUD_SPRITES;
 	}
-
+	
 	public void createLevelFromFile(int ln) {
 		FileHandle jsonId = getFileHandle(ln);
 		JsonReader reader=new JsonReader();
@@ -59,6 +59,9 @@ public class LevelLoader {
 
 		if (ln == 1) {
 			levelID = Gdx.files.internal("levels/test4.json");
+		}
+		if (ln == 2) {
+			levelID = Gdx.files.internal("levels/RAWtest3.json");
 		}
 
 		return levelID;
