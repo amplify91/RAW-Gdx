@@ -274,8 +274,6 @@ public class LevelLoader {
 			}
 		}
 		
-		if(Gdx.app.getType()==ApplicationType.Android){
-			mSpriteFactory.createHUDElements();
-		}
+		
 	}
 }

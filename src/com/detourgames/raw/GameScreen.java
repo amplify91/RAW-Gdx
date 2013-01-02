@@ -2,6 +2,7 @@ package com.detourgames.raw;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Application.ApplicationType;
 
 public class GameScreen implements Screen{
 	
@@ -22,14 +23,17 @@ public class GameScreen implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
+		//ftr, this is called AFTER show()
 		
 		float ratio = (float)width/(float)height;
 		mGameManager.createCamera(7.5f*ratio, 7.5f, width, height);
+		if(Gdx.app.getType()==ApplicationType.Android){
+			SpriteFactory.getSpriteFactory().createHUDElements();
+		}
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
 		Gdx.input.setInputProcessor(new RAWInput());
 		mGameManager.loadLevel(1);
 	}

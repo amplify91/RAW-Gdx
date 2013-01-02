@@ -15,7 +15,7 @@ import com.badlogic.gdx.physics.box2d.RayCastCallback;
 public class RaycastSteerer implements RayCastCallback{
 	//returns false if no obstacle is found
 	public static boolean AvoidObstacles(Body physics,ArrayList<Fixture>fixturesToIgnore){
-		physics.setAngularVelocity(20);
+		//physics.setAngularVelocity(20);
 		Vector2 linearVelocity=physics.getLinearVelocity().cpy();
 		if(physics.getLinearVelocity().len()==0)
 			return false;

@@ -8,7 +8,7 @@ public class GameManager {
 	private static GameManager gameManager = new GameManager();
 	
 	private Camera mCamera;
-	private HUD mHUD;
+	private HUD mHUD = new HUD();
 	// Input input;
 	// HUD mHUD;
 
@@ -101,7 +101,7 @@ public class GameManager {
 	public void createCamera(float viewportWidth, float viewportHeight, int pixelWidth, int pixelHeight){
 		mCamera = new Camera(viewportWidth, viewportHeight);
 		mCamera.setScreenSizePixels(pixelWidth, pixelHeight);
-		mHUD = new HUD(mCamera);
+		mHUD.setCamera(mCamera);
 	}
 	
 	public Camera getCamera(){

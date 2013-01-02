@@ -7,7 +7,7 @@ import com.detourgames.raw.game.HUDButtonJump;
 
 public class HUD {
 	
-	private Camera mCamera;
+	private Camera mCamera = null;
 	
 	public static final int BUTTON_NONE = 0;
 	public static final int BUTTON_JUMP = 1;
@@ -15,7 +15,11 @@ public class HUD {
 	
 	HUDElement[] mHUDElements;
 	
-	public HUD(Camera camera){
+	public HUD(){
+		
+	}
+	
+	public void setCamera(Camera camera){
 		mCamera = camera;
 	}
 	

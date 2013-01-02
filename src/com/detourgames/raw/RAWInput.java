@@ -1,5 +1,7 @@
 package com.detourgames.raw;
 
+import tv.ouya.console.api.OuyaController;
+
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -19,7 +21,7 @@ public class RAWInput implements InputProcessor{
 	@Override
 	public boolean keyDown(int keycode) {
 		// TODO Auto-generated method stub
-		if(keycode==Keys.UP || keycode==Keys.W){
+		if(keycode==Keys.UP || keycode==Keys.W || keycode==OuyaController.BUTTON_DPAD_UP){
 			jump();
 			return true;
 		}else if(keycode==Keys.RIGHT || keycode==Keys.D){
