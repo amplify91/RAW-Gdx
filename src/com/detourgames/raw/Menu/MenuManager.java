@@ -84,7 +84,7 @@ public class MenuManager {
 			levelLoaded = true;
 		}
 		
-		debug = new Box2DDebugRenderer(true, true,true,true);
+		debug = new Box2DDebugRenderer(true, true, true, true, true);
 
 		// System.gc();
 	}

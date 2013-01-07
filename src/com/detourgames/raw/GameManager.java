@@ -16,7 +16,7 @@ public class GameManager {
 
 	LevelLoader levelLoader;
 	SpriteBatch spriteBatch;
-	Box2DDebugRenderer debug;
+	Box2DDebugRenderer debug = new Box2DDebugRenderer(true, true, true, true, true);
 	
 	boolean levelLoaded = false;
 
@@ -80,8 +80,6 @@ public class GameManager {
 
 			levelLoaded = true;
 		}
-		
-		debug = new Box2DDebugRenderer(true, true,true,true);
 
 		// System.gc();
 	}

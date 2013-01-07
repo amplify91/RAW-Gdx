@@ -79,9 +79,8 @@ public class SpriteFactory {
 		return turret;
 	}
 	
-	public Turret createHomingTurret(float x, float y)
-	{
-		Turret t=createSimpleTurret(x,y);
+	public Turret createHomingTurret(float x, float y){
+		Turret t = createSimpleTurret(x,y);
 		t.SetLauncher(HomingRocketLauncher.getHomingRocketLauncher());
 		return t;
 	}
@@ -101,7 +100,7 @@ public class SpriteFactory {
 		return bgt;
 	}
 	
-public Tile createTile(float x, float y, int frame){
+	public Tile createTile(float x, float y, int frame){
 		
 		Tile tile = (Tile)mPools.get(Tile.class).obtain();
 		if(tile==null){
@@ -131,8 +130,7 @@ public Tile createTile(float x, float y, int frame){
 		return projectile;
 	}
 	
-	public Projectile createHomingProjectile(Sprite parent, Sprite target)
-	{
+	public Projectile createHomingProjectile(Sprite parent, Sprite target){
 		Projectile projectile = createTurretProjectile(parent,target.getPosition());
 		projectile.setController(new ControllerHoming(target,100));
 		return projectile;
@@ -180,7 +178,7 @@ public Tile createTile(float x, float y, int frame){
 		}else if(tileNumber==704){
 			return createHero(x, y);
 		}else if(tileNumber==755){
-			return createHomingTurret(x, y);
+			return createSimpleTurret(x, y);
 		}else if(tileNumber==1200){
 			return createBackgroundTile(x, y, 1200, BackgroundTile.BACKGROUND1_SCROLL_FACTOR);
 		}else{

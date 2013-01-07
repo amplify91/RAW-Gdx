@@ -89,7 +89,7 @@ public class RAWInput implements InputProcessor{
 	}
 
 	@Override
-	public boolean touchMoved(int x, int y) {
+	public boolean mouseMoved(int screenX, int screenY) {
 		// TODO Auto-generated method stub
 		return false;
 	}

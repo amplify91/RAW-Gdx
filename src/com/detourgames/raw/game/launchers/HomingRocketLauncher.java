@@ -7,8 +7,11 @@ import com.detourgames.raw.SpriteFactory;
 public class HomingRocketLauncher implements IProjectileLauncher {
 
 	private static HomingRocketLauncher launcher;
+	
+	private HomingRocketLauncher(){}
+	
 	@Override
-	public void fireProjectile(Sprite mShootingSprite, Sprite mTarget,Vector2 mDestination) {
+	public void fireProjectile(Sprite mShootingSprite, Sprite mTarget, Vector2 mDestination){
 		SpriteFactory.getSpriteFactory().createHomingProjectile(mShootingSprite, mTarget);
 		
 	}
@@ -18,7 +21,5 @@ public class HomingRocketLauncher implements IProjectileLauncher {
 			launcher=new HomingRocketLauncher();
 		return launcher;
 	}
-	
-	private HomingRocketLauncher(){}
 
 }
