@@ -177,7 +177,7 @@ public class SpriteFactory {
 		}else if(tileNumber==704){
 			return createHero(x, y);
 		}else if(tileNumber==755){
-			return createHomingTurret(x, y);
+			return createSimpleTurret(x, y);
 		}else if(tileNumber==1200){
 			return createBackgroundTile(x, y, 1200, BackgroundTile.BACKGROUND1_SCROLL_FACTOR);
 		}else{
