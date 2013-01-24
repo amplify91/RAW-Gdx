@@ -3,7 +3,6 @@ package com.detourgames.raw.game;
 import com.detourgames.raw.Event;
 import com.detourgames.raw.GameManager;
 import com.detourgames.raw.Sprite;
-import com.detourgames.raw.SpriteFactory;
 
 public class SpriteDeathEvent extends Event{
 	

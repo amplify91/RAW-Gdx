@@ -1,7 +1,6 @@
 package com.detourgames.raw.game;
 
 import com.badlogic.gdx.math.Vector2;
-import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.PhysicsNone;
 import com.detourgames.raw.Sprite;
 

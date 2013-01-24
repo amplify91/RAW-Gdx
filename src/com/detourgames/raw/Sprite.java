@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import com.detourgames.raw.game.SpawnGFXEvent;
 import com.detourgames.raw.game.SpriteDeathEvent;
 
-public abstract class Sprite implements IFocusable{
+public abstract class Sprite implements IFocusable, Recyclable{
 
 	protected PhysicsComponent mPhysics;
 	protected StateComponent mState;
@@ -37,7 +37,7 @@ public abstract class Sprite implements IFocusable{
 		//System.out.println("Sprite = "+this+" Pool = "+mPool );
 		destroyChildSprites();
 		if(getBody()!=null){
-			SpriteFactory.getLevel().getWorld().destroyBody(getBody());
+			SpriteFactory.getSpriteFactory().getLevel().getWorld().destroyBody(getBody());
 		}
 		if(mPool!=null){
 			mPool.free(this);

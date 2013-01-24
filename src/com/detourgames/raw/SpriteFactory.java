@@ -18,28 +18,27 @@ public class SpriteFactory {
 
 	private static Level mLevel;
 	static SpriteSheet mSpriteSheet;
-	public static Hashtable<Class,GenericPool> mPools;
+	public static Hashtable<Class<? extends Recyclable>,GenericPool<? extends Recyclable>> mPools;
 	private static final SpriteFactory mSpriteFactory = new SpriteFactory();
-
-	public SpriteFactory() {
+	private SpriteFactory(){
 		mPools = generatePools();
 	}
-	
+
 	public static SpriteFactory getSpriteFactory(){
 		return mSpriteFactory;
 	}
 	
-	public static Level getLevel(){
+	public Level getLevel(){
 		return mLevel;
 	}
 	
-	public static void setLevel(Level level){
+	public void setLevel(Level level){
 		mLevel = level;
 		mSpriteSheet = mLevel.getSpriteSheet();
 	}
 	
-	private static Hashtable<Class,GenericPool> generatePools(){
-		Hashtable<Class, GenericPool> pools = new Hashtable<Class, GenericPool>();
+	private static Hashtable<Class<? extends Recyclable>,GenericPool<? extends Recyclable>> generatePools(){//"extends" here is treated as "implements" since Recyclable.java is an interface.
+		Hashtable<Class<? extends Recyclable>, GenericPool<? extends Recyclable>> pools = new Hashtable<Class<? extends Recyclable>, GenericPool<? extends Recyclable>>();
 		pools.put(HeroProjectile.class, new GenericPool<HeroProjectile>());
 		pools.put(Turret.class, new GenericPool<Turret>());
 		pools.put(Hero.class, new GenericPool<Hero>());
@@ -178,7 +177,7 @@ public class SpriteFactory {
 		}else if(tileNumber==704){
 			return createHero(x, y);
 		}else if(tileNumber==755){
-			return createSimpleTurret(x, y);
+			return createHomingTurret(x, y);
 		}else if(tileNumber==1200){
 			return createBackgroundTile(x, y, 1200, BackgroundTile.BACKGROUND1_SCROLL_FACTOR);
 		}else{

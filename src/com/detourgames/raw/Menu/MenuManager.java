@@ -4,8 +4,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.detourgames.raw.Camera;
 import com.detourgames.raw.EventQueue;
-import com.detourgames.raw.HUD;
-import com.detourgames.raw.LevelLoader;
 
 public class MenuManager {
 

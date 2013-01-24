@@ -7,6 +7,7 @@ import com.detourgames.raw.ControllerComponent;
 import com.detourgames.raw.GameManager;
 import com.detourgames.raw.GenericPool;
 import com.detourgames.raw.PhysicsScrolling;
+import com.detourgames.raw.Recyclable;
 import com.detourgames.raw.Sprite;
 import com.detourgames.raw.SpriteSheet;
 import com.detourgames.raw.StateNone;
@@ -19,8 +20,8 @@ public class BackgroundTile extends Sprite{
 	public static final float BACKGROUND2_SCROLL_FACTOR = 0.5f;
 	public static final float BACKGROUND3_SCROLL_FACTOR = 0.9f;
 	
-	public BackgroundTile(GenericPool<BackgroundTile> pool) {
-		super(new PhysicsScrolling(GameManager.getGameManager().getLevel().getHero()), new AnimationStatic(), new StateNone(), new ControllerComponent(), pool);
+	public BackgroundTile(GenericPool<? extends Recyclable> genericPool) {
+		super(new PhysicsScrolling(GameManager.getGameManager().getLevel().getHero()), new AnimationStatic(), new StateNone(), new ControllerComponent(), genericPool);
 		// might need to be created AFTER Hero.
 	}
 	

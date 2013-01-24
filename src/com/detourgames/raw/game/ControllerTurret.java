@@ -1,5 +1,4 @@
 package com.detourgames.raw.game;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.detourgames.raw.ControllerComponent;
 import com.detourgames.raw.GameManager;

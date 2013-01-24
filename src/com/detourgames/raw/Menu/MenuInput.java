@@ -2,10 +2,6 @@ package com.detourgames.raw.Menu;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.math.Vector2;
-import com.detourgames.raw.EventQueue;
-import com.detourgames.raw.GameManager;
-import com.detourgames.raw.HUD;
 
 public class MenuInput implements InputProcessor{
 	

@@ -3,8 +3,6 @@ package com.detourgames.raw.Menu;
 import com.badlogic.gdx.physics.box2d.World;
 import com.detourgames.raw.Camera;
 import com.detourgames.raw.GameRAW;
-import com.detourgames.raw.GameScreen;
-import com.detourgames.raw.HUDButton;
 import com.detourgames.raw.PhysicsHUDElement;
 import com.detourgames.raw.SpriteSheet;
 import com.detourgames.raw.StateButton;

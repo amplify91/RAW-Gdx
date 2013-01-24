@@ -1,14 +1,12 @@
 package com.detourgames.raw;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
-import com.detourgames.raw.game.BackgroundTile;
 
 public class LevelLoader {
 
@@ -46,6 +44,7 @@ public class LevelLoader {
 		// sprites += HUD.HUD_SPRITES;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void createLevelFromFile(int ln) {
 		FileHandle jsonId = getFileHandle(ln);
 		JsonReader reader=new JsonReader();
@@ -93,6 +92,7 @@ public class LevelLoader {
 		Array<?> foregroundData = null;
 		Array<?> terrainData = null;
 		Array<?> actorsObjectsData = null;
+		@SuppressWarnings("unused")
 		Array<?> eventsObjects = null;
 		Array<?> background1Data = null;
 		Array<?> background2Data = null;

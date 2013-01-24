@@ -2,8 +2,6 @@ package com.detourgames.raw.Menu;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.detourgames.raw.SpriteFactory;
-import com.detourgames.raw.SpriteSheet;
 
 public class Menu implements ApplicationListener{
 

@@ -6,9 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.OrderedMap;
-import com.detourgames.raw.SpriteFactory;
 import com.detourgames.raw.SpriteSheet;
-import com.detourgames.raw.game.BackgroundTile;
 
 public class MenuLoader {
 
@@ -49,6 +47,7 @@ public class MenuLoader {
 		// sprites += HUD.HUD_SPRITES;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void createLevelFromFile(int ln) {
 		FileHandle jsonId = getFileHandle(ln);
 		JsonReader reader=new JsonReader();
@@ -77,6 +76,7 @@ public class MenuLoader {
 		
 		Array<?> tileSetO = (Array<?>)map.get("tilesets");
 		OrderedMap<String, ?> tileSetProperties = (OrderedMap<String, ?>)tileSetO.items[0];
+		@SuppressWarnings("unused")
 		OrderedMap<String, ?> tileProperties = (OrderedMap<String, ?>)tileSetProperties.get("tileproperties");
 		
 		Array<?> layers = (Array<?>) map.get("layers");
@@ -90,6 +90,7 @@ public class MenuLoader {
 		Array<?> foregroundData = null;
 		Array<?> terrainData = null;
 		Array<?> actorsObjectsData = null;
+		@SuppressWarnings("unused")
 		Array<?> eventsObjects = null;
 		Array<?> background1Data = null;
 		Array<?> background2Data = null;

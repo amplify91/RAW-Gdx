@@ -9,8 +9,8 @@ import com.detourgames.raw.ControllerNone;
 import com.detourgames.raw.FixtureType;
 import com.detourgames.raw.GenericPool;
 import com.detourgames.raw.PhysicsStatic;
+import com.detourgames.raw.Recyclable;
 import com.detourgames.raw.Sprite;
-import com.detourgames.raw.SpriteFactory;
 import com.detourgames.raw.SpriteSheet;
 import com.detourgames.raw.StateStatic;
 
@@ -59,8 +59,8 @@ public class Tile extends Sprite{
 	public static final Vector2[] VERTS_HALF_LEFT = new Vector2[]{new Vector2(-0.25f,-0.25f),new Vector2(0f,-0.25f),new Vector2(0f,0.25f),new Vector2(-0.25f,0.25f)};
 	public static final Vector2[] VERTS_HALF_RIGHT = new Vector2[]{new Vector2(0f,-0.25f),new Vector2(0.25f,-0.25f),new Vector2(0.25f,0.25f),new Vector2(0f,0.25f)};
 	
-	public Tile(GenericPool<Tile> pool){
-		super(new PhysicsStatic(), new AnimationStatic(), new StateStatic(), new ControllerNone(), pool);
+	public Tile(GenericPool<? extends Recyclable> genericPool){
+		super(new PhysicsStatic(), new AnimationStatic(), new StateStatic(), new ControllerNone(), genericPool);
 		
 	}
 	

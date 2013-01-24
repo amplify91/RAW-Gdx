@@ -13,6 +13,7 @@ public class GenericPool<T> extends Pool<T> {
 		super.free(sprite);
 	}*/
 
+	@SuppressWarnings("unchecked")
 	public void free(Sprite sprite) {
 		super.free((T)sprite);
 	}

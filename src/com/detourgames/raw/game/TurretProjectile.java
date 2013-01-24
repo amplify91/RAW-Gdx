@@ -2,10 +2,8 @@ package com.detourgames.raw.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.detourgames.raw.ControllerHoming;
 import com.detourgames.raw.ControllerNone;
 import com.detourgames.raw.FixtureType;
-import com.detourgames.raw.GameManager;
 import com.detourgames.raw.GenericPool;
 import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.PhysicsStatic;

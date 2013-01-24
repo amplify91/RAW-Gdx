@@ -2,7 +2,6 @@ package com.detourgames.raw.AI;
 
 import java.util.ArrayList;
 
-import com.detourgames.raw.GameManager;
 import com.detourgames.raw.Sprite;
 
 public class Sight {

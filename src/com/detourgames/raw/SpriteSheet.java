@@ -1,6 +1,5 @@
 package com.detourgames.raw;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 public class SpriteSheet {

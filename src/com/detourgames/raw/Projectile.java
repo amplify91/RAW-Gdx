@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.detourgames.raw.game.AnimationTurretProjectile;
 import com.detourgames.raw.game.StateHeroProjectile;
 
-public class Projectile extends Sprite{
+public class Projectile extends Sprite implements Recyclable{
 
 	public static final float WIDTH = 0.4f;
 	public static final float HEIGHT = 0.4f;

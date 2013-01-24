@@ -7,6 +7,7 @@ import com.detourgames.raw.FixtureType;
 import com.detourgames.raw.GameManager;
 import com.detourgames.raw.GenericPool;
 import com.detourgames.raw.PhysicsComponent;
+import com.detourgames.raw.Recyclable;
 import com.detourgames.raw.Sprite;
 import com.detourgames.raw.SpriteSheet;
 import com.detourgames.raw.game.launchers.IProjectileLauncher;
@@ -19,8 +20,8 @@ public class Turret extends Sprite{
 	public static final float WIDTH = 1f;
 	public static final float HEIGHT = 1f;
 	
-	public Turret(SpriteSheet spriteSheet, GenericPool<Turret> pool){
-		super(new PhysicsTurret(), new AnimationTurret(spriteSheet,WIDTH,HEIGHT), new StateTurret(), null, pool);
+	public Turret(SpriteSheet spriteSheet, GenericPool<? extends Recyclable> genericPool){
+		super(new PhysicsTurret(), new AnimationTurret(spriteSheet,WIDTH,HEIGHT), new StateTurret(), null, genericPool);
 		this.mController=new ControllerTurret(this);
 		mBarrel = new TurretBarrel(spriteSheet, this);
 		mState.setInitialState();

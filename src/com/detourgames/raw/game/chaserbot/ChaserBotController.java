@@ -4,7 +4,6 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.detourgames.raw.PhysicsComponent;
 import com.detourgames.raw.StateComponent;
 import com.detourgames.raw.game.ControllerTurret;
-import com.detourgames.raw.game.PhysicsTurret;
 import com.detourgames.raw.game.Turret;
 
 public class ChaserBotController extends ControllerTurret {
