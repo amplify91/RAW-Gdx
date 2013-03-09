@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="com/detourgames/raw/PhysicsComponent/" kind="src" path="src">
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx.jar" sourcepath="libs/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="libs/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="libs/guava-r09.jar"/>
+	<classpathentry kind="lib" path="libs/ouya-sdk.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="RAW-Gdx/native libs"/>
+			<attribute name="javadoc_location" value="file:/C:/Users/Clayton/Desktop/OUYA-ODK/javadoc/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="RAW-Gdx"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="libs/commons-lang-2.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/gdx.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-gwt.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-gwt-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/gdx-openal.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/gdx-openal-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/gdx-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/guava-r09.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/ouya-sdk.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
