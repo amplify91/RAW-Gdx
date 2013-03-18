@@ -21,19 +21,9 @@ public class Turret extends Sprite{
 	public static final float HEIGHT = 1f;
 	
 	public Turret(SpriteSheet spriteSheet, GenericPool<? extends Recyclable> genericPool){
-		super(new PhysicsTurret(), new AnimationTurret(spriteSheet,WIDTH,HEIGHT), new StateTurret(), null, genericPool);
-		this.mController=new ControllerTurret(this);
+		super(new PhysicsTurret(), new AnimationTurret(spriteSheet,WIDTH,HEIGHT), new StateTurret(), new ControllerTurret(), genericPool);
 		mBarrel = new TurretBarrel(spriteSheet, this);
 		mState.setInitialState();
-	}
-	
-	public void SetLauncher(IProjectileLauncher launcher)
-	{
-		mLauncher=launcher;
-	}
-	public void SetController(ControllerComponent controller)
-	{
-		mController=controller;
 	}
 	
 	public void create(World world, float x, float y){
@@ -46,7 +36,7 @@ public class Turret extends Sprite{
 
 	public void fireMissileAtTarget(Sprite target){//todo Q: Move this to Turret class?
 		EventQueue.getEventQueue().queue(new FireProjectileEvent(mLauncher, this, target, null));
-		float radians = (float)Math.atan2(target.getX()-getY(), target.getY()-getX());
+		float radians = (float)Math.atan2(target.getY()-getY(), target.getX()-getX());
 		mBarrel.rotateTo(radians);
 	}
 	

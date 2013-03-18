@@ -9,7 +9,6 @@ import com.detourgames.raw.StateComponent;
 public class ControllerTurret extends ControllerComponent {
 	
 	protected Sprite mTarget;
-	protected Turret mTurret;
 	protected long mLastShot = TimeUtils.nanoTime();
 	protected long mNextShot = 0;
 	protected static final long mCooldown = 1000000000; //the amount of time between shots.
@@ -18,7 +17,7 @@ public class ControllerTurret extends ControllerComponent {
 	public void update(StateComponent state, PhysicsComponent physics){
 		getNextAction(state);
 		if(state.getState()==StateComponent.STATE_SHOOTING && TimeUtils.nanoTime()>=mNextShot){
-			mTurret.fireMissileAtTarget(mTarget);
+			((Turret) physics.getParentSprite()).fireMissileAtTarget(mTarget);
 			mLastShot = TimeUtils.nanoTime();
 			mNextShot = mLastShot + mCooldown;
 			state.setState(StateComponent.STATE_IDLE);
@@ -35,9 +34,5 @@ public class ControllerTurret extends ControllerComponent {
 	public void startAttackingTarget(StateComponent state, Sprite target){
 		state.setState(StateComponent.STATE_SHOOTING);
 		mTarget = target;
-	}
-	public ControllerTurret(Turret mTurret)
-	{
-		this.mTurret=mTurret;
 	}
 }

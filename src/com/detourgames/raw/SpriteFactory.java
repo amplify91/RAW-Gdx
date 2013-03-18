@@ -65,13 +65,14 @@ public class SpriteFactory {
 		
 		return hero;
 	}
+	
 	public Turret createSimpleTurret(float x, float y){
 		Turret turret = (Turret)mPools.get(Turret.class).obtain();
 		if(turret==null){
 			turret = new Turret(mSpriteSheet, mPools.get(Turret.class));
 			turret.create(mLevel.getWorld(), x, y);
 		}
-		turret.SetLauncher(SimpleRocketLauncher.getSimpleRocketLauncher());
+		//turret.SetLauncher(SimpleRocketLauncher.getSimpleRocketLauncher());
 		mLevel.addDrawableSprite(turret, Level.LAYER_ACTORS_OBJECTS);
 		mLevel.addUpdateableSprite(turret);
 		
@@ -80,7 +81,7 @@ public class SpriteFactory {
 	
 	public Turret createHomingTurret(float x, float y){
 		Turret t = createSimpleTurret(x,y);
-		t.SetLauncher(HomingRocketLauncher.getHomingRocketLauncher());
+		//t.SetLauncher(HomingRocketLauncher.getHomingRocketLauncher());
 		return t;
 	}
 	
