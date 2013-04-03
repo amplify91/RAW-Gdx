@@ -9,7 +9,7 @@ import com.detourgames.raw.game.Turret;
 public class ChaserBotController extends ControllerTurret {
 	
 	public ChaserBotController(Turret mTurret) {
-		super(mTurret);
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -17,7 +17,7 @@ public class ChaserBotController extends ControllerTurret {
 	public void update(StateComponent state, PhysicsComponent physics){
 		getNextAction(state);
 		if(state.getState()==StateComponent.STATE_SHOOTING && TimeUtils.nanoTime()>= mNextShot){
-			mTurret.fireMissileAtTarget(mTarget);
+			//mTurret.fireMissileAtTarget(mTarget); //disabled all of this to remove project errors while fixing some things. TODO reenable
 			mLastShot = TimeUtils.nanoTime();
 			mNextShot = mLastShot + mCooldown;
 			state.setState(StateComponent.STATE_IDLE);
