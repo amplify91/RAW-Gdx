@@ -2,6 +2,8 @@ package com.detourgames.raw;
 
 import java.util.ArrayList;
 
+import sun.rmi.runtime.Log;
+
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,31 +18,34 @@ public class Level {
 	World mWorld;
 	SpriteSheet mSpriteSheet;
 	Hero mHero;
-	ArrayList<Sprite> mHUD = new ArrayList<Sprite>();
-	ArrayList<Sprite> mForeGround = new ArrayList<Sprite>();
-	ArrayList<Sprite> mOverGFX = new ArrayList<Sprite>();
-	ArrayList<Sprite> mActorsObjects = new ArrayList<Sprite>();
-	ArrayList<Sprite> mUnderGFX = new ArrayList<Sprite>();
-	ArrayList<Sprite> mTerrain = new ArrayList<Sprite>();
-	ArrayList<Sprite> mBackground1 = new ArrayList<Sprite>();
-	ArrayList<Sprite> mBackground2 = new ArrayList<Sprite>();
-	ArrayList<Sprite> mBackground3 = new ArrayList<Sprite>();
+	
+	public static final int LAYER_HUD = 0;
+	public static final int LAYER_FOREGROUND = 1;
+	public static final int LAYER_OVER_GFX = 2;
+	public static final int LAYER_ACTORS_OBJECTS = 3;
+	public static final int LAYER_UNDER_GFX = 4;
+	public static final int LAYER_TERRAIN = 5;
+	public static final int LAYER_BACKGROUND1 = 6;
+	public static final int LAYER_BACKGROUND2 = 7;
+	public static final int LAYER_BACKGROUND3 = 8;
+	
+	LevelLayer mHUD = new LevelLayer(LAYER_HUD);
+	LevelLayer mForeGround = new LevelLayer(LAYER_FOREGROUND);
+	LevelLayer mOverGFX = new LevelLayer(LAYER_OVER_GFX);
+	LevelLayer mActorsObjects = new LevelLayer(LAYER_ACTORS_OBJECTS);
+	LevelLayer mUnderGFX = new LevelLayer(LAYER_UNDER_GFX);
+	LevelLayer mTerrain = new LevelLayer(LAYER_TERRAIN);
+	LevelLayer mBackground1 = new LevelLayer(LAYER_BACKGROUND1);
+	LevelLayer mBackground2 = new LevelLayer(LAYER_BACKGROUND2);
+	LevelLayer mBackground3 = new LevelLayer(LAYER_BACKGROUND3);
+	ArrayList<LevelLayer> mLayers = new ArrayList<LevelLayer>();
+	
 	//ArrayList<ArrayList<Sprite>> mDrawableSprites;
-	ArrayList<Sprite> mUpdateableSprites;
+	ArrayList<Sprite> mUpdateableSprites = new ArrayList<Sprite>();
 	
 	long mCurrentTime = 0;
 	long mLastTime = 0;
 	float mDeltaTime = 0;
-	
-	public static final int LAYER_HUD = 1;
-	public static final int LAYER_FOREGROUND = 2;
-	public static final int LAYER_OVER_GFX = 3;
-	public static final int LAYER_ACTORS_OBJECTS = 4;
-	public static final int LAYER_UNDER_GFX = 5;
-	public static final int LAYER_TERRAIN = 6;
-	public static final int LAYER_BACKGROUND1 = 7;
-	public static final int LAYER_BACKGROUND2 = 8;
-	public static final int LAYER_BACKGROUND3 = 9;
 	
 	public static final int VELOCITY_ITERATIONS = 8;
 	public static final int POSITION_ITERATIONS = 3;
@@ -52,8 +57,17 @@ public class Level {
 		Vector2 gravity = new Vector2(0.0f, -10.0f);
 		mWorld = new World(gravity, true);
 		mWorld.setContinuousPhysics(true);
-		//mDrawableSprites = new ArrayList<ArrayList<Sprite>>();
-		mUpdateableSprites = new ArrayList<Sprite>();
+		
+		mLayers.add(mHUD);
+		mLayers.add(mForeGround);
+		mLayers.add(mOverGFX);
+		mLayers.add(mActorsObjects);
+		mLayers.add(mUnderGFX);
+		mLayers.add(mTerrain);
+		mLayers.add(mBackground1);
+		mLayers.add(mBackground2);
+		mLayers.add(mBackground3);
+		checkLayers();
 		
 		setContactListeners();
 
@@ -88,40 +102,17 @@ public class Level {
 
 	public void draw(SpriteBatch sb, long nanoTime) {
 		//draw each layer in order back to front
-		for (int i = 0; i < mBackground3.size(); i++) {
-			mBackground3.get(i).draw(sb, nanoTime);
-		}
-		for (int i = 0; i < mBackground2.size(); i++) {
-			mBackground2.get(i).draw(sb, nanoTime);
-		}
-		for (int i = 0; i < mBackground1.size(); i++) {
-			mBackground1.get(i).draw(sb, nanoTime);
-		}
-		for (int i = 0; i < mTerrain.size(); i++) {
-			mTerrain.get(i).draw(sb, nanoTime);
-		}
-		for (int i = 0; i < mUnderGFX.size(); i++) {
-			mUnderGFX.get(i).draw(sb, nanoTime);
-		}
-		for (int i = 0; i < mActorsObjects.size(); i++) {
-			mActorsObjects.get(i).draw(sb, nanoTime);
-		}
-		for (int i = 0; i < mOverGFX.size(); i++) {
-			mOverGFX.get(i).draw(sb, nanoTime);
-		}
-		for (int i = 0; i < mForeGround.size(); i++) {
-			mForeGround.get(i).draw(sb, nanoTime);
+		for (int i = mLayers.size()-1; i > LAYER_HUD; i--) {
+			mLayers.get(i).drawLayer(sb, nanoTime);
 		}
 		if(Gdx.app.getType()==ApplicationType.Android){
-			for (int i = 0; i < mHUD.size(); i++) {
-				mHUD.get(i).draw(sb, nanoTime);
-			}
+			mHUD.drawLayer(sb, nanoTime);
 		}
 		
 	}
 
-	public void addDrawableSprite(Sprite sprite, int layer) {
-		if(layer==LAYER_HUD){
+	public void addDrawableSprite(Sprite sprite, int layerName) {
+		/*if(layerName==LAYER_HUD){
 			mHUD.add(sprite);
 		}else if(layer==LAYER_FOREGROUND){
 			mForeGround.add(sprite);
@@ -139,7 +130,8 @@ public class Level {
 			mBackground2.add(sprite);
 		}else if(layer==LAYER_BACKGROUND3){
 			mBackground3.add(sprite);
-		}
+		}*/
+		mLayers.get(layerName).addSprite(sprite);
 		//mDrawableSprites.add(sprite);
 	}
 
@@ -149,22 +141,28 @@ public class Level {
 	
 	public void removeSprite(Sprite sprite){
 		mUpdateableSprites.remove(sprite);
-		mHUD.remove(sprite);
-		mForeGround.remove(sprite);
-		mOverGFX.remove(sprite);
-		mActorsObjects.remove(sprite);
-		mUnderGFX.remove(sprite);
-		mTerrain.remove(sprite);
-		mBackground1.remove(sprite);
-		mBackground2.remove(sprite);
-		mBackground3.remove(sprite);
+		for (int i = 0; i < mLayers.size(); i++) {
+			mLayers.get(i).removeSprite(sprite);
+		}
 		//TODO make sure this works^
 	}
 
 	void step(float deltaTime) {
 		mWorld.step(deltaTime, 8, 3);
 	}
-
+	
+	private boolean checkLayers(){
+		for(int i = 0; i < mLayers.size(); i++){
+			if(mLayers.get(i).getName()!=i){
+				System.out.println("Error with the LevelLayers. Check Level class.");
+				return false;
+			}
+		}
+		
+		return true;
+		
+	}
+	
 	public World getWorld() {
 		return mWorld;
 	}
