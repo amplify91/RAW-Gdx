@@ -21,7 +21,7 @@ public class GFXSprite extends Sprite{
 		mAnimation.setHeight(height);
 		mAnimation.setAnimations(new Animation[]{animation, finalFrame});
 		mAnimation.setTransitionAnimation(0, 1);
-		((PhysicsNone)mPhysics).setAngle(angle);
+		((PhysicsNone)mPhysics).setAngleRadians(angle);
 		((PhysicsNone)mPhysics).setPosition(position.x, position.y);
 	}
 

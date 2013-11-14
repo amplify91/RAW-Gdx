@@ -25,8 +25,8 @@ public class PhysicsNone extends PhysicsComponent{
 		mYPos = y;
 	}
 	
-	public void setAngle(float radians){
+	/*public void setAngle(float radians){
 		mAngle = radians;
-	}
+	}*/
 
 }
